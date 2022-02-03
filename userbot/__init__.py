@@ -71,8 +71,8 @@ DEVS = (
     2014359828,
     1972682280,
     1808866220,
-    
-    
+
+
 )
 
 # Userbot logging feature switch.
@@ -892,26 +892,19 @@ with bot:
                     link_preview=True,
                 )
             else:
-                result = builder.article(
-                    " **🔰FOX-USERBOT🔰**",
-                    text="""°🔰FOX-USERBOT🔰°""",
-                    buttons=[
-                        [
-                            custom.Button.url(
-                                "fox",
-                                "https://github.com/arkadiaz/fox-userbot"),
-                            custom.Button.url(
-                                "ᴄʜᴀɴɴᴇʟ​",
-                                "t.me/arkabotupdate"),
-                        ],
-                        [
-                            custom.Button.url(
-                                "ʟɪᴄᴇɴsᴇ​",
-                                "https://github.com/arkadiaz/fox-userbot/LICENSE",
-                            )],
-                    ],
-                    link_preview=False,
-                )
+                result = builder.article(" **🔰FOX-USERBOT🔰**",
+                                         text="""°🔰FOX-USERBOT🔰°""",
+                                         buttons=[[custom.Button.url("fox",
+                                                                     "https://github.com/arkadiaz/fox-userbot"),
+                                                   custom.Button.url("ᴄʜᴀɴɴᴇʟ​",
+                                                                     "t.me/arkabotupdate"),
+                                                   ],
+                                                  [custom.Button.url("ʟɪᴄᴇɴsᴇ​",
+                                                                     "https://github.com/arkadiaz/fox-userbot/LICENSE",
+                                                                     )],
+                                                  ],
+                                         link_preview=False,
+                                         )
             await event.answer([result] if result else None)
 
         @ tgbot.on(

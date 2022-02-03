@@ -4,14 +4,13 @@
 # you may not use this file except in compliance with the License.
 #
 """ Userbot start point """
-import sys
 from importlib import import_module
 from sys import argv
 
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
 from userbot import BOT_VER, LOGS, bot
 from userbot.modules import ALL_MODULES
-from telethon.tl.functions.channels import InviteToChannelRequest, JoinChannelRequest
+from telethon.tl.functions.channels import JoinChannelRequest
 
 INVALID_PH = (
     "\nERROR: The Phone No. entered is INVALID"
@@ -25,6 +24,7 @@ try:
 except PhoneNumberInvalidError:
     print(INVALID_PH)
     exit(1)
+
 
 async def fox_userbot_on():
     try:

@@ -16,17 +16,6 @@ from userbot.events import register
 GCAST_BLACKLIST = [
     -1001473548283,  # SharingUserbot
     -1001640166253,  # Yansensupport
-
-
-
-
-
-
-
-
-
-
-
 ]
 
 
