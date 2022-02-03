@@ -30,9 +30,9 @@ jobs:
       # commit changes
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: 'Yansen-Userbot: auto fixes'
+          commit_message: 'Fox-Userbot: auto fixes'
           commit_options: '--no-verify --signoff'
           repository: .
-          commit_user_name: Lepin
-          commit_user_email: levindyno@gmail.com
-          commit_author: Lepin <levindyno@gmail.com>
+          commit_user_name: arkadiaz
+          commit_user_email: kneko1411@gmail.com@gmail.com
+          commit_author: arkadiaz <kneko1411@gmail.com>
