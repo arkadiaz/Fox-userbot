@@ -367,7 +367,7 @@ except Exception as e:
     sys.exit()
 
 async def checking():
-    gocheck = str("@yansensesat")
+    gocheck = str("@arkabotsupport")
     checker = str("@Kenzusupport")
     try:
         await bot(GetSec(f"{gocheck}"))
@@ -382,7 +382,7 @@ with bot:
         bot.loop.run_until_complete(checking())
     except BaseException:
         LOGS.info(
-            "Join Support Group @yansensesat and Channel @ProjectYansen to see the updates of ubot"
+            "Join Support Group @arkabotsupport and Channel @arkabotupdate to see the updates of ubot"
             "Don't Leave")
         quit(1)
         
