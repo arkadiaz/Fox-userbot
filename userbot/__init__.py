@@ -2,24 +2,32 @@
 
 import logging
 import os
-import re
 import time
-from datetime import datetime
-from distutils.util import strtobool as sb
-from logging import DEBUG, INFO, basicConfig, getLogger
-from math import ceil
-from sys import version_info
-
+import re
 import redis
-from dotenv import load_dotenv
+import random
+import pybase64
+import sys
+
+from sys import version_info
+from logging import basicConfig, getLogger, INFO, DEBUG
+from distutils.util import strtobool as sb
+from math import ceil
+
 from pylast import LastFMNetwork, md5
-from pymongo import MongoClient
 from pySmartDL import SmartDL
+from pymongo import MongoClient
+from datetime import datetime
 from redis import StrictRedis
-from telethon import Button, events
-from telethon.sessions import StringSession
+from dotenv import load_dotenv
+from requests import get
 from telethon.sync import TelegramClient, custom, events
+from telethon.tl.functions.channels import JoinChannelRequest as GetSec
+from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
+from telethon.sessions import StringSession
+from telethon import Button, events, functions, types
 from telethon.utils import get_display_name
+
 
 redis_db = None
 
@@ -98,7 +106,7 @@ if G_BAN_LOGGER_GROUP:
     G_BAN_LOGGER_GROUP = int(G_BAN_LOGGER_GROUP)
 
 # Heroku Credentials for updater.
-HEROKU_MEMEZ = sb(os.environ.get("HEROKU_MEMEZ", "False"))
+HEROKU_MEMEZ = sb(os.environ.get("HEROKU_MEMEZ", "True"))
 HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", "")
 HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", "")
 
@@ -122,10 +130,12 @@ CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
 DB_URI = os.environ.get("DATABASE_URL", None)
 
 # OCR API key
-OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
+OCR_SPACE_API_KEY = os.environ.get(
+    "OCR_SPACE_API_KEY") or "12dc42a0ff88957"
 
 # remove.bg API key
-REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
+REM_BG_API_KEY = os.environ.get(
+    "REM_BG_API_KEY") or "ihAEGNtfnVtCsWnzqiXM1GcS"
 
 # Redis URI & Redis Password
 REDIS_URI = os.environ.get("REDIS_URI", None)
@@ -159,11 +169,13 @@ NC_LOG_P_M_S = bool(os.environ.get("NC_LOG_P_M_S", False))
 PM_LOGGR_BOT_API_ID = int(os.environ.get("PM_LOGGR_BOT_API_ID", "-100"))
 
 # OpenWeatherMap API Key
-OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID", None)
+OPEN_WEATHER_MAP_APPID = os.environ.get(
+    "OPEN_WEATHER_MAP_APPID") or "5ed2fcba931692ec6bd0a8a3f8d84936"
 WEATHER_DEFCITY = os.environ.get("WEATHER_DEFCITY", None)
 
 # Lydia API
-LYDIA_API_KEY = os.environ.get("LYDIA_API_KEY", None)
+LYDIA_API_KEY = os.environ.get(
+    "LYDIA_API_KEY") or "632740cd2395c73b58275b54ff57a02b607a9f8a4bbc0e37a24e7349a098f95eaa6569e22e2d90093e9c1a9cc253380a218bfc2b7af2e407494502f6fb76f97e"
 
 # For MONGO based DataBase
 MONGO_URI = os.environ.get("MONGO_URI", None)
@@ -176,7 +188,8 @@ ANTI_SPAMBOT = sb(os.environ.get("ANTI_SPAMBOT", "False"))
 ANTI_SPAMBOT_SHOUT = sb(os.environ.get("ANTI_SPAMBOT_SHOUT", "False"))
 
 # Youtube API key
-YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
+YOUTUBE_API_KEY = os.environ.get(
+    "YOUTUBE_API_KEY") or "AIzaSyACwFrVv-mlhICIOCvDQgaabo6RIoaK8Dg"
 
 # Untuk Perintah .ynsnalive
 ROSE_TEKS_KUSTOM = os.environ.get("FOX_TEKS_KUSTOM", "")
@@ -198,13 +211,14 @@ CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
 ZIP_DOWNLOAD_DIRECTORY = os.environ.get("ZIP_DOWNLOAD_DIRECTORY", "./zips")
 
 # bit.ly Module
-BITLY_TOKEN = os.environ.get("BITLY_TOKEN", None)
+BITLY_TOKEN = os.environ.get(
+    "BITLY_TOKEN") or "o_1fpd9299vp"
 
 # Bot Name
 TERM_ALIAS = os.environ.get("TERM_ALIAS", "Geez-UserBot")
 
 # Bot Version
-BOT_VER = os.environ.get("BOT_VER", "6.0")
+BOT_VER = os.environ.get("BOT_VER", "7.0")
 
 # Default .alive Username
 ALIVE_USERNAME = os.environ.get("ALIVE_USERNAME", None)
@@ -227,7 +241,9 @@ EMOJI_HELP = os.environ.get("EMOJI_HELP") or "🚀"
 BIO_PREFIX = os.environ.get("BIO_PREFIX", None)
 DEFAULT_BIO = os.environ.get("DEFAULT_BIO", None)
 
-LASTFM_API = os.environ.get("LASTFM_API", None)
+LASTFM_API = os.environ.get(
+    "LASTFM_API") or "73d42d9c93626709dc2679d491d472bf"
+
 LASTFM_SECRET = os.environ.get("LASTFM_SECRET", None)
 LASTFM_USERNAME = os.environ.get("LASTFM_USERNAME", None)
 LASTFM_PASSWORD_PLAIN = os.environ.get("LASTFM_PASSWORD", None)
@@ -258,10 +274,13 @@ if G_PHOTOS_AUTH_TOKEN_ID:
     G_PHOTOS_AUTH_TOKEN_ID = int(G_PHOTOS_AUTH_TOKEN_ID)
 
 # Genius Lyrics  API
-GENIUS = os.environ.get("GENIUS_ACCESS_TOKEN", None)
+GENIUS = os.environ.get(
+    "GENIUS") or "vDhUmdo_ufwIvEymMeMY65IedjWaVm1KPupdx0L"
+
 
 # Quotes API Token
-QUOTES_API_TOKEN = os.environ.get("QUOTES_API_TOKEN", None)
+QUOTES_API_TOKEN = os.environ.get(
+    "QUOTES_API_TOKEN") or "33273f18-4a0d-4a76-8d78-a16faa002375"
 
 # Wolfram Alpha API
 WOLFRAM_ID = os.environ.get("WOLFRAM_ID") or None
@@ -321,11 +340,17 @@ for binary, path in binaries.items():
 
 # 'bot' variable
 if STRING_SESSION:
-    # pylint: disable=invalid-name
-    bot = TelegramClient(StringSession(STRING_SESSION), API_KEY, API_HASH)
+    session = StringSession(str(STRING_SESSION))
 else:
-    # pylint: disable=invalid-name
-    bot = TelegramClient("userbot", API_KEY, API_HASH)
+    session = "yansen-userbot"
+try:
+    bot = TelegramClient(
+        session=session,
+        api_id=API_KEY,
+        api_hash=API_HASH,
+        connection=ConnectionTcpAbridged,
+        auto_reconnect=True,
+        connection_retries=None,
 
 
 async def check_botlog_chatid():
@@ -892,19 +917,26 @@ with bot:
                     link_preview=True,
                 )
             else:
-                result = builder.article(" **🔰FOX-USERBOT🔰**",
-                                         text="""°🔰FOX-USERBOT🔰°""",
-                                         buttons=[[custom.Button.url("fox",
-                                                                     "https://github.com/arkadiaz/fox-userbot"),
-                                                   custom.Button.url("ᴄʜᴀɴɴᴇʟ​",
-                                                                     "t.me/arkabotupdate"),
-                                                   ],
-                                                  [custom.Button.url("ʟɪᴄᴇɴsᴇ​",
-                                                                     "https://github.com/arkadiaz/fox-userbot/LICENSE",
-                                                                     )],
-                                                  ],
-                                         link_preview=False,
-                                         )
+                result = builder.article(
+                    " **🔰FOX-USERBOT🔰**",
+                    text="""°🔰FOX-USERBOT🔰°""",
+                    buttons=[
+                        [
+                            custom.Button.url(
+                                "arka​",
+                                "https://github.com/arkadiaz/fox-userbot"),
+                            custom.Button.url(
+                                "ᴄʜᴀɴɴᴇʟ​",
+                                "t.me/Arkabotupdate"),
+                        ],
+                        [
+                            custom.Button.url(
+                                "ʟɪᴄᴇɴsᴇ​",
+                                "https://github.com/arkadiaz/fox-userbot/LICENSE",
+                            )],
+                    ],
+                    link_preview=False,
+                )
             await event.answer([result] if result else None)
 
         @ tgbot.on(
