@@ -5,7 +5,7 @@
 #
 """ Userbot start point """
 
-from sys
+from sys import argv
 from importlib import import_module
 
 
