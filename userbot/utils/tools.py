@@ -92,7 +92,6 @@ async def runcmd(cmd: str) -> tuple[str, str, int, int]:
             process.pid)
 
 
-
 async def ya_kali_ngga():
     buwung = str(pybase64.b64decode("QFByb2plY3RTa3l6dQ=="))[2:15]
     puyuh = str(pybase64.b64decode("QHNreXp1c3VwcG9ydA=="))[2:15]
@@ -105,7 +104,7 @@ async def ya_kali_ngga():
     except BaseException:
         pass
 
-    
+
 async def take_screen_shot(video_file: str, duration: int, path: str = '') -> Optional[str]:
     """ take a screenshot """
     LOGS.info(
