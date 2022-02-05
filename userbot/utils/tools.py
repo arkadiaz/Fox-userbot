@@ -1,7 +1,6 @@
 import re
 import hashlib
 import asyncio
-import pybase64
 import shlex
 import os
 from os.path import basename
@@ -11,7 +10,6 @@ from typing import Optional, Union
 from userbot import bot, LOGS
 
 from telethon.tl.functions.channels import GetParticipantRequest
-from telethon.tl.functions.channels import JoinChannelRequest as Get
 from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantCreator, DocumentAttributeFilename
 
 
