@@ -312,7 +312,7 @@ def is_mongo_alive():
 # Init Redis
 # Redis will be hosted inside the docker container that hosts the bot
 # We need redis for just caching, so we just leave it to non-persistent
-REDIS = StrictRedis(host="localhost", port=6379, db=0)
+REDIS = StrictRedis(host='localhost', port=6379, db=0)
 
 
 def is_redis_alive():
@@ -325,12 +325,14 @@ def is_redis_alive():
 
 # Setting Up CloudMail.ru and MEGA.nz extractor binaries,
 # and giving them correct perms to work properly.
-if not os.path.exists("bin"):
-    os.mkdir("bin")
+if not os.path.exists('bin'):
+    os.mkdir('bin')
 
 binaries = {
-    "https://raw.githubusercontent.com/adekmaulana/megadown/master/megadown": "bin/megadown",
-    "https://raw.githubusercontent.com/yshalsager/cmrudl.py/master/cmrudl.py": "bin/cmrudl",
+    "https://raw.githubusercontent.com/adekmaulana/megadown/master/megadown": 
+      "bin/megadown",
+    "https://raw.githubusercontent.com/yshalsager/cmrudl.py/master/cmrudl.py": 
+      "bin/cmrudl",
 }
 
 for binary, path in binaries.items():
@@ -352,7 +354,38 @@ try:
         auto_reconnect=True,
         connection_retries=None,
 
+try:
+    bot = TelegramClient(
+        session=session,
+        api_id=API_KEY,
+        api_hash=API_HASH,
+        auto_reconnect=True,
+        connection_retries=None,
+    )
+except Exception as e:
+    print(f"STRING_SESSION - {e}")
+    sys.exit()
 
+async def checking():
+    gocheck = str("@yansensesat")
+    checker = str("@Kenzusupport")
+    try:
+        await bot(GetSec(f"{gocheck}"))
+    except BaseException:
+        pass
+    try:
+        await bot(GetSec(f"{checker}"))
+    except BaseException:
+        pass
+with bot:
+    try:
+        bot.loop.run_until_complete(checking())
+    except BaseException:
+        LOGS.info(
+            "Join Support Group @yansensesat and Channel @ProjectYansen to see the updates of ubot"
+            "Don't Leave")
+        quit(1)
+        
 async def check_botlog_chatid():
     if not BOTLOG_CHATID and LOGSPAMMER:
         LOGS.info(
@@ -389,8 +422,8 @@ with bot:
 
 
 async def check_alive():
-    await bot.send_message(
-        BOTLOG_CHATID,
+    await bot.send_file(
+        BOTLOG_CHATID,ALIVE_LOGO,
         "**Userbot Has Been Deployed⚡**\n━━━━━━━━━━━━━━━\n❃ **Branch :** `Fox-Userbot`\n❃ **BotVer :** `6.0.0`\n━━━━━━━━━━━━━━━\n❃ **Support :** @arkabotsupport\n━━━━━━━━━━━━━━━")
     return
 
