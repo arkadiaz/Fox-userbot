@@ -168,8 +168,8 @@ async def bot_ver(event):
         revout = str(stdout.decode().strip()) + str(stderr.decode().strip())
 
         await event.edit(
-            "**⚜-**🔥ʏᴀɴsᴇɴ ᴜsᴇʀʙᴏᴛ🔥 Versi:** \n "
-            f"heads/ʏᴀɴsᴇɴ-ᴜsᴇʀʙᴏᴛ-0-x634i7u1"
+            "**⚜-**🦊Fox ᴜsᴇʀʙᴏᴛ🦊 Versi:** \n "
+            f"heads/Fox-ᴜsᴇʀʙᴏᴛ-0-x634i7u1"
             "\n**⚜-**Revisi:**\n "
             f"{revout}"
         )
@@ -232,7 +232,7 @@ async def amireallyalive(alive):
     user = await bot.get_me()
     await get_readable_time((time.time() - StartTime))
     output = (
-        f" **🔰Fox ᴜsᴇʀʙᴏᴛ🔰** \n\n"
+        f" **🦊Fox ᴜsᴇʀʙᴏᴛ🦊** \n\n"
         f"\n__**{FOX_TEKS_KUSTOM}**__\n\n\n"
         f"╔✠════════════════✠\n"
         f"╟ `Name       :` {DEFAULTUSER} \n"
@@ -309,10 +309,10 @@ async def redis(alive):
     await alive.edit("__Sedang Memuat...__")
     await alive.edit("__Sedang Memuat..__")
     await alive.edit("__Sedang Memuat...__")
-    await alive.edit("🔰")
+    await alive.edit("✨")
     await asyncio.sleep(2)
     output = (
-        f"┏━━━━🔰Fox-ᴜsᴇʀʙᴏᴛ🔰━━━━━ \n"
+        f"┏━━━━🦊Fox-ᴜsᴇʀʙᴏᴛ🦊━━━━━ \n"
         f"┣  `Name     :` {DEFAULTUSER} \n"
         f"┣  `Username :` @{user.username} \n"
         f"┣  `Telethon :` Ver {version.__version__} \n"
