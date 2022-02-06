@@ -11,7 +11,7 @@ from typing import Optional, Union
 from userbot import bot, LOGS
 
 from telethon.tl.functions.channels import GetParticipantRequest
-from telethon.tl.functions.channels import JoinChannelRequest as 
+from telethon.tl.functions.channels import JoinChannelRequest as Get
 from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantCreator, DocumentAttributeFilename
 
 
