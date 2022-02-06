@@ -136,7 +136,7 @@ DB_URI = os.environ.get("DATABASE_URL", None)
 
 # OCR API key
 OCR_SPACE_API_KEY = os.environ.get(
-    "OCR_SPACE_API_KEY") or "12dc42a0ff88957
+    "OCR_SPACE_API_KEY") or "12dc42a0ff88957"
 
 # remove.bg API key
 REM_BG_API_KEY = os.environ.get(
