@@ -28,7 +28,6 @@ from telethon.sessions import StringSession
 from telethon import Button, events, functions, types
 from telethon.utils import get_display_name
 
-
 redis_db = None
 
 load_dotenv("config.env")
@@ -56,22 +55,20 @@ else:
 LOGS = getLogger(__name__)
 
 if version_info[0] < 3 or version_info[1] < 8:
-    LOGS.info(
-        "You MUST have a python version of at least 3.8."
-        "Multiple features depend on this. Bot quitting."
-    )
+    LOGS.info("You MUST have a python version of at least 3.8."
+              "Multiple features depend on this. Bot quitting.")
     quit(1)
+    
+# Check if the config was edited by using the already used variable.
+# Basically, its the 'virginity check' for the config file ;)
+CONFIG_CHECK = os.environ.get(
+    "___________PLOX_______REMOVE_____THIS_____LINE__________", None)    
+    
+if CONFIG_CHECK:
+    LOGS.info(
+        "Please remove the line mentioned in the first hashtag from the config.env file")
 
-
-# Telegram App KEY and HASH
-API_KEY = int(os.environ.get("API_KEY") or None)
-API_HASH = str(os.environ.get("API_HASH") or None)
-
-# Userbot Session String
-STRING_SESSION = os.environ.get("STRING_SESSION", "")
-
-# Logging channel/group ID configuration.
-BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", ""))
+    quit(1)
 
 # DEVS
 DEVS = (
@@ -82,6 +79,16 @@ DEVS = (
 
 
 )
+
+# Telegram App KEY and HASH
+API_KEY = int(os.environ.get("API_KEY") or None)
+API_HASH = str(os.environ.get("API_HASH") or None)
+
+# Userbot Session String
+STRING_SESSION = os.environ.get("STRING_SESSION", "")
+
+# Logging channel/group ID configuration.
+BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", ""))
 
 # Userbot logging feature switch.
 BOTLOG = sb(os.environ.get("BOTLOG", "True"))
@@ -98,7 +105,7 @@ PMPERMIT_PIC = (
 )
 
 # Bleep Blop, this is a bot ;)
-PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "False"))
+PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "False")
 
 # Send .chatid in any group with all your administration bots (added)
 G_BAN_LOGGER_GROUP = os.environ.get("G_BAN_LOGGER_GROUP", "")
@@ -122,7 +129,7 @@ UPSTREAM_REPO_URL = os.environ.get(
     "UPSTREAM_REPO_URL", "https://github.com/arkadiaz/fox-userbot"
 )
 UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH", "main")
-
+                 
 # Console verbose logging
 CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
 
@@ -131,12 +138,12 @@ DB_URI = os.environ.get("DATABASE_URL", None)
 
 # OCR API key
 OCR_SPACE_API_KEY = os.environ.get(
-    "OCR_SPACE_API_KEY") or "12dc42a0ff88957"
+    "OCR_SPACE_API_KEY") or "12dc42a0ff88957
 
 # remove.bg API key
 REM_BG_API_KEY = os.environ.get(
     "REM_BG_API_KEY") or "ihAEGNtfnVtCsWnzqiXM1GcS"
-
+                 
 # Redis URI & Redis Password
 REDIS_URI = os.environ.get("REDIS_URI", None)
 REDIS_PASSWORD = os.environ.get("REDIS_PASSWORD", None)
@@ -156,7 +163,7 @@ if REDIS_URI and REDIS_PASSWORD:
             "Make sure you have the correct Redis endpoint and password "
             "and your machine can make connections."
         )
-
+                 
 # Chrome Driver and Headless Google Chrome Binaries
 CHROME_BIN = os.environ.get("CHROME_BIN", "/app/.apt/usr/bin/google-chrome")
 CHROME_DRIVER = os.environ.get("CHROME_DRIVER") or "/usr/bin/chromedriver"
@@ -354,14 +361,6 @@ try:
         auto_reconnect=True,
         connection_retries=None,
 
-try:
-    bot = TelegramClient(
-        session=session,
-        api_id=API_KEY,
-        api_hash=API_HASH,
-        auto_reconnect=True,
-        connection_retries=None,
-    )
 except Exception as e:
     print(f"STRING_SESSION - {e}")
     sys.exit()
