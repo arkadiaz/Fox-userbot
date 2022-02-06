@@ -849,7 +849,7 @@ with bot:
                 apps.get("quota_used") / 60
                 AppPercentage = math.floor(apps.get("quota_used") * 100 / quota)
                 text = (
-                    "⚡ **ɪɴꜰᴏʀᴍᴀsɪ ᴅʏɴᴏ ʜᴇʀᴏᴋᴜ :**\n"
+                    "✨ **ɪɴꜰᴏʀᴍᴀsɪ ᴅʏɴᴏ ʜᴇʀᴏᴋᴜ :**\n"
                     "╔════════════════════╗\n"
                     f" ☂ **ᴘᴇɴɢɢᴜɴᴀ ᴅʏɴᴏ sᴀᴀᴛ ɪɴɪ :**\n"
                     f"  ➽  `{AppHours}`**ᴊᴀᴍ**  `{AppMinutes}`**ᴍᴇɴɪᴛ**  "
@@ -926,15 +926,15 @@ with bot:
                 )
             elif query.startswith("tb_btn"):
                 result = builder.article(
-                    "Bantuan Dari **​🔰FOX-USERBOT🔰**",
+                    "Bantuan Dari **​🦊FOX-USERBOT🦊**",
                     text="Daftar Plugins",
                     buttons=[],
                     link_preview=True,
                 )
             else:
                 result = builder.article(
-                    " **🔰FOX-USERBOT🔰**",
-                    text="""°🔰FOX-USERBOT🔰°""",
+                    " **🦊FOX-USERBOT🦊**",
+                    text="""°🦊FOX-USERBOT🦊°""",
                     buttons=[
                         [
                             custom.Button.url(
