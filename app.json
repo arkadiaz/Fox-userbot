@@ -28,7 +28,7 @@
       "required": false
     },
      "STRING_SESSION": {
-      "description": "Dapatkan String Session di termux caranya ada di repo, jika tidak tau reponya tanya ke @yansesat di telegram",
+      "description": "Dapatkan String Session di termux caranya ada di repo, jika tidak tau reponya tanya ke @laz1yy di telegram",
       "required": true
     },
     "HEROKU_APP_NAME": {
