@@ -13,9 +13,5 @@ RUN pip3 install -r https://raw.githubusercontent.com/Skyzu/skyzu-userbot/Skyzuu
 
 EXPOSE 80 443
 
-
-
-EXPOSE 80 443
-
 # Finalization
 CMD ["python3", "-m", "userbot"]
