@@ -21,13 +21,13 @@ except BaseException as e:
     LOGS.info(str(e), exc_info=True)
     sys.exit(1)
 
-
 async def userbot_on():
     try:
         if BOTLOG_CHATID != 0:
-            foto = "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
-            text = f"🔰Fox-Userbot Berhasil Diaktfikan🔰\n━━━━━━━━━━━━━━━\n❃ Bot Of : {ALIVE_NAME}\n❃ BotVer : {BOT_VER}@{UPSTREAM_REPO_BRANCH}\n━━━━━━━━━━━━━━━"
-            await bot.send_file(BOTLOG_CHATID, foto, caption=text)
+            await bot.send_message(
+                BOTLOG_CHATID,
+                 f"🔰Fox-Userbot Berhasil Diaktfikan🔰\n━━━━━━━━━━━━━━━\n❃ Bot Of : {ALIVE_NAME}\n❃ BotVer : {BOT_VER}@{UPSTREAM_REPO_BRANCH}\n━━━━━━━━━━━━━━━"
+                ) 
     except Exception as e:
         LOGS.info(str(e))
 
