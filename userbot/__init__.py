@@ -386,37 +386,6 @@ async def check_botlog_chatid():
         )
         quit(1)
 
-
-with bot:
-    try:
-        bot.loop.run_until_complete(check_botlog_chatid())
-    except BaseException:
-        LOGS.info(
-            "BOTLOG_CHATID environment variable isn't a "
-            "valid entity. Check your environment variables/config.env file."
-        )
-        quit(1)
-
-
-async def check_alive():
-    await bot.send_file(
-        BOTLOG_CHATID,
-        ALIVE_LOGO,
-        "**Userbot Has Been Deployed⚡**\n━━━━━━━━━━━━━━━\n❃ **Branch :** `Fox-Userbot`\n❃ **BotVer :** `6.0.0`\n━━━━━━━━━━━━━━━\n❃ **Support :** @arkabotsupport\n━━━━━━━━━━━━━━━",
-    )
-    return
-
-
-with bot:
-    try:
-        bot.loop.run_until_complete(check_alive())
-    except BaseException:
-        LOGS.info(
-            "BOTLOG_CHATID environment variable isn't a "
-            "valid entity. Check your environment variables/config.env file."
-        )
-        quit(1)
-
 # Global Variables
 COUNT_MSG = 0
 USERS = {}
