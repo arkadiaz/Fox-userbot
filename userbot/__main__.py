@@ -21,14 +21,13 @@ except BaseException as e:
     LOGS.info(str(e), exc_info=True)
     sys.exit(1)
 
-
 async def userbot_on():
     try:
         if BOTLOG_CHATID != 0:
             await bot.send_message(
                 BOTLOG_CHATID,
-                f"🔰Fox-Userbot Berhasil Diaktfikan🔰\n━━━━━━━━━━━━━━━\n❃ Bot Of : {ALIVE_NAME}\n❃ BotVer : {BOT_VER}@{UPSTREAM_REPO_BRANCH}\n━━━━━━━━━━━━━━━",
-            )
+                 f"🔰Fox-Userbot Berhasil Diaktfikan🔰\n━━━━━━━━━━━━━━━\n❃ Bot Of : {ALIVE_NAME}\n❃ BotVer : {BOT_VER}@{UPSTREAM_REPO_BRANCH}\n━━━━━━━━━━━━━━━"
+            ) 
     except Exception as e:
         LOGS.info(str(e))
 
