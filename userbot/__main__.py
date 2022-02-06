@@ -25,8 +25,8 @@ except BaseException as e:
 async def userbot_on():
     try:
         if BOTLOG_CHATID != 0:
-            foto = "https://telegra.ph/file/fd08937c4ae6cb1303731.jpg"
-            text = f"⚡Skyzu-Userbot Berhasil Diaktfikan⚡\n━━━━━━━━━━━━━━━\n❃ Bot Of : {ALIVE_NAME}\n❃ BotVer : {BOT_VER}@{UPSTREAM_REPO_BRANCH}\n━━━━━━━━━━━━━━━"
+            foto = "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
+            text = f"🔰Fox-Userbot Berhasil Diaktfikan🔰\n━━━━━━━━━━━━━━━\n❃ Bot Of : {ALIVE_NAME}\n❃ BotVer : {BOT_VER}@{UPSTREAM_REPO_BRANCH}\n━━━━━━━━━━━━━━━"
             await bot.send_file(BOTLOG_CHATID, foto, caption=text)
     except Exception as e:
         LOGS.info(str(e))
