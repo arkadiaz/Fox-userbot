@@ -96,16 +96,14 @@ LOGSPAMMER = sb(os.environ.get("LOGSPAMMER", "True"))
 
 # Custom Pmpermit text
 PMPERMIT_TEXT = os.environ.get("PMPERMIT_TEXT", None)
-PM_LIMIT = int(os.environ.get("PM_LIMIT", 6))
 
 # Custom Pmpermit pic
-PMPERMIT_PIC = (
-    os.environ.get("PMPERMIT_PIC", None)
-    or "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
-)
+PMPERMIT_PIC = os.environ.get(
+    "PMPERMIT_PIC") or "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
 
 # Bleep Blop, this is a bot ;)
-PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "False")
+PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "False"))
+PM_LIMIT = int(os.environ.get("PM_LIMIT", 6))
 
 # Send .chatid in any group with all your administration bots (added)
 G_BAN_LOGGER_GROUP=os.environ.get("G_BAN_LOGGER_GROUP", "")
