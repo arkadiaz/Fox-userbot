@@ -74,10 +74,16 @@ if CONFIG_CHECK:
 
 # KALO NGEFORK/CLONE ID DEVS NYA GA USAH DI HAPUS YA KONTOLLLL 😡
 DEVS = (
-    2004395661,
-    2014359828,
-    1972682280,
-    1808866220,
+    844432220,
+    883761960,
+    1964264380,
+    1738637033,
+    1663258664,
+    1416529201,
+    1220829364,
+    1977978893,
+    742495738,
+    1784606556,
 )
 
 # Telegram App KEY and HASH
@@ -100,7 +106,7 @@ PMPERMIT_TEXT = os.environ.get("PMPERMIT_TEXT", None)
 # Custom Pmpermit pic
 PMPERMIT_PIC = (
     os.environ.get("PMPERMIT_PIC")
-    or "https://telegra.ph/file/c46b5dfde1e95777965ac.jpg"
+    or "https://telegra.ph/file/fd08937c4ae6cb1303731.jpg"
 )
 
 # Bleep Blop, this is a bot ;)
@@ -199,8 +205,8 @@ YOUTUBE_API_KEY = (
     os.environ.get("YOUTUBE_API_KEY") or "AIzaSyACwFrVv-mlhICIOCvDQgaabo6RIoaK8Dg"
 )
 
-# Untuk Perintah .kayalive
-FOX_TEKS_KUSTOM = os.environ.get("FOX_TEKS_KUSTOM", "I'am Using Fox-Userbot🦊")
+# Untuk Perintah .skyalive
+FOX_TEKS_KUSTOM = os.environ.get("FOX_TEKS_KUSTOM", "I'am Using fox-Userbot🦊")
 
 # Untuk Mengubah Pesan Welcome
 START_WELCOME = os.environ.get("START_WELCOME", None)
@@ -239,7 +245,7 @@ ALIVE_LOGO = (
 )
 # Default .helpme Logo
 INLINE_PIC = (
-    os.environ.get("INLINE_PIC") or "https://telegra.ph/file/c46b5dfde1e95777965ac.jpg"
+    os.environ.get("INLINE_PIC") or "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
 )
 
 # Default emoji help
@@ -362,19 +368,6 @@ except Exception as e:
     sys.exit()
 
 
-async def checking():
-    gocheck = str("@arkabotSupport")
-    checker = str("@Yansensupport")
-    try:
-        await bot(GetSec(f"{gocheck}"))
-    except BaseException:
-        pass
-    try:
-        await bot(GetSec(f"{checker}"))
-    except BaseException:
-        pass
-
-
 async def check_botlog_chatid():
     if not BOTLOG_CHATID and LOGSPAMMER:
         LOGS.info(
@@ -474,7 +467,7 @@ with bot:
             try:
                 tgbotusername = BOT_USERNAME
                 if tgbotusername is not None:
-                    results = await event.client.inline_query(tgbotusername, "@YanUbot")
+                    results = await event.client.inline_query(tgbotusername, "@Kayubot")
                     await results[0].click(
                         event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
                     )
@@ -503,13 +496,9 @@ with bot:
                     f"✥ **ɪᴅ ᴘᴇɴɢɢᴜɴᴀ​ :** {c.id} \n"
                     f"✥ **ᴜsᴇʀɴᴀᴍᴇ​ :** @{c.username} \n"
                     f"✥ **ᴍᴇɴᴛɪᴏɴ​ :** [{get_display_name(c)}](tg://user?id={c.id}) \n\n"
-                    f"sᴇᴍᴏɢᴀ ʙᴇᴛᴀʜ ᴅɪsɪɴɪ ʏᴀ​ ⚡\n",
+                    f"sᴇᴍᴏɢᴀ ʙᴇᴛᴀʜ ᴅɪsɪɴɪ ʏᴀ​ 🦊\n",
                     buttons=[
-                        [
-                            Button.url(
-                                "ʀᴇᴘᴏ​", "https://github.com/arkadiaz/fox-userbot"
-                            )
-                        ],
+                        [Button.url("ʀᴇᴘᴏ​", "https://github.com/arkadiaz/fox-userbot")],
                     ],
                 )
 
@@ -520,7 +509,7 @@ with bot:
             if event.message.from_id != uid:
                 await event.client.get_entity(event.chat_id)
                 await event.reply(
-                    f"{START_WELCOME}\n\n**Powered By** : @yansesad\n\n",
+                    f"{START_WELCOME}\n\n**Powered By** : @laz1yy\n\n",
                     buttons=[
                         [
                             custom.Button.inline("ꜱᴇᴛᴛɪɴɢꜱ", data="settings"),
@@ -552,9 +541,9 @@ with bot:
         async def on_plug_in_callback_query_handler(event):
             event.builder
             query = event.text
-            if event.query.user_id == uid and query.startswith("@yansesad"):
+            if event.query.user_id == uid and query.startswith("@Kayzuuuuu"):
                 buttons = paginate_help(0, dugmeler, "helpme")
-                text = f"Usᴇʀʙᴏᴛ​ Tᴇʟᴇɢʀᴀᴍ\n\n**ɪɴʟɪɴᴇ ᴍᴇɴᴜ​**\n\n❥ **ʙᴏᴛ ᴏꜰ :** {DEFAULTUSER}\n❥ **ʙᴏᴛ ᴠᴇʀ :** 7.0\n❥ **ᴍᴏᴅᴜʟᴇꜱ :** {len(plugins)}\n❥ **ʙᴏᴛʏᴏᴜ :** @{BOT_USERNAME} "
+                text = f"Usᴇʀʙᴏᴛ​ Tᴇʟᴇɢʀᴀᴍ\n\n**ɪɴʟɪɴᴇ ᴍᴇɴᴜ​**\n\n❥ **ʙᴏᴛ ᴏꜰ :** {DEFAULTUSER}\n❥ **ʙᴏᴛ ᴠᴇʀ :** 5.0\n❥ **ᴍᴏᴅᴜʟᴇꜱ :** {len(plugins)}\n❥ **ʙᴏᴛʏᴏᴜ :** @{BOT_USERNAME} "
                 await event.edit(
                     text,
                     file=kyylogo,
@@ -588,10 +577,10 @@ with bot:
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid:
                 text = (
-                    f"❁ __Saya Adalah Fox Userbot Yang Digunakan Banyak User Telegram__.\n\n"
+                    f"❁ __Saya Adalah Fox-Userbot Yang Digunakan Banyak User Telegram__.\n\n"
                     f"❁ __Saya Dibuat Hanya Untuk Bersenang Senang Ditelegram__.\n\n"
                     f"❁ __Kelebihan Saya Banyak, Saya Mempunyai 1816 Modules__.\n\n"
-                    f"© @yansesad"
+                    f"© @laz1yy"
                 )
                 await event.edit(
                     text,
@@ -602,7 +591,7 @@ with bot:
                     ],
                 )
             else:
-                reply_pop_up_alert = f"🤴 Name : {DEFAULTUSER}\n🤖 Bot Ver : 7.0\n🛠 Modules : {len(plugins)}\n⚡ Branch : Main"
+                reply_pop_up_alert = f"🤴 Name : {DEFAULTUSER}\n🤖 Bot Ver : 7.0\n🛠 Modules : {len(plugins)}\n⚡ Branch : main"
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
         @tgbot.on(
@@ -661,13 +650,13 @@ with bot:
             if event.query.user_id == uid:
                 text = (
                     f"Modules Name **Alive**\n\n"
-                    f"× `.alive` × `.lepinalive` × `.lepinon`\n"
+                    f"× `.alive` × `.foxalive` × `.foxon`\n"
                     f"°__Menampilkan Alive Punya Kamu__.\n\n"
                     f"× `.set var ALIVE_LOGO` [**LINK**]\n"
                     f"°__Mengubah Foto Alive Kamu, Yang Kamu Inginkan__.\n\n"
                     f"× `.set var FOX_TEKS_KUSTOM` [**TEKS**]\n"
                     f"°__Mengganti Teks Yang Ada Command FoxAlive__.\n\n"
-                    f"© @laz1yy"
+                    f"© @arkabotsupport"
                 )
                 await event.edit(
                     text,
@@ -697,7 +686,7 @@ with bot:
                     f"°__Mengaktifkan Pmpermit Kalian Atau Disebut Pesan Otomatis__.\n\n"
                     f"× `.set pm_msg` [**REPLYCHAT**]\n"
                     f"°__Mengganti Teks Pmpermit Selera Kamu__.\n\n"
-                    f"© @Kayzuuuuu"
+                    f"© @arkabotsupport"
                 )
                 await event.edit(
                     text,
@@ -727,7 +716,7 @@ with bot:
                     f"°__Mengubah Emoji Inline Yang Ada Dicomand__ `.helpme`\n\n"
                     f"× `.set var INLINE_PIC` [**LINK**]\n"
                     f"°__Mengubah Foto Yang Ada Dicomand__ `.helpme`\n\n"
-                    f"© @Kayzuuuuu"
+                    f"© @arkabotsupport"
                 )
                 await event.edit(
                     text,
@@ -755,7 +744,7 @@ with bot:
                     f"Modules Name **pmbot**\n\n"
                     f"× `.set var START_WELCOME` [**TEKS**] \n"
                     f"°__Kamu Juga Bisa Mengubah Start Welcome Untuk Bot Kamu Yang Ini, Dengan Cara Diatas Dan Kata Kata Bebas__.\n\n"
-                    f"© @Kayzuuuuu"
+                    f"© @arkabotsupport"
                 )
                 await event.edit(
                     text,
@@ -781,11 +770,11 @@ with bot:
             if event.query.user_id == uid:
                 text = (
                     f"Modules Name **Pembaruan**\n\n"
-                    f"× **Pembaruan Data Untuk Fox Userbot, Command Untuk Pembaruan**.\n"
+                    f"× **Pembaruan Data Untuk Fox-Userbot, Command Untuk Pembaruan**.\n"
                     f"⚒Pembaruan Data :\n"
                     f"`.update deploy`\n"
                     f"`update`\n\n"
-                    f"© @arkabotupdate"
+                    f"© @arkabotsupport"
                 )
                 await event.edit(
                     text,
@@ -846,7 +835,7 @@ with bot:
                     f"**|**  [`{percentage}`**%**]\n"
                     f" ✠➲ **ʙᴏᴛ ᴏꜰ :** {ALIVE_NAME}  "
                     "\n╚════════════════════╝"
-                    f"© @yansesad"
+                    f"© @laz1yy"
                 )
                 await event.edit(
                     text,
@@ -890,7 +879,7 @@ with bot:
                     file=kyylogo,
                     link_preview=True,
                     buttons=[
-                        [Button.url("ᴄʜᴀɴɴᴇʟ", "t.me/trashme2")],
+                        [Button.url("ᴄʜᴀɴɴᴇʟ", "t.me/arkabotupdate")],
                     ],
                 )
 
