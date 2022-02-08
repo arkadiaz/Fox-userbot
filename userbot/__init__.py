@@ -2,12 +2,6 @@
 
 import logging
 import os
-<<<<<<< HEAD
-=======
-import random
-import re
-import sys
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 import time
 import re
 import redis
@@ -20,18 +14,11 @@ from logging import basicConfig, getLogger, INFO, DEBUG
 from distutils.util import strtobool as sb
 from math import ceil
 
-<<<<<<< HEAD
-=======
-import pybase64
-import redis
-from dotenv import load_dotenv
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 from pylast import LastFMNetwork, md5
 from pySmartDL import SmartDL
 from pymongo import MongoClient
 from datetime import datetime
 from redis import StrictRedis
-<<<<<<< HEAD
 from dotenv import load_dotenv
 from requests import get
 from telethon.sync import TelegramClient, custom, events
@@ -39,14 +26,6 @@ from telethon.tl.functions.channels import JoinChannelRequest as GetSec
 from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
 from telethon.sessions import StringSession
 from telethon import Button, events, functions, types
-=======
-from requests import get
-from telethon import Button, events, functions, types
-from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
-from telethon.sessions import StringSession
-from telethon.sync import TelegramClient, custom, events
-from telethon.tl.functions.channels import JoinChannelRequest as GetSec
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 from telethon.utils import get_display_name
 
 redis_db = None
@@ -70,14 +49,8 @@ if CONSOLE_LOGGER_VERBOSE:
         level=DEBUG,
     )
 else:
-<<<<<<< HEAD
     basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
                 level=INFO)
-=======
-    basicConfig(
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=INFO
-    )
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 LOGS = getLogger(__name__)
 
 if version_info[0] < 3 or version_info[1] < 8:
@@ -96,34 +69,9 @@ if CONFIG_CHECK:
     )
     quit(1)
 
-<<<<<<< HEAD
 # KALO NGEFORK/CLONE ID DEVS NYA GA USAH DI HAPUS YA KONTOLLLL 😡
 DEVS = (
     2004395661,
-    2014359828,
-    1972682280,
-    1808866220,
-=======
-# Check if the config was edited by using the already used variable.
-# Basically, its the 'virginity check' for the config file ;)
-CONFIG_CHECK = os.environ.get(
-    "___________PLOX_______REMOVE_____THIS_____LINE__________", None
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
-)
-
-if CONFIG_CHECK:
-    LOGS.info(
-        "Please remove the line mentioned in the first hashtag from the config.env file"
-    )
-
-    quit(1)
-
-<<<<<<< HEAD
-=======
-# DEVS
-DEVS = (
-    2004395661,
-    1964264380,
     2014359828,
     1972682280,
     1808866220,
@@ -139,7 +87,6 @@ STRING_SESSION = os.environ.get("STRING_SESSION", "")
 # Logging channel/group ID configuration.
 BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", ""))
 
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 # Userbot logging feature switch.
 BOTLOG = sb(os.environ.get("BOTLOG", "True"))
 LOGSPAMMER = sb(os.environ.get("LOGSPAMMER", "False"))
@@ -148,15 +95,8 @@ LOGSPAMMER = sb(os.environ.get("LOGSPAMMER", "False"))
 PMPERMIT_TEXT = os.environ.get("PMPERMIT_TEXT", None)
 
 # Custom Pmpermit pic
-<<<<<<< HEAD
 PMPERMIT_PIC = os.environ.get(
     "PMPERMIT_PIC") or "https://telegra.ph/file/c46b5dfde1e95777965ac.jpg"
-=======
-PMPERMIT_PIC = (
-    os.environ.get("PMPERMIT_PIC")
-    or "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
-)
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 
 # Bleep Blop, this is a bot ;)
 PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "False"))
@@ -181,16 +121,10 @@ GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN", None)
 
 # Custom (forked) repo URL for updater.
 UPSTREAM_REPO_URL = os.environ.get(
-<<<<<<< HEAD
     "UPSTREAM_REPO_URL",
     "https://github.com/arkadiaz/fox-userbot")
 UPSTREAM_REPO_BRANCH = os.environ.get(
     "UPSTREAM_REPO_BRANCH", "main")
-=======
-    "UPSTREAM_REPO_URL", "https://github.com/arkadiaz/fox-userbot"
-)
-UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH", "main")
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 
 # Console verbose logging
 CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
@@ -199,19 +133,12 @@ CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
 DB_URI = os.environ.get("DATABASE_URL", None)
 
 # OCR API key
-<<<<<<< HEAD
 OCR_SPACE_API_KEY = os.environ.get(
     "OCR_SPACE_API_KEY") or "12dc42a0ff88957"
 
 # remove.bg API key
 REM_BG_API_KEY = os.environ.get(
     "REM_BG_API_KEY") or "ihAEGNtfnVtCsWnzqiXM1GcS"
-=======
-OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY") or "12dc42a0ff88957"
-
-# remove.bg API key
-REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY") or "ihAEGNtfnVtCsWnzqiXM1GcS"
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 
 # Redis URI & Redis Password
 REDIS_URI = os.environ.get('REDIS_URI', None)
@@ -236,7 +163,8 @@ if REDIS_URI and REDIS_PASSWORD:
 # Chrome Driver and Headless Google Chrome Binaries
 CHROME_BIN = os.environ.get("CHROME_BIN", "/app/.apt/usr/bin/google-chrome")
 CHROME_DRIVER = os.environ.get("CHROME_DRIVER") or "/usr/bin/chromedriver"
-GOOGLE_CHROME_BIN = os.environ.get("GOOGLE_CHROME_BIN") or "/usr/bin/google-chrome"
+GOOGLE_CHROME_BIN = os.environ.get(
+    "GOOGLE_CHROME_BIN") or "/usr/bin/google-chrome"
 
 # set to True if you want to log PMs to your PM_LOGGR_BOT_API_ID
 NC_LOG_P_M_S = bool(os.environ.get("NC_LOG_P_M_S", False))
@@ -244,7 +172,6 @@ NC_LOG_P_M_S = bool(os.environ.get("NC_LOG_P_M_S", False))
 PM_LOGGR_BOT_API_ID = int(os.environ.get("PM_LOGGR_BOT_API_ID", "-100"))
 
 # OpenWeatherMap API Key
-<<<<<<< HEAD
 OPEN_WEATHER_MAP_APPID = os.environ.get(
     "OPEN_WEATHER_MAP_APPID") or "5ed2fcba931692ec6bd0a8a3f8d84936"
 WEATHER_DEFCITY = os.environ.get("WEATHER_DEFCITY", "Batam")
@@ -252,18 +179,6 @@ WEATHER_DEFCITY = os.environ.get("WEATHER_DEFCITY", "Batam")
 # Lydia API
 LYDIA_API_KEY = os.environ.get(
     "LYDIA_API_KEY") or "632740cd2395c73b58275b54ff57a02b607a9f8a4bbc0e37a24e7349a098f95eaa6569e22e2d90093e9c1a9cc253380a218bfc2b7af2e407494502f6fb76f97e"
-=======
-OPEN_WEATHER_MAP_APPID = (
-    os.environ.get("OPEN_WEATHER_MAP_APPID") or "5ed2fcba931692ec6bd0a8a3f8d84936"
-)
-WEATHER_DEFCITY = os.environ.get("WEATHER_DEFCITY", None)
-
-# Lydia API
-LYDIA_API_KEY = (
-    os.environ.get("LYDIA_API_KEY")
-    or "632740cd2395c73b58275b54ff57a02b607a9f8a4bbc0e37a24e7349a098f95eaa6569e22e2d90093e9c1a9cc253380a218bfc2b7af2e407494502f6fb76f97e"
-)
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 
 # For MONGO based DataBase
 MONGO_URI = os.environ.get("MONGO_URI", None)
@@ -276,7 +191,6 @@ ANTI_SPAMBOT = sb(os.environ.get("ANTI_SPAMBOT", "False"))
 ANTI_SPAMBOT_SHOUT = sb(os.environ.get("ANTI_SPAMBOT_SHOUT", "False"))
 
 # Youtube API key
-<<<<<<< HEAD
 YOUTUBE_API_KEY = os.environ.get(
     "YOUTUBE_API_KEY") or "AIzaSyACwFrVv-mlhICIOCvDQgaabo6RIoaK8Dg"
 
@@ -284,14 +198,6 @@ YOUTUBE_API_KEY = os.environ.get(
 FOX_TEKS_KUSTOM = os.environ.get(
     "FOX_TEKS_KUSTOM",
     "I'am Using Fox-Userbot🦊")
-=======
-YOUTUBE_API_KEY = (
-    os.environ.get("YOUTUBE_API_KEY") or "AIzaSyACwFrVv-mlhICIOCvDQgaabo6RIoaK8Dg"
-)
-
-# Untuk Perintah .foxalive
-FOX_TEKS_KUSTOM = os.environ.get("FOX_TEKS_KUSTOM", "I'am Using Fox-Userbot🔰")
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 
 # Untuk Mengubah Pesan Welcome
 START_WELCOME = os.environ.get("START_WELCOME", None)
@@ -310,12 +216,8 @@ CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
 ZIP_DOWNLOAD_DIRECTORY = os.environ.get("ZIP_DOWNLOAD_DIRECTORY", "./zips")
 
 # bit.ly Module
-<<<<<<< HEAD
 BITLY_TOKEN = os.environ.get(
     "BITLY_TOKEN") or "o_1fpd9299vp"
-=======
-BITLY_TOKEN = os.environ.get("BITLY_TOKEN") or "o_1fpd9299vp"
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 
 # Bot Name
 TERM_ALIAS = os.environ.get("TERM_ALIAS", "Skyzu-Userbot")
@@ -330,22 +232,11 @@ ALIVE_USERNAME = os.environ.get("ALIVE_USERNAME", None)
 S_PACK_NAME = os.environ.get("S_PACK_NAME", None)
 
 # Default .alive Logo
-<<<<<<< HEAD
 ALIVE_LOGO = (os.environ.get("ALIVE_LOGO")
               or "https://telegra.ph/file/c46b5dfde1e95777965ac.jpg")
 # Default .helpme Logo
 INLINE_PIC = os.environ.get(
     "INLINE_PIC") or "https://telegra.ph/file/c46b5dfde1e95777965ac.jpg"
-=======
-ALIVE_LOGO = (
-    os.environ.get("ALIVE_LOGO") or "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
-)
-
-# Default .helpme Logo
-INLINE_PIC = (
-    os.environ.get("INLINE_PIC") or "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
-)
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 
 # Default emoji help
 EMOJI_HELP = os.environ.get("EMOJI_HELP") or "⚡"
@@ -354,12 +245,8 @@ EMOJI_HELP = os.environ.get("EMOJI_HELP") or "⚡"
 BIO_PREFIX = os.environ.get("BIO_PREFIX", None)
 DEFAULT_BIO = os.environ.get("DEFAULT_BIO", None)
 
-<<<<<<< HEAD
 LASTFM_API = os.environ.get(
     "LASTFM_API") or "73d42d9c93626709dc2679d491d472bf"
-=======
-LASTFM_API = os.environ.get("LASTFM_API") or "73d42d9c93626709dc2679d491d472bf"
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 
 LASTFM_SECRET = os.environ.get("LASTFM_SECRET", None)
 LASTFM_USERNAME = os.environ.get("LASTFM_USERNAME", None)
@@ -379,7 +266,8 @@ G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID", None)
 G_DRIVE_CLIENT_SECRET = os.environ.get("G_DRIVE_CLIENT_SECRET", None)
 G_DRIVE_AUTH_TOKEN_DATA = os.environ.get("G_DRIVE_AUTH_TOKEN_DATA", None)
 G_DRIVE_FOLDER_ID = os.environ.get("G_DRIVE_FOLDER_ID", None)
-TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./downloads")
+TEMP_DOWNLOAD_DIRECTORY = os.environ.get(
+    "TMP_DOWNLOAD_DIRECTORY", "./downloads")
 # Google Photos
 G_PHOTOS_CLIENT_ID = os.environ.get("G_PHOTOS_CLIENT_ID", None)
 G_PHOTOS_CLIENT_SECRET = os.environ.get("G_PHOTOS_CLIENT_SECRET", None)
@@ -388,22 +276,12 @@ if G_PHOTOS_AUTH_TOKEN_ID:
     G_PHOTOS_AUTH_TOKEN_ID = int(G_PHOTOS_AUTH_TOKEN_ID)
 
 # Genius Lyrics  API
-<<<<<<< HEAD
 GENIUS = os.environ.get(
     "GENIUS") or "vDhUmdo_ufwIvEymMeMY65IedjWaVm1KPupdx0L"
 
 # Quotes API Token
 QUOTES_API_TOKEN = os.environ.get(
     "QUOTES_API_TOKEN") or "33273f18-4a0d-4a76-8d78-a16faa002375"
-=======
-GENIUS = os.environ.get("GENIUS") or "vDhUmdo_ufwIvEymMeMY65IedjWaVm1KPupdx0L"
-
-
-# Quotes API Token
-QUOTES_API_TOKEN = (
-    os.environ.get("QUOTES_API_TOKEN") or "33273f18-4a0d-4a76-8d78-a16faa002375"
-)
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 
 # Wolfram Alpha API
 WOLFRAM_ID = os.environ.get("WOLFRAM_ID") or None
@@ -467,11 +345,7 @@ for binary, path in binaries.items():
 if STRING_SESSION:
     session = StringSession(str(STRING_SESSION))
 else:
-<<<<<<< HEAD
     session = "skyzu-userbot"
-=======
-    session = "fox-userbot"
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 try:
     bot = TelegramClient(
         session=session,
@@ -487,13 +361,8 @@ except Exception as e:
 
 
 async def checking():
-<<<<<<< HEAD
     gocheck = str("@arkabotSupport")
     checker = str("@Yansensupport")
-=======
-    gocheck = str("@arkabotsupport")
-    checker = str("@YansenSupport")
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
     try:
         await bot(GetSec(f"{gocheck}"))
     except BaseException:
@@ -503,23 +372,13 @@ async def checking():
     except BaseException:
         pass
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 with bot:
     try:
         bot.loop.run_until_complete(checking())
     except BaseException:
         LOGS.info(
-<<<<<<< HEAD
             "Join Support Group @arkabotSupport and Channel @arkabotupdate to see the updates of ubot"
             "Don't Leave")
-=======
-            "Join Support Group @arkabotsupport and Channel @arkabotupdate to see the updates of ubot"
-            "Don't Leave"
-        )
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
         quit(1)
 
 
@@ -543,7 +402,6 @@ async def check_botlog_chatid():
     if entity.default_banned_rights.send_messages:
         LOGS.info(
             "Your account doesn't have rights to send messages to BOTLOG_CHATID "
-<<<<<<< HEAD
             "group. Check if you typed the Chat ID correctly.")
         quit(1)
 
@@ -572,13 +430,6 @@ with bot:
         quit(1)
 
 
-=======
-            "group. Check if you typed the Chat ID correctly."
-        )
-        quit(1)
-
-
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
 # Global Variables
 COUNT_MSG = 0
 USERS = {}
@@ -618,7 +469,6 @@ def paginate_help(page_number, loaded_modules, prefix):
     modulo_page = page_number % max_num_pages
     if len(pairs) > number_of_rows:
         pairs = pairs[
-<<<<<<< HEAD
             modulo_page * number_of_rows: number_of_rows * (
                 modulo_page + 1)] + [
             (custom.Button.inline(
@@ -628,30 +478,16 @@ def paginate_help(page_number, loaded_modules, prefix):
                             prefix, modulo_page)), custom.Button.inline(
                                 "ɴᴇxᴛ>>", data="{}_next({})".format(
                                     prefix, modulo_page)), )]
-=======
-            modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
-        ] + [
-            (
-                custom.Button.inline(
-                    "<ʙᴀᴄᴋ​", data="{}_prev({})".format(prefix, modulo_page)
-                ),
-                custom.Button.inline(
-                    "ᴍᴇɴᴜ", data="{}_close({})".format(prefix, modulo_page)
-                ),
-                custom.Button.inline(
-                    "ɴᴇxᴛ>>", data="{}_next({})".format(prefix, modulo_page)
-                ),
-            )
-        ]
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
     return pairs
 
 
 with bot:
     try:
-        tgbot = TelegramClient("TG_BOT_TOKEN", api_id=API_KEY, api_hash=API_HASH).start(
-            bot_token=BOT_TOKEN
-        )
+        tgbot = TelegramClient(
+            "TG_BOT_TOKEN",
+            api_id=API_KEY,
+            api_hash=API_HASH).start(
+            bot_token=BOT_TOKEN)
 
         dugmeler = CMD_HELP
         me = bot.get_me()
@@ -699,15 +535,10 @@ with bot:
                     f"✥ **ᴍᴇɴᴛɪᴏɴ​ :** [{get_display_name(c)}](tg://user?id={c.id}) \n\n"
                     f"sᴇᴍᴏɢᴀ ʙᴇᴛᴀʜ ᴅɪsɪɴɪ ʏᴀ​ ⚡\n",
                     buttons=[
-<<<<<<< HEAD
                         [
                             Button.url("ʀᴇᴘᴏ​",
                                        "https://github.com/arkadiaz/fox-userbot")],
                     ]
-=======
-                        [Button.url("【﻿Ｃｈａｎｎｅｌ】", "https://t.me/arkabotupdate")],
-                    ],
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
                 )
 
 # ====================================InlineHandler===================================== #
@@ -788,14 +619,8 @@ with bot:
                 text = (
                     f"❁ __Saya Adalah Fox Userbot Yang Digunakan Banyak User Telegram__.\n\n"
                     f"❁ __Saya Dibuat Hanya Untuk Bersenang Senang Ditelegram__.\n\n"
-<<<<<<< HEAD
                     f"❁ __Kelebihan Saya Banyak, Saya Mempunyai 1816 Modules__.\n\n"
                     f"© @yansesad")
-=======
-                    f"❁ __Kelebihan Saya Banyak, Saya Mempunyai 180 Modules__.\n\n"
-                    f"© @laz1yy"
-                )
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
                 await event.edit(
                     text,
                     file=kyylogo,
@@ -825,7 +650,8 @@ with bot:
                         [custom.Button.inline("ᴀʟɪᴠᴇ", data="alive")],
                         [custom.Button.inline("ᴘᴍᴘᴇʀᴍɪᴛ", data="permirt")],
                         [custom.Button.inline("ᴘᴍʙᴏᴛ", data="pmbot")],
-                        [custom.Button.inline("ɪɴʟɪɴᴇ ᴍᴏᴅᴇ ", data="inline_mode")],
+                        [custom.Button.inline(
+                            "ɪɴʟɪɴᴇ ᴍᴏᴅᴇ ", data="inline_mode")],
                         [custom.Button.inline("ᴍᴇɴᴜ", data="kanan")],
                     ]
                 )
@@ -833,7 +659,7 @@ with bot:
                 reply_pop_up_alert = f"❌ DISCLAIMER ❌\n\nAnda Tidak Mempunyai Hak Untuk Menekan Tombol Button Ini"
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-        @tgbot.on(
+        @ tgbot.on(
             events.callbackquery.CallbackQuery(  # pylint:disable=E0602
                 data=re.compile(rb"kanan")
             )
@@ -902,12 +728,7 @@ with bot:
                     f"°__Mengaktifkan Pmpermit Kalian Atau Disebut Pesan Otomatis__.\n\n"
                     f"× `.set pm_msg` [**REPLYCHAT**]\n"
                     f"°__Mengganti Teks Pmpermit Selera Kamu__.\n\n"
-<<<<<<< HEAD
                     f"© @Kayzuuuuu")
-=======
-                    f"© @laz1yy"
-                )
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
                 await event.edit(
                     text,
                     file=kyylogo,
@@ -937,12 +758,7 @@ with bot:
                     f"°__Mengubah Emoji Inline Yang Ada Dicomand__ `.helpme`\n\n"
                     f"× `.set var INLINE_PIC` [**LINK**]\n"
                     f"°__Mengubah Foto Yang Ada Dicomand__ `.helpme`\n\n"
-<<<<<<< HEAD
                     f"© @Kayzuuuuu")
-=======
-                    f"© @laz1yy"
-                )
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
                 await event.edit(
                     text,
                     file=kyylogo,
@@ -970,12 +786,7 @@ with bot:
                     f"Modules Name **pmbot**\n\n"
                     f"× `.set var START_WELCOME` [**TEKS**] \n"
                     f"°__Kamu Juga Bisa Mengubah Start Welcome Untuk Bot Kamu Yang Ini, Dengan Cara Diatas Dan Kata Kata Bebas__.\n\n"
-<<<<<<< HEAD
                     f"© @Kayzuuuuu")
-=======
-                    f"© @laz1y"
-                )
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
                 await event.edit(
                     text,
                     file=kyylogo,
@@ -1005,12 +816,7 @@ with bot:
                     f"⚒Pembaruan Data :\n"
                     f"`.update deploy`\n"
                     f"`update`\n\n"
-<<<<<<< HEAD
                     f"© @arkabotupdate")
-=======
-                    f"© @laz1yy"
-                )
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
                 await event.edit(
                     text,
                     file=kyylogo,
@@ -1027,7 +833,7 @@ with bot:
                 reply_pop_up_alert = f"❌ DISCLAIMER ❌\n\nAnda Tidak Mempunyai Hak Untuk Menekan Tombol Button Ini"
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-        @tgbot.on(
+        @ tgbot.on(
             events.callbackquery.CallbackQuery(  # pylint:disable=E0602
                 data=re.compile(rb"ping")
             )
@@ -1059,16 +865,10 @@ with bot:
             )
         )
         async def on_plug_in_callback_query_handler(event):
-<<<<<<< HEAD
             if apps.get('app_uuid') == app.id:
                 apps.get('quota_used') / 60
                 AppPercentage = math.floor(
                     apps.get('quota_used') * 100 / quota)
-=======
-            if apps.get("app_uuid") == app.id:
-                apps.get("quota_used") / 60
-                AppPercentage = math.floor(apps.get("quota_used") * 100 / quota)
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
                 text = (
                     "✨ **ɪɴꜰᴏʀᴍᴀsɪ ᴅʏɴᴏ ʜᴇʀᴏᴋᴜ :**\n"
                     "╔════════════════════╗\n"
@@ -1096,7 +896,7 @@ with bot:
                 reply_pop_up_alert = f"❌ DISCLAIMER ❌\n\nAnda Tidak Mempunyai Hak Untuk Menekan Tombol Button Ini"
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-        @tgbot.on(
+        @ tgbot.on(
             events.callbackquery.CallbackQuery(  # pylint:disable=E0602
                 data=re.compile(rb"restart_bot")
             )
@@ -1116,7 +916,7 @@ with bot:
                     ]
                 )
 
-        @tgbot.on(
+        @ tgbot.on(
             events.callbackquery.CallbackQuery(  # pylint:disable=E0602
                 data=re.compile(rb"closed")
             )
@@ -1136,7 +936,7 @@ with bot:
                     ]
                 )
 
-        @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
+        @ tgbot.on(events.InlineQuery)  # pylint:disable=E0602
         async def inline_handler(event):
             builder = event.builder
             result = None
@@ -1154,17 +954,12 @@ with bot:
                 )
             elif query.startswith("tb_btn"):
                 result = builder.article(
-<<<<<<< HEAD
                     "Bantuan Dari 🦊Fox-Userbot🦊",
-=======
-                    "Bantuan Dari **​🦊FOX-USERBOT🦊**",
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
                     text="Daftar Plugins",
                     buttons=[],
                     link_preview=True)
             else:
                 result = builder.article(
-<<<<<<< HEAD
                     " 🦊Fox-Userbot",
                     text="""°Fox-Userbot°""",
                     buttons=[
@@ -1179,44 +974,29 @@ with bot:
                         [custom.Button.url(
                             "ʟɪᴄᴇɴsᴇ",
                             "https://github.com/arkadiaz/fox-userbot/LICENSE")],
-=======
-                    " **🦊FOX-USERBOT🦊**",
-                    text="""°🦊FOX-USERBOT🦊°""",
-                    buttons=[
-                        [
-                            custom.Button.url(
-                                "arka​", "https://github.com/arkadiaz/fox-userbot"
-                            ),
-                            custom.Button.url("ᴄʜᴀɴɴᴇʟ​", "t.me/Arkabotupdate"),
-                        ],
-                        [
-                            custom.Button.url(
-                                "ʟɪᴄᴇɴsᴇ​",
-                                "https://github.com/arkadiaz/fox-userbot/LICENSE",
-                            )
-                        ],
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
                     ],
                     link_preview=False,
                 )
             await event.answer([result] if result else None)
 
-        @tgbot.on(
+        @ tgbot.on(
             events.callbackquery.CallbackQuery(  # pylint:disable=E0602
                 data=re.compile(rb"helpme_next\((.+?)\)")
             )
         )
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid:  # pylint:disable=E0602
-                current_page_number = int(event.data_match.group(1).decode("UTF-8"))
-                buttons = paginate_help(current_page_number + 1, dugmeler, "helpme")
+                current_page_number = int(
+                    event.data_match.group(1).decode("UTF-8"))
+                buttons = paginate_help(
+                    current_page_number + 1, dugmeler, "helpme")
                 # https://t.me/TelethonChat/115200
                 await event.edit(buttons=buttons)
             else:
                 reply_pop_up_alert = f"🚫!WARNING!🚫 Jangan Menggunakan Milik {DEFAULTUSER}."
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-        @tgbot.on(
+        @ tgbot.on(
             events.callbackquery.CallbackQuery(  # pylint:disable=E0602
                 data=re.compile(rb"helpme_close\((.+?)\)")
             )
@@ -1229,7 +1009,6 @@ with bot:
                     link_preview=True,
                     buttons=[
                         [
-<<<<<<< HEAD
                             Button.url("❈ꜱᴜᴘᴘᴏʀᴛ❈",
                                        "t.me/arkabotSupport"),
                             Button.url("❈ᴄʜᴀɴɴᴇʟ❈",
@@ -1239,31 +1018,24 @@ with bot:
                         [custom.Button.inline(
                             "°ᴄʟᴏꜱᴇ ɪɴʟɪɴᴇ°", b"close")],
                     ]
-=======
-                            Button.url("❈ꜱᴜᴘᴘᴏʀᴛ❈", "t.me/arkabotsupport"),
-                            Button.url("❈ᴄʜᴀɴɴᴇʟ❈", "t.me/arkaborupdate"),
-                        ],
-                        [custom.Button.inline("°ᴏᴘᴇɴ ᴍᴇɴᴜ°", data="open_plugin")],
-                        [custom.Button.inline("°ᴄʟᴏꜱᴇ ɪɴʟɪɴᴇ°", b"close")],
-                    ],
->>>>>>> 70a4f801d153a2ab4aed3d6ec7c5259911167055
                 )
 
-        @tgbot.on(events.CallbackQuery(data=b"close"))
+        @ tgbot.on(events.CallbackQuery(data=b"close"))
         async def close(event):
             buttons = [
                 (custom.Button.inline("Open Menu", data="open_plugin"),),
             ]
             await event.edit(f"Menu Ditutup! ", buttons=buttons)
 
-        @tgbot.on(
+        @ tgbot.on(
             events.callbackquery.CallbackQuery(  # pylint:disable=E0602
                 data=re.compile(rb"helpme_prev\((.+?)\)")
             )
         )
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid:  # pylint:disable=E0602
-                current_page_number = int(event.data_match.group(1).decode("UTF-8"))
+                current_page_number = int(
+                    event.data_match.group(1).decode("UTF-8"))
                 buttons = paginate_help(
                     current_page_number - 1, dugmeler, "helpme"  # pylint:disable=E0602
                 )
@@ -1273,7 +1045,7 @@ with bot:
                 reply_pop_up_alert = f"🚫!WARNING!🚫 Jangan Menggunakan Milik {DEFAULTUSER}."
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-        @tgbot.on(
+        @ tgbot.on(
             events.callbackquery.CallbackQuery(  # pylint:disable=E0602
                 data=re.compile(rb"ub_modul_(.*)")
             )
@@ -1315,6 +1087,5 @@ with bot:
     except BaseException:
         LOGS.info(
             "BOTLOG_CHATID Environment Variable Isn't a "
-            "Valid Entity. Please Check Your Environment variables/config.env File."
-        )
+            "Valid Entity. Please Check Your Environment variables/config.env File.")
         quit(1)
