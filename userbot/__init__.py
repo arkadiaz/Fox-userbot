@@ -399,6 +399,7 @@ async def check_botlog_chatid():
         )
         quit(1)
 
+
 # Global Variables
 COUNT_MSG = 0
 USERS = {}
