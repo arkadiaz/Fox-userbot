@@ -374,6 +374,7 @@ async def checking():
     except BaseException:
         pass
 
+
 async def check_botlog_chatid():
     if not BOTLOG_CHATID and LOGSPAMMER:
         LOGS.info(
@@ -398,6 +399,7 @@ async def check_botlog_chatid():
         )
         quit(1)
 
+
 async def check_alive():
     await bot.send_file(
         BOTLOG_CHATID,
@@ -405,6 +407,7 @@ async def check_alive():
         caption=f"**Fox-Userbot ʙᴇʀʜᴀsɪʟ ᴅɪᴀᴋᴛɪғᴋᴀɴ🦊**\n━━━━━━━━━━━━━━━━━━━\n❃ **ʙᴏᴛ ᴏꜰ :** {ALIVE_NAME}\n❃ **ʙᴏᴛ ᴠᴇʀ :** 7.0\n━━━━━━━━━━━━━━━━━━━\n❃ **sᴜᴘᴘᴏʀᴛ​ :** @arkabotsupport\n❃ **ᴄʜᴀɴɴᴇʟ​ :** @arkabotupdate \n━━━━━━━━━━━━━━━━━━━",
     )
     return
+
 
 # Global Variables
 COUNT_MSG = 0
