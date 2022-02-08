@@ -222,7 +222,7 @@ ZIP_DOWNLOAD_DIRECTORY = os.environ.get("ZIP_DOWNLOAD_DIRECTORY", "./zips")
 BITLY_TOKEN = os.environ.get("BITLY_TOKEN") or "o_1fpd9299vp"
 
 # Bot Name
-TERM_ALIAS = os.environ.get("TERM_ALIAS", "Skyzu-Userbot")
+TERM_ALIAS = os.environ.get("TERM_ALIAS", "Fox-Userbot")
 
 # Bot Version
 BOT_VER = os.environ.get("BOT_VER", "7.0")
@@ -235,7 +235,7 @@ S_PACK_NAME = os.environ.get("S_PACK_NAME", None)
 
 # Default .alive Logo
 ALIVE_LOGO = (
-    os.environ.get("ALIVE_LOGO") or "https://telegra.ph/file/c46b5dfde1e95777965ac.jpg"
+    os.environ.get("ALIVE_LOGO") or "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
 )
 # Default .helpme Logo
 INLINE_PIC = (
@@ -347,7 +347,7 @@ for binary, path in binaries.items():
 if STRING_SESSION:
     session = StringSession(str(STRING_SESSION))
 else:
-    session = "skyzu-userbot"
+    session = "fox-userbot"
 try:
     bot = TelegramClient(
         session=session,
@@ -426,7 +426,7 @@ async def check_alive():
     await bot.send_file(
         BOTLOG_CHATID,
         ALIVE_LOGO,
-        caption=f"**Skyzu-Userbot ʙᴇʀʜᴀsɪʟ ᴅɪᴀᴋᴛɪғᴋᴀɴ⚡**\n━━━━━━━━━━━━━━━━━━━\n❃ **ʙᴏᴛ ᴏꜰ :** {ALIVE_NAME}\n❃ **ʙᴏᴛ ᴠᴇʀ :** 7.0\n━━━━━━━━━━━━━━━━━━━\n❃ **sᴜᴘᴘᴏʀᴛ​ :** @SkyzuSupport\n❃ **ᴄʜᴀɴɴᴇʟ​ :** @kayzuchannel \n━━━━━━━━━━━━━━━━━━━",
+        caption=f"**Fox-Userbot ʙᴇʀʜᴀsɪʟ ᴅɪᴀᴋᴛɪғᴋᴀɴ🦊**\n━━━━━━━━━━━━━━━━━━━\n❃ **ʙᴏᴛ ᴏꜰ :** {ALIVE_NAME}\n❃ **ʙᴏᴛ ᴠᴇʀ :** 7.0\n━━━━━━━━━━━━━━━━━━━\n❃ **sᴜᴘᴘᴏʀᴛ​ :** @arkabotsupport\n❃ **ᴄʜᴀɴɴᴇʟ​ :** @arkabotupdate \n━━━━━━━━━━━━━━━━━━━",
     )
     return
 
