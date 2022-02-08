@@ -374,18 +374,6 @@ async def checking():
     except BaseException:
         pass
 
-
-with bot:
-    try:
-        bot.loop.run_until_complete(checking())
-    except BaseException:
-        LOGS.info(
-            "Join Support Group @arkabotSupport and Channel @arkabotupdate to see the updates of ubot"
-            "Don't Leave"
-        )
-        quit(1)
-
-
 async def check_botlog_chatid():
     if not BOTLOG_CHATID and LOGSPAMMER:
         LOGS.info(
@@ -410,18 +398,6 @@ async def check_botlog_chatid():
         )
         quit(1)
 
-
-with bot:
-    try:
-        bot.loop.run_until_complete(check_botlog_chatid())
-    except BaseException:
-        LOGS.info(
-            "BOTLOG_CHATID environment variable isn't a "
-            "valid entity. Check your environment variables/config.env file."
-        )
-        quit(1)
-
-
 async def check_alive():
     await bot.send_file(
         BOTLOG_CHATID,
@@ -429,18 +405,6 @@ async def check_alive():
         caption=f"**Fox-Userbot ʙᴇʀʜᴀsɪʟ ᴅɪᴀᴋᴛɪғᴋᴀɴ🦊**\n━━━━━━━━━━━━━━━━━━━\n❃ **ʙᴏᴛ ᴏꜰ :** {ALIVE_NAME}\n❃ **ʙᴏᴛ ᴠᴇʀ :** 7.0\n━━━━━━━━━━━━━━━━━━━\n❃ **sᴜᴘᴘᴏʀᴛ​ :** @arkabotsupport\n❃ **ᴄʜᴀɴɴᴇʟ​ :** @arkabotupdate \n━━━━━━━━━━━━━━━━━━━",
     )
     return
-
-
-with bot:
-    try:
-        bot.loop.run_until_complete(check_alive())
-    except BaseException:
-        LOGS.info(
-            "BOTLOG_CHATID environment variable isn't a "
-            "valid entity. Check your environment variables/config.env file."
-        )
-        quit(1)
-
 
 # Global Variables
 COUNT_MSG = 0
