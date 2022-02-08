@@ -498,7 +498,11 @@ with bot:
                     f"✥ **ᴍᴇɴᴛɪᴏɴ​ :** [{get_display_name(c)}](tg://user?id={c.id}) \n\n"
                     f"sᴇᴍᴏɢᴀ ʙᴇᴛᴀʜ ᴅɪsɪɴɪ ʏᴀ​ 🦊\n",
                     buttons=[
-                        [Button.url("ʀᴇᴘᴏ​", "https://github.com/arkadiaz/fox-userbot")],
+                        [
+                            Button.url(
+                                "ʀᴇᴘᴏ​", "https://github.com/arkadiaz/fox-userbot"
+                            )
+                        ],
                     ],
                 )
 
