@@ -399,16 +399,6 @@ async def check_botlog_chatid():
         )
         quit(1)
 
-
-async def check_alive():
-    await bot.send_file(
-        BOTLOG_CHATID,
-        ALIVE_LOGO,
-        caption=f"**Fox-Userbot ʙᴇʀʜᴀsɪʟ ᴅɪᴀᴋᴛɪғᴋᴀɴ🦊**\n━━━━━━━━━━━━━━━━━━━\n❃ **ʙᴏᴛ ᴏꜰ :** {ALIVE_NAME}\n❃ **ʙᴏᴛ ᴠᴇʀ :** 7.0\n━━━━━━━━━━━━━━━━━━━\n❃ **sᴜᴘᴘᴏʀᴛ​ :** @arkabotsupport\n❃ **ᴄʜᴀɴɴᴇʟ​ :** @arkabotupdate \n━━━━━━━━━━━━━━━━━━━",
-    )
-    return
-
-
 # Global Variables
 COUNT_MSG = 0
 USERS = {}
