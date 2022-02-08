@@ -15,7 +15,7 @@
   <img src="https://telegra.ph/file/8d1fbe4bef4642956d726.jpg">
 </p>
 
-## DEPLOY MEMEK
+## DEPLOY SINI CUK!
 
 <p align="center">
 <a href="https://dashboard.heroku.com/new?template=https://github.com/arkadiaz/fox-userbot"><img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="250""/</a>
@@ -35,5 +35,6 @@
 *   [Sendi](https://github.com/SendiAp/Rose-Userbot)   Rose-Userbot
 *   [Risman](https://github.com/mrismanaziz/Man-Userbot)   Man - Userbot
 *   [Skyzu](https://github.com/Skyzu/skyzu-userbot)   skyzu-userbot
+*   [Lepin](https://github.com/Yansensad/yansen-userbot) Yansen-Userbot
 *   DAN TERIMAKASIH KEPADA USERBOT LAINNYA
 

@@ -1,4 +1,4 @@
-# Skyzu-userbot
+# Fox-userbot
 from telethon.tl import functions
 
 from userbot import CMD_HELP
