@@ -19,8 +19,6 @@ GCAST_BLACKLIST = [
     -1001752592753,  # Syzusupport
     -1001736842222,  # KenshuSupport
     -1001631322423,  # ArkaSupport
-
-
 ]
 
 
