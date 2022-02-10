@@ -15,8 +15,8 @@ from userbot.utils.tools import ya_kali_ngga
 try:
     for module_name in ALL_MODULES:
         imported_module = import_module("userbot.modules." + module_name)
-        bot.start()
-        LOGS.info(f"🦊Fox-Userbot🦊 ⚙️ V{BOT_VER} [ TELAH DIAKTIFKAN! ]")
+    bot.start()
+    LOGS.info(f"🦊Fox-Userbot🦊 ⚙️ V{BOT_VER} [ TELAH DIAKTIFKAN! ]")
 except BaseException as e:
     LOGS.info(str(e), exc_info=True)
     sys.exit(1)
