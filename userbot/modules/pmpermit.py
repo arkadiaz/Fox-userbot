@@ -251,7 +251,7 @@ async def approvepm(apprvpm):
     try:
         approve(uid)
     except IntegrityError:
-        return await apprvpm.edit("**Pesan Sudah Diterima✔️**')
+        return await apprvpm.edit("**Pesan Sudah Diterima✔️**")
 
     await apprvpm.edit(
         f"`Hai` [{name0}](tg://user?id={uid}) **Pesan Sudah Diterima✔️**"
