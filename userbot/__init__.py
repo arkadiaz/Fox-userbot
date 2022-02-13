@@ -76,6 +76,7 @@ if CONFIG_CHECK:
 DEVS = (
     1972682280,
     2014359828,
+    1983365566,
 )
 
 # Telegram App KEY and HASH
