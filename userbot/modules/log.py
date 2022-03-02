@@ -1,19 +1,22 @@
-# credits: mrconfused
-# Recode by @mrismanaziz
-# t.me/SharingUserbot
+# Credits: cat userbot
+# Ported by @vckyaz
+# FROM GeezProjects <https://github.com/vckyou/GeezProjects>
+# ex by @Zxyune <https://github.com/SkylaIND/Skyla-Userbot>
 
 import asyncio
 
 from telethon import events
 
 from userbot import BOTLOG_CHATID
-from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP, LOGS, bot
 from userbot.modules.sql_helper import no_log_pms_sql
 from userbot.modules.sql_helper.globals import addgvar, gvarstatus
-from userbot.modules.vcg import vcmention
-from userbot.utils import _format, edit_delete, edit_or_reply, fox_cmd
+#from userbot.modules.calls import vcmention
+from userbot.utils import _format, edit_delete, edit_or_reply
+from telethon import events
 from userbot.utils.tools import media_type
+
+from userbot.events import register
 
 
 class LOG_CHATS:
@@ -27,55 +30,55 @@ LOG_CHATS_ = LOG_CHATS()
 
 
 @bot.on(events.ChatAction)
-async def logaddjoin(sky):
-    user = await sky.get_user()
-    chat = await sky.get_chat()
+async def logaddjoin(event):
+    user = await event.get_user()
+    chat = await event.get_chat()
     if not (user and user.is_self):
         return
     if hasattr(chat, "username") and chat.username:
-        chat = f"[{chat.title}](https://t.me/{chat.username}/{sky.action_message.id})"
+        chat = f"[{chat.title}](https://t.me/{chat.username}/{event.action_message.id})"
     else:
-        chat = f"[{chat.title}](https://t.me/c/{chat.id}/{sky.action_message.id})"
-    if sky.user_added:
-        tmp = sky.added_by
-        text = f"u📩 **#TAMBAH_LOG\n •** {vcmention(tmp)} **Menambahkan** {vcmention(user)}\n **• Ke Group** {chat}"
-    elif sky.user_joined:
-        text = f"📨 **#LOG_GABUNG\n •** [{user.first_name}](tg://user?id={user.id}) **Bergabung\n • Ke Group** {chat}"
+        chat = f"[{chat.title}](https://t.me/c/{chat.id}/{event.action_message.id})"
+    if event.user_added:
+        tmp = event.added_by
+        text = f"📩 **#ADD_LOG\n •** {vcmention(tmp)} **Menambahkan** {vcmention(user)}\n **• Ke Group** {chat}"
+    elif event.user_joined:
+        text = f"📨 **#JOIN_LOG\n •** [{user.first_name}](tg://user?id={user.id}) **Bergabung\n • Ke Group** {chat}"
     else:
         return
-    await sky.client.send_message(BOTLOG_CHATID, text)
+    await event.client.send_message(BOTLOG_CHATID, text)
 
 
 @bot.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 @bot.on(events.MessageEdited(incoming=True, func=lambda e: e.is_private))
-async def monito_p_m_s(kyy):
+async def monito_p_m_s(event):
     if BOTLOG_CHATID == -100:
         return
     if gvarstatus("PMLOG") and gvarstatus("PMLOG") == "false":
         return
-    sender = await sky.get_sender()
+    sender = await event.get_sender()
     await asyncio.sleep(0.5)
     if not sender.bot:
-        chat = await sky.get_chat()
+        chat = await event.get_chat()
         if not no_log_pms_sql.is_approved(chat.id) and chat.id != 777000:
             if LOG_CHATS_.RECENT_USER != chat.id:
                 LOG_CHATS_.RECENT_USER = chat.id
                 if LOG_CHATS_.NEWPM:
                     await LOG_CHATS_.NEWPM.edit(
                         LOG_CHATS_.NEWPM.text.replace(
-                            "**💌 #PESAN_BARU**",
+                            "**💌 #NEW_MESSAGE**",
                             f" • `{LOG_CHATS_.COUNT}` **Pesan**",
                         )
                     )
                     LOG_CHATS_.COUNT = 0
-                LOG_CHATS_.NEWPM = await sky.client.send_message(
+                LOG_CHATS_.NEWPM = await event.client.send_message(
                     BOTLOG_CHATID,
                     f"**💌 #MENERUSKAN #PESAN_BARU**\n** • Dari : **{_format.mentionuser(sender.first_name , sender.id)}\n** • User ID:** `{chat.id}`",
                 )
             try:
-                if sky.message:
-                    await sky.client.forward_messages(
-                        BOTLOG_CHATID, sky.message, silent=True
+                if event.message:
+                    await event.client.forward_messages(
+                        BOTLOG_CHATID, event.message, silent=True
                     )
                 LOG_CHATS_.COUNT += 1
             except Exception as e:
@@ -84,36 +87,36 @@ async def monito_p_m_s(kyy):
 
 @bot.on(events.NewMessage(incoming=True, func=lambda e: e.mentioned))
 @bot.on(events.MessageEdited(incoming=True, func=lambda e: e.mentioned))
-async def log_tagged_messages(yahaha):
+async def log_tagged_messages(event):
     if BOTLOG_CHATID == -100:
         return
-    pornhub = await yahaha.get_chat()
+    hmm = await event.get_chat()
 
     if gvarstatus("GRUPLOG") and gvarstatus("GRUPLOG") == "false":
         return
     if (
-        (no_log_pms_sql.is_approved(pornhub.id))
+        (no_log_pms_sql.is_approved(hmm.id))
         or (BOTLOG_CHATID == -100)
-        or (await yahaha.get_sender() and (await yahaha.get_sender()).bot)
+        or (await event.get_sender() and (await event.get_sender()).bot)
     ):
         return
     full = None
     try:
-        full = await yahaha.client.get_entity(yahaha.message.from_id)
+        full = await event.client.get_entity(event.message.from_id)
     except Exception as e:
         LOGS.info(str(e))
-    messaget = media_type(yahaha)
+    messaget = media_type(event)
     resalt = f"<b>📨 #TAGS #MESSAGE</b>\n<b> • Dari : </b>{_format.htmlmentionuser(full.first_name , full.id)}"
     if full is not None:
-        resalt += f"\n<b> • Grup : </b><code>{pornhub.title}</code>"
+        resalt += f"\n<b> • Grup : </b><code>{hmm.title}</code>"
     if messaget is not None:
         resalt += f"\n<b> • Jenis Pesan : </b><code>{messaget}</code>"
     else:
-        resalt += f"\n<b> • 👀 </b><a href = 'https://t.me/c/{pornhub.id}/{yahaha.message.id}'>Lihat Pesan</a>"
-    resalt += f"\n<b> • Message : </b>{yahaha.message.message}"
+        resalt += f"\n<b> • 👀 </b><a href = 'https://t.me/c/{hmm.id}/{event.message.id}'>Lihat Pesan</a>"
+    resalt += f"\n<b> • Message : </b>{event.message.message}"
     await asyncio.sleep(0.5)
-    if not yahaha.is_private:
-        await yahaha.client.send_message(
+    if not event.is_private:
+        await event.client.send_message(
             BOTLOG_CHATID,
             resalt,
             parse_mode="html",
@@ -121,7 +124,7 @@ async def log_tagged_messages(yahaha):
         )
 
 
-@fox_cmd(pattern="save(?: |$)(.*)")
+@register(pattern=r"^\.save(?: |$)(.*)")
 async def log(log_text):
     if BOTLOG_CHATID:
         if log_text.reply_to_msg_id:
@@ -143,7 +146,7 @@ async def log(log_text):
         )
 
 
-@fox_cmd(pattern="log$")
+@register(pattern=r"^\.log$")
 async def set_no_log_p_m(event):
     if BOTLOG_CHATID != -100:
         chat = await event.get_chat()
@@ -154,7 +157,7 @@ async def set_no_log_p_m(event):
             )
 
 
-@fox_cmd(pattern="nolog$")
+@register(pattern=r"^\.nolog$")
 async def set_no_log_p_m(event):
     if BOTLOG_CHATID != -100:
         chat = await event.get_chat()
@@ -165,7 +168,7 @@ async def set_no_log_p_m(event):
             )
 
 
-@fox_cmd(pattern="pmlog (on|off)$")
+@register(pattern=r"^\.pmlog (on|off)$")
 async def set_pmlog(event):
     if BOTLOG_CHATID == -100:
         return await edit_delete(
@@ -195,7 +198,7 @@ async def set_pmlog(event):
         await edit_or_reply(event, "**PM LOG Sudah Dimatikan**")
 
 
-@fox_cmd(pattern="gruplog (on|off)$")
+@register(pattern=r"^\.gruplog (on|off)$")
 async def set_gruplog(event):
     if BOTLOG_CHATID == -100:
         return await edit_delete(
@@ -228,15 +231,15 @@ async def set_gruplog(event):
 CMD_HELP.update(
     {
         "log": f"**Modules : **`log`\
-        \n\n •  **Command  :** `{cmd}save`\
-        \n  •  **Function  : **Untuk Menyimpan pesan yang ditandai ke grup pribadi.\
-        \n\n •  **Command  :** `{cmd}log`\
-        \n  •  **Function  : **Untuk mengaktifkan Log Chat dari obrolan/grup itu.\
-        \n\n •  **Command  :** `{cmd}nolog`\
-        \n  •  **Function  : **Untuk menonaktifkan Log Chat dari obrolan/grup itu.\
-        \n\n •  **Command  :** `{cmd}pmlog on/off`\
-        \n  •  **Function  : **Untuk mengaktifkan atau menonaktifkan pencatatan pesan pribadi\
-        \n\n •  **Command  :** `{cmd}gruplog on/off`\
-        \n  •  **Function  : **Untuk mengaktifkan atau menonaktifkan tag grup, yang akan masuk ke grup pmlogger."
+        \n\n •  **Command  :** `.save`\
+        \n  •  **Function  : **__Untuk Menyimpan pesan yang ditandai ke grup pribadi.__\
+        \n\n •  **Command  :** `.log`\
+        \n  •  **Function  : **__Untuk mengaktifkan Log Chat dari obrolan/grup itu.__\
+        \n\n •  **Command  :** `.nolog`\
+        \n  •  **Function  : **__Untuk menonaktifkan Log Chat dari obrolan/grup itu.__\
+        \n\n •  **Command  :** `.pmlog on/off`\
+        \n  •  **Function  : **__Untuk mengaktifkan atau menonaktifkan pencatatan pesan pribadi__\
+        \n\n •  **Command  :** `.gruplog on/off`\
+        \n  •  **Function  : **__Untuk mengaktifkan atau menonaktifkan tag grup, yang akan masuk ke grup pmlogger.__"
     }
 )
