@@ -1,7 +1,7 @@
 # port by KOALA 🐨 /@manusiarakitann
 
-from userbot import CMD_HELP
 from userbot.events import register
+from userbot import CMD_HELP
 
 
 @register(outgoing=True, pattern="^.gsend ?(.*)")
@@ -32,10 +32,8 @@ async def remoteaccess(event):
     except BaseException:
         await event.edit("** Gagal Mengirim Pesan, Emang Lu Join Grup Nya Goblok ? **")
 
-
 CMD_HELP.update(
     {
         "grouplink": ".gsend\
     \nMengirim Pesan Jarak Jauh Ke Grup Lain .gsend <link grup> <pesan>."
-    }
-)
+    })

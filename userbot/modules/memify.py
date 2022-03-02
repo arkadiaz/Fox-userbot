@@ -29,14 +29,17 @@ async def mim(event):
         await event.edit("```Balas ke pesan pengguna yang sebenarnya.```")
         return
     else:
-        await event.edit("```Prosess Merubah Gambar Ini.. ```")
+        await event.edit(
+            "```Prosess Merubah Gambar Ini.. ```"
+        )
         await asyncio.sleep(5)
         text = event.pattern_match.group(1)
         if event.reply_to_msg_id:
             file_name = "meme.jpg"
             reply_message = await event.get_reply_message()
             to_download_directory = TEMP_DOWNLOAD_DIRECTORY
-            downloaded_file_name = os.path.join(to_download_directory, file_name)
+            downloaded_file_name = os.path.join(
+                to_download_directory, file_name)
             downloaded_file_name = await bot.download_media(
                 reply_message,
                 downloaded_file_name,
@@ -55,7 +58,8 @@ async def draw_meme_text(image_path, text):
     os.remove(image_path)
     i_width, i_height = img.size
     m_font = ImageFont.truetype(
-        "userbot/utils/styles/GeezFont.otf", int((70 / 640) * i_width)
+        "userbot/utils/styles/GeezFont.otf", int(
+            (70 / 640) * i_width)
     )
     if ";" in text:
         upper_text, lower_text = text.split(";")
@@ -69,25 +73,29 @@ async def draw_meme_text(image_path, text):
             u_width, u_height = draw.textsize(u_text, font=m_font)
 
             draw.text(
-                xy=(((i_width - u_width) / 2) - 1, int((current_h / 640) * i_width)),
+                xy=(((i_width - u_width) / 2) - 1,
+                    int((current_h / 640) * i_width)),
                 text=u_text,
                 font=m_font,
                 fill=(0, 0, 0),
             )
             draw.text(
-                xy=(((i_width - u_width) / 2) + 1, int((current_h / 640) * i_width)),
+                xy=(((i_width - u_width) / 2) + 1,
+                    int((current_h / 640) * i_width)),
                 text=u_text,
                 font=m_font,
                 fill=(0, 0, 0),
             )
             draw.text(
-                xy=((i_width - u_width) / 2, int(((current_h / 640) * i_width)) - 1),
+                xy=((i_width - u_width) / 2,
+                    int(((current_h / 640) * i_width)) - 1),
                 text=u_text,
                 font=m_font,
                 fill=(0, 0, 0),
             )
             draw.text(
-                xy=(((i_width - u_width) / 2), int(((current_h / 640) * i_width)) + 1),
+                xy=(((i_width - u_width) / 2),
+                    int(((current_h / 640) * i_width)) + 1),
                 text=u_text,
                 font=m_font,
                 fill=(0, 0, 0),
@@ -177,14 +185,17 @@ async def mim(event):
         await event.edit("```Balas Ke Pesan Pengguna Yang Sebenarnya.```")
         return
     else:
-        await event.edit("```Mengubah Gambar Ini Saatnya Menulis```")
+        await event.edit(
+            "```Mengubah Gambar Ini Saatnya Menulis```"
+        )
         await asyncio.sleep(5)
         text = event.pattern_match.group(1)
         if event.reply_to_msg_id:
             file_name = "meme.jpg"
             reply_message = await event.get_reply_message()
             to_download_directory = TEMP_DOWNLOAD_DIRECTORY
-            downloaded_file_name = os.path.join(to_download_directory, file_name)
+            downloaded_file_name = os.path.join(
+                to_download_directory, file_name)
             downloaded_file_name = await bot.download_media(
                 reply_message,
                 downloaded_file_name,
@@ -306,11 +317,10 @@ async def draw_meme_text(image_path, text):
     return webp_file
 
 
-CMD_HELP.update(
-    {
-        "memify": "`.mmf Teks Atas ; Teks Bawah`\
+CMD_HELP.update({
+    "memify":
+        "`.mmf Teks Atas ; Teks Bawah`\
         \nUsage: Balas Ke Sticker/Gambar/Gif.\n"
         "`.mmf2 Teks Atas ; Teks Bawah`\
         \nUsage: Balas Ke Sticker/Gambar/Gif."
-    }
-)
+})
