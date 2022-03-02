@@ -1,4 +1,5 @@
 from platform import uname
+
 from userbot import ALIVE_NAME, CMD_HELP
 from userbot.events import register
 
@@ -49,8 +50,9 @@ async def perkenalan(event):
 # Perkenalan
 
 
-CMD_HELP.update({
-    "gabut": "**Modules** - `Gabut`\
+CMD_HELP.update(
+    {
+        "gabut": "**Modules** - `Gabut`\
     \n\n Cmd : `.p`\
     \nUsage : Untuk Memberi Salam\
     \n\n Cmd : `.l`\
@@ -59,4 +61,5 @@ CMD_HELP.update({
     \nUsage : Untuk Beristighfar\
     \n\n Cmd : `.perkenalan`\
     \nUsage : Untuk Memperkenalkan diri."
-})
+    }
+)

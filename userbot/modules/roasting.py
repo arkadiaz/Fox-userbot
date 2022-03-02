@@ -21,7 +21,9 @@ async def typewriter(typew):
 @register(outgoing=True, pattern="^.su(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
-    await typew.edit("KU KIRA SUHU TERNYATA BABU GROUP SURUH SEBAR LINK, MENDING LU SEBARIN STICKER SEDOT WC DAPET DUIT ANJ")
+    await typew.edit(
+        "KU KIRA SUHU TERNYATA BABU GROUP SURUH SEBAR LINK, MENDING LU SEBARIN STICKER SEDOT WC DAPET DUIT ANJ"
+    )
 
 
 @register(outgoing=True, pattern="^.jl(?: |$)(.*)")
@@ -33,15 +35,15 @@ async def typewriter(typew):
 @register(outgoing=True, pattern="^.kr(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
-    await typew.edit(
-        "**KU KIRA KERAS TERNYATA LEMBEK KE KERTAS**"
-    )
+    await typew.edit("**KU KIRA KERAS TERNYATA LEMBEK KE KERTAS**")
 
 
 @register(outgoing=True, pattern="^.se(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
-    await typew.edit("**JADI SUGEST AJA BANGGA ANJ, EMANG EMAK BAPAK LU KALAU MENINGGAL BUTUH DI SUGGEST**")
+    await typew.edit(
+        "**JADI SUGEST AJA BANGGA ANJ, EMANG EMAK BAPAK LU KALAU MENINGGAL BUTUH DI SUGGEST**"
+    )
 
 
 @register(outgoing=True, pattern="^.tl(?: |$)(.*)")
@@ -109,15 +111,15 @@ async def typewriter(typew):
 @register(outgoing=True, pattern="^.pn(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
-    await typew.edit(
-        "**JAKA SEMBUNG BAWA GOLOL GAK NYAMBUNG GOBLOK**"
-    )
+    await typew.edit("**JAKA SEMBUNG BAWA GOLOL GAK NYAMBUNG GOBLOK**")
 
 
 @register(outgoing=True, pattern="^.ow(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
-    await typew.edit("**LU GAK GUNA JADI OWNER ANJ KALAU CUMAN MINTA VCS GRATIS SAMA TALENT**")
+    await typew.edit(
+        "**LU GAK GUNA JADI OWNER ANJ KALAU CUMAN MINTA VCS GRATIS SAMA TALENT**"
+    )
 
 
 @register(outgoing=True, pattern="^.kc(?: |$)(.*)")
