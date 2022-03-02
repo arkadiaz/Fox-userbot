@@ -605,7 +605,7 @@ with bot:
                     ],
                 )
             else:
-                reply_pop_up_alert = f"🤴 Name : {DEFAULTUSER}\n🤖 Bot Ver : 7.0\n🛠 Modules : {len(plugins)}\n⚡ Branch : Fox-Userbot"
+                reply_pop_up_alert = f"🤴 Name : {DEFAULTUSER}\n🤖 Bot Ver : 7.0\n🛠 Modules : {len(plugins)}\n⚡ Branch : main"
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
         @tgbot.on(
@@ -972,7 +972,7 @@ with bot:
                     buttons=[
                         [
                             Button.url("❈ꜱᴜᴘᴘᴏʀᴛ❈", "t.me/arkabotsupport"),
-                            Button.url("❈ᴄʜᴀɴɴᴇʟ❈", "t.me/aekabotupdate"),
+                            Button.url("❈ᴄʜᴀɴɴᴇʟ❈", "t.me/arkabotupdate"),
                         ],
                         [custom.Button.inline("°ᴏᴘᴇɴ ᴍᴇɴᴜ°", data="open_plugin")],
                         [custom.Button.inline("°ᴄʟᴏꜱᴇ ɪɴʟɪɴᴇ°", b"close")],
