@@ -39,13 +39,7 @@ async def echo(event):
     if is_echo(chat_id, user_id):
         return await event.edit("**Pengguna sudah diaktifkan dengan echo**")
     try:
-        addecho(
-            chat_id,
-            user_id,
-            chat_name,
-            user_name,
-            user_username,
-            chat_type)
+        addecho(chat_id, user_id, chat_name, user_name, user_username, chat_type)
     except Exception as e:
         await edit_delete(roseevent, f"**Error:**\n`{str(e)}`")
     else:
@@ -161,7 +155,9 @@ async def samereply(event):
         await event.reply(event.message)
 
 
-CMD_HELP.update({
-    "echo": "`.addecho` ; `.delecho` ; `.echolist`\
+CMD_HELP.update(
+    {
+        "echo": "`.addecho` ; `.delecho` ; `.echolist`\
     \nUsage: Untuk Menambahkan Followers Chat Kamu."
-})
+    }
+)

@@ -1,6 +1,7 @@
 # import userbot by apis
 
 from time import sleep
+
 from userbot import CMD_HELP
 from userbot.events import register
 
@@ -108,9 +109,11 @@ async def typewriter(typew):
     await typew.edit("**Mampus Kau Wibu**")
 
 
-CMD_HELP.update({
-    "wibu": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.wibu`\
+CMD_HELP.update(
+    {
+        "wibu": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.wibu`\
     \n↳ : untuk melihat sesuatu yng menarik\
     \n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.wibu2`\
     \n↳ : Lari cukk ada wibuu aarrghh."
-})
+    }
+)

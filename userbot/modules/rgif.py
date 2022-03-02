@@ -1,12 +1,12 @@
 import asyncio
 import os
+import time
 
 import cv2
 import PIL
-import time
 
-from userbot.events import register
 from userbot import CMD_HELP
+from userbot.events import register
 from userbot.utils import progress
 
 path = "./downloads/"
@@ -14,7 +14,7 @@ if not os.path.isdir(path):
     os.makedirs(path)
 
 
-@register(outgoing=True, pattern='^.rgif(?: |$)(.*)')
+@register(outgoing=True, pattern="^.rgif(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -52,8 +52,9 @@ async def _(event):
     os.remove("danish.mp4")
 
 
-CMD_HELP.update({
-    "rgif":
-        "`.rgif`\
+CMD_HELP.update(
+    {
+        "rgif": "`.rgif`\
           \nUsage: Reply a image to convert image to rotate gif."
-})
+    }
+)
