@@ -43,7 +43,7 @@ async def autobot():
     if who.username:
         username = who.username + "_ubot"
     else:
-        username = "fox" + (str(who.id))[5:] + "ubot"
+        username = "skyla" + (str(who.id))[5:] + "ubot"
     bf = "@BotFather"
     await bot(UnblockRequest(bf))
     await bot.send_message(bf, "/cancel")
@@ -76,7 +76,7 @@ async def autobot():
     await bot.send_read_acknowledge("botfather")
     if isdone.startswith("Sorry,"):
         ran = randint(1, 100)
-        username = "fox" + (str(who.id))[6:] + str(ran) + "ubot"
+        username = "skyla" + (str(who.id))[6:] + str(ran) + "ubot"
         await bot.send_message(bf, username)
         await asyncio.sleep(1)
         nowdone = (await bot.get_messages(bf, limit=1))[0].text
@@ -92,7 +92,7 @@ async def autobot():
             await asyncio.sleep(1)
             await bot.send_message(bf, f"@{username}")
             await asyncio.sleep(1)
-            await bot.send_file(bf, "resources/IMG_20220224_084328_326.jpg")
+            await bot.send_file(bf, "resources/extras/IMG_20220128_234037_279.jpg")
             await asyncio.sleep(3)
             await bot.send_message(bf, "/setabouttext")
             await asyncio.sleep(1)
@@ -105,7 +105,7 @@ async def autobot():
             await bot.send_message(bf, f"@{username}")
             await asyncio.sleep(1)
             await bot.send_message(
-                bf, f"✨ Owner ~ {who.first_name} ✨\n\n✨ Powered By ~ @arkabotupdate 🦊"
+                bf, f"✨ Owner ~ {who.first_name} ✨\n\n✨ Powered By ~ @SkylaIND ✨"
             )
             await bot.send_message(
                 BOTLOG_CHATID,
@@ -134,7 +134,7 @@ async def autobot():
         await asyncio.sleep(1)
         await bot.send_message(bf, f"@{username}")
         await asyncio.sleep(1)
-        await bot.send_file(bf, "resources/IMG_20220224_084328_326.jpg")
+        await bot.send_file(bf, "resources/extras/IMG_20220128_234037_279.jpg")
         await asyncio.sleep(3)
         await bot.send_message(bf, "/setabouttext")
         await asyncio.sleep(1)
@@ -147,7 +147,7 @@ async def autobot():
         await bot.send_message(bf, f"@{username}")
         await asyncio.sleep(1)
         await bot.send_message(
-            bf, f"✨ Owner ~ {who.first_name} ✨\n\n✨ Powered By ~ @arkabotupdate 🦊"
+            bf, f"✨ Owner ~ {who.first_name} ✨\n\n✨ Powered By ~ @SkylaIND ✨"
         )
         await bot.send_message(
             BOTLOG_CHATID,

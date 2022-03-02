@@ -1,19 +1,19 @@
 import logging
 
 from userbot import BOT_USERNAME
-from userbot.utils import fox_cmd
+from userbot.events import register
 
 logging.basicConfig(
-    format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=logging.WARNING
-)
+    format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s",
+    level=logging.WARNING)
 
 
-@fox_cmd(pattern="helpme")
+@register(outgoing=True, pattern=r"^\.helpme")
 async def yardim(event):
     try:
         tgbotusername = BOT_USERNAME
         if tgbotusername is not None:
-            results = await event.client.inline_query(tgbotusername, "@arkabotsupport")
+            results = await event.client.inline_query(tgbotusername, "@skylasupport")
             await results[0].click(
                 event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
             )
@@ -24,5 +24,5 @@ async def yardim(event):
             )
     except Exception:
         return await event.edit(
-            "`Anda tidak dapat mengirim hasil sebaris dalam hal ini ke chat (disebabkan oleh Mengirim Inline Sebaris)`"
+            "`Anda tidak dapat mengirim hasil sebaris dalam hal ini ke chat (disebabkan oleh Mengirim Inline Sebaris)\ngunakan perintah .inlineon`"
         )

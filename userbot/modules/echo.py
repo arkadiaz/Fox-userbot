@@ -1,7 +1,7 @@
-# Thanks skyzu
-# Recode By kijuu
+# Thanks Sandy
+# Recode By Apis
+# fixes by : @pikyus1 / sendi
 
-from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP
 from userbot.events import register
 from userbot.modules.sql_helper.echo_sql import (
@@ -13,16 +13,16 @@ from userbot.modules.sql_helper.echo_sql import (
     remove_echo,
     remove_echos,
 )
-from userbot.utils import edit_delete, edit_or_reply, fox_cmd
+from userbot.utils import edit_delete, edit_or_reply
 from userbot.utils.events import get_user_from_event
 
 
-@fox_cmd(pattern="addecho(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^.addecho(?: |$)(.*)")
 async def echo(event):
     if event.reply_to_msg_id is None:
         return await event.edit("`Balas pesan Pengguna untuk menggemakan pesannya`")
-    roseevent = await event.edit("`Tambahkan Echo ke pengguna...`")
-    user, rank = await get_user_from_event(event, roseevent, nogroup=True)
+    kayzuevent = await event.edit("`Tambahkan Echo ke pengguna...`")
+    user, rank = await get_user_from_event(event, kayzuevent, nogroup=True)
     if not user:
         return
     reply_msg = await event.get_reply_message()
@@ -39,14 +39,20 @@ async def echo(event):
     if is_echo(chat_id, user_id):
         return await event.edit("**Pengguna sudah diaktifkan dengan echo**")
     try:
-        addecho(chat_id, user_id, chat_name, user_name, user_username, chat_type)
+        addecho(
+            chat_id,
+            user_id,
+            chat_name,
+            user_name,
+            user_username,
+            chat_type)
     except Exception as e:
         await edit_delete(roseevent, f"**Error:**\n`{str(e)}`")
     else:
         await edit_or_reply(roseevent, "Berhasil")
 
 
-@fox_cmd(pattern="rmecho(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^.rmecho(?: |$)(.*)")
 async def echo(event):
     if event.reply_to_msg_id is None:
         return await event.edit("Reply to a User's message to echo his messages")
@@ -57,14 +63,14 @@ async def echo(event):
         try:
             remove_echo(chat_id, user_id)
         except Exception as e:
-            await edit_delete(roseevent, f"**Error:**\n`{str(e)}`")
+            await edit_delete(kayzuevent, f"**Error:**\n`{str(e)}`")
         else:
             await event.edit("Echo has been stopped for the user")
     else:
         await event.edit("The user is not activated with echo")
 
 
-@fox_cmd(pattern="delecho(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^.delecho(?: |$)(.*)")
 async def echo(event):
     input_str = event.pattern_match.group(1)
     if input_str:
@@ -94,7 +100,7 @@ async def echo(event):
             await event.edit("Echo telah di hentikan.")
 
 
-@fox_cmd(pattern="echolist(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^.echolist(?: |$)(.*)")
 async def echo(event):  # sourcery no-metrics
     input_str = event.pattern_match.group(1)
     private_chats = ""
@@ -155,9 +161,7 @@ async def samereply(event):
         await event.reply(event.message)
 
 
-CMD_HELP.update(
-    {
-        "echo": f"`{cmd}addecho` ; `{cmd}delecho` ; `{cmd}echolist`\
+CMD_HELP.update({
+    "echo": "`.addecho` ; `.delecho` ; `.echolist`\
     \nUsage: Untuk Menambahkan Followers Chat Kamu."
-    }
-)
+})

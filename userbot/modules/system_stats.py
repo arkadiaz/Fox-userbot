@@ -7,23 +7,20 @@
 
 
 import asyncio
+from asyncio import create_subprocess_exec as asyncrunapp
+from asyncio.subprocess import PIPE as asyncPIPE
+from platform import python_version, uname
+from shutil import which
+from os import remove
+from telethon import __version__, version
 import platform
 import sys
 import time
-from asyncio import create_subprocess_exec as asyncrunapp
-from asyncio.subprocess import PIPE as asyncPIPE
 from datetime import datetime
-from os import remove
-from platform import python_version, uname
-from shutil import which
-
 import psutil
-from telethon import __version__, version
+from userbot import ALIVE_LOGO, ALIVE_NAME, BOT_VER, CMD_HELP, FOX_TEKS_KUSTOM, StartTime, UPSTREAM_REPO_BRANCH, bot
+from userbot.events import register
 
-from userbot import ALIVE_LOGO, ALIVE_NAME, BOT_VER
-from userbot import CMD_HANDLER as cmd
-from userbot import CMD_HELP, UPSTREAM_REPO_BRANCH, StartTime, bot
-from userbot.utils import fox_cmd
 
 # ================= CONSTANT =================
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
@@ -41,7 +38,9 @@ async def get_readable_time(seconds: int) -> str:
 
     while count < 4:
         count += 1
-        remainder, result = divmod(seconds, 60) if count < 3 else divmod(seconds, 24)
+        remainder, result = divmod(
+            seconds, 60) if count < 3 else divmod(
+            seconds, 24)
         if seconds == 0 and remainder == 0:
             break
         time_list.append(int(result))
@@ -59,7 +58,7 @@ async def get_readable_time(seconds: int) -> str:
     return up_time
 
 
-@fox_cmd(pattern="spc")
+@register(outgoing=True, pattern=r"^\.spc")
 async def psu(event):
     uname = platform.uname()
     softw = "**Informasi Sistem**\n"
@@ -73,8 +72,10 @@ async def psu(event):
     softw += f"`Waktu Hidup: {bt.day}/{bt.month}/{bt.year}  {bt.hour}:{bt.minute}:{bt.second}`\n"
     # CPU Cores
     cpuu = "**Informasi CPU**\n"
-    cpuu += "`Physical cores   : " + str(psutil.cpu_count(logical=False)) + "`\n"
-    cpuu += "`Total cores      : " + str(psutil.cpu_count(logical=True)) + "`\n"
+    cpuu += "`Physical cores   : " + \
+        str(psutil.cpu_count(logical=False)) + "`\n"
+    cpuu += "`Total cores      : " + \
+        str(psutil.cpu_count(logical=True)) + "`\n"
     # CPU frequencies
     cpufreq = psutil.cpu_freq()
     cpuu += f"`Max Frequency    : {cpufreq.max:.2f}Mhz`\n"
@@ -115,7 +116,7 @@ def get_size(bytes, suffix="B"):
         bytes /= factor
 
 
-@fox_cmd(pattern="sysd$")
+@register(outgoing=True, pattern=r"^\.sysd$")
 async def sysdetails(sysd):
     if not sysd.text[0].isalpha() and sysd.text[0] not in ("/", "#", "@", "!"):
         try:
@@ -127,14 +128,15 @@ async def sysdetails(sysd):
             )
 
             stdout, stderr = await fetch.communicate()
-            result = str(stdout.decode().strip()) + str(stderr.decode().strip())
+            result = str(stdout.decode().strip()) + \
+                str(stderr.decode().strip())
 
             await sysd.edit("`" + result + "`")
         except FileNotFoundError:
             await sysd.edit("`Install neofetch first !!`")
 
 
-@fox_cmd(pattern="botver$")
+@register(outgoing=True, pattern=r"^\.botver$")
 async def bot_ver(event):
     if event.text[0].isalpha() or event.text[0] in ("/", "#", "@", "!"):
         return
@@ -162,9 +164,9 @@ async def bot_ver(event):
         revout = str(stdout.decode().strip()) + str(stderr.decode().strip())
 
         await event.edit(
-            "**⚜-**🦊Fox-Userbot🦊 Versi:** \n "
+            "**♤-**🦊𝔉𝔬𝔵 - Usᴇʀʙᴏᴛ🦊 Versi:** \n "
             f"heads/Fox-Userbot-0-x634i7u1"
-            "\n**⚜-**Revisi:**\n "
+            "\n**♤-**Revisi:**\n "
             f"{revout}"
         )
     else:
@@ -173,7 +175,7 @@ async def bot_ver(event):
         )
 
 
-@fox_cmd(pattern="pip(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.pip(?: |$)(.*)")
 async def pipcheck(pip):
     if pip.text[0].isalpha() or pip.text[0] in ("/", "#", "@", "!"):
         return
@@ -221,23 +223,25 @@ async def pipcheck(pip):
         await pip.edit("Gunakan `.help pip` Untuk Melihat Contoh")
 
 
-@fox_cmd(pattern="(?:foxalive)\s?(.)?")
+@register(outgoing=True, pattern=r"^\.(?:skyalive)\s?(.)?")
 async def amireallyalive(alive):
     user = await bot.get_me()
     await get_readable_time((time.time() - StartTime))
     output = (
-        f"丂Ҝㄚ乙ㄩ 卂ㄥ丨ᐯ乇\n\n"
-        f"\n__**{FOX_TEKS_KUSTOM}**__\n\n\n"
-        f"╭✠╼━━━━━━━━━━━━━━━✠╮\n"
-        f"➥ **Name** : `{DEFAULTUSER}` \n"
-        f"➥ **Username** : @{user.username} \n"
-        f"➥ **Telethon** : `{version.__version__}` \n"
-        f"➥ **Python**   : `{python_version()}` \n"
-        f"➥ **Bot Ver**  : `{BOT_VER}` \n"
-        f"➥ **Modules**  : `{len(modules)}` \n"
-        f"╰✠╼━━━━━━━━━━━━━━━✠╯\n"
-        f"[ɢʀᴏᴜᴘꜱ](https://t.me/arkabotsupport) | [ʙᴏᴛᴏꜰ](https://t.me/{user.username}) | [ɢɪᴛʜᴜʙ](https://github.com/arkabot/fox-userbot)"
-    )
+        f"╔═══════≪•❈•≫══════╗ \n\n"
+        f"🦊 ℱℴ𝓍 - 𝒰𝓈ℯ𝓇𝒷ℴ𝓉 🦊 \n\n"
+        f"╚═══════≪•❈•≫══════╝ \n\n"
+        f"\n__**{FOX_TEKS_KUSTOM}**__\n"
+        f"───────────────────── \n"
+        f"╔═══════๏⊙๏════════╗\n"
+        f"╠ 🤴 `Name       :` {DEFAULTUSER} \n"
+        f"╠ 👀 `Username   :` @{user.username} \n"
+        f"╠ ⚙️ `Telethon   :` {version.__version__} \n"
+        f"╠ 🐍 `Python     :` {python_version()} \n"
+        f"╠ 👾 `Bot Ver    :` {BOT_VER} \n"
+        f"╠ 📂 `Modules    :` {len(modules)} \n"
+        f"╚═══════๏⊙๏════════╝\n"
+        f"[𝗚𝗿𝗼𝘂𝗽](https://t.me/arkabotsupport) | [𝗖𝗵𝗮𝗻𝗻𝗲𝗹](https://t.me/arkabotupdate) | [𝗥𝗲𝗽𝗼](https://github.com/arkadiaz/Fox-Userbot)")
     if ALIVE_LOGO:
         try:
             logo = ALIVE_LOGO
@@ -258,20 +262,20 @@ async def amireallyalive(alive):
         await alive.delete()
 
 
-@fox_cmd(pattern="(?:foxon)\s?(.)?")
+@register(outgoing=True, pattern=r"^\.(?:skylaon)\s?(.)?")
 async def amireallyalive(alive):
     await bot.get_me()
     await get_readable_time((time.time() - StartTime))
     output = (
-        f"●▬▬▬▬▬▬ஜ۩۞۩ஜ▬▬▬▬▬▬● \n"
-        f"✾ 🤴 • `ᴏᴡɴᴇʀ :`[Arka](t.me/laz1yy)             ㅤ \n"
-        f"✾ 🖥️ • `ꜱʏꜱᴛᴇᴍ. :`Ubuntu 20.10            \n"
-        f"✾ ⚙️ • `ᴛᴇʟᴇᴛʜᴏɴ :`v.{version.__version__}                ㅤㅤ  \n"
-        f"✾ 🐍 • `ᴘʏᴛʜᴏɴ. :`v.{python_version()} ㅤㅤ\n"
-        f"✾ 👾 • `ʙᴏᴛ :`v.{BOT_VER}                ㅤㅤㅤ \n"
-        f"✾ 📂 • `ᴍᴏᴅᴜʟᴇ :`{len(modules)} ㅤㅤㅤㅤㅤㅤㅤ   \n"
-        f"●▬▬▬▬▬▬ஜ۩۞۩ஜ▬▬▬▬▬▬●"
-    )
+        f"🦊 ℱℴ𝓍 - 𝒰𝓈ℯ𝓇𝒷ℴ𝓉 🦊 \n"
+        f"╔═══════▣◎▣════════╗ \n"
+        f"➤ 🤴 • `ᴏᴡɴᴇʀ    :`[Arka](t.me/laz1yy) \n"
+        f"➤ 🖥️ • `ꜱʏꜱᴛᴇᴍ   :`Ubuntu 20.10 \n"
+        f"➤ ⚙️ • `ᴛᴇʟᴇᴛʜᴏɴ :`v.{version.__version__} \n\n"
+        f"➤ 🐍 • `ᴘʏᴛʜᴏɴ   :`v.{python_version()} \n"
+        f"➤ 👾 • `ʙᴏᴛ      :`v.{BOT_VER} \n"
+        f"➤ 📂 • `ᴍᴏᴅᴜʟᴇ   :`{len(modules)} \n"
+        f"╚═══════▣◎▣════════╝")
     if ALIVE_LOGO:
         try:
             logo = ALIVE_LOGO
@@ -292,33 +296,34 @@ async def amireallyalive(alive):
         await alive.delete()
 
 
-@fox_cmd(pattern="(?:alive|on)\s?(.)?")
+@register(outgoing=True, pattern=r"^\.(?:alive|on)\s?(.)?")
 async def redis(alive):
     user = await bot.get_me()
     await get_readable_time((time.time() - StartTime))
-    await alive.edit("__Sedang Memuat.__")
+    await alive.edit("__Fox Userbot.__")
     await alive.edit("__Sedang Memuat..__")
-    await alive.edit("__Sedang Memuat.__")
+    await alive.edit("__Fox Userbot.__")
     await alive.edit("__Sedang Memuat..__")
-    await alive.edit("__Sedang Memuat...__")
+    await alive.edit("__Fox Userbot...__")
     await alive.edit("__Sedang Memuat..__")
-    await alive.edit("__Sedang Memuat...__")
+    await alive.edit("__MMMEEEOOWWW...__")
     await alive.edit("🦊")
     await asyncio.sleep(2)
     output = (
-        f"╭✠╼━━━━━━━━━━━━━━━━✠╮\n"
-        f"┃✧ **Name     :** {DEFAULTUSER} \n"
-        f"┃✧ **Username :** @{user.username} \n"
-        f"┃✧ **Telethon :** Ver {version.__version__} \n"
-        f"┃✧ **Python   :** Ver {python_version()} \n"
-        f"┃✧ **Branch   :** {UPSTREAM_REPO_BRANCH} \n"
-        f"┃✧ **Bot Ver  :** {BOT_VER} \n"
-        f"┃✧ **Modules  :** {len(modules)} Modules \n"
-        f"┃✧ **GitHub   :** [UserBot](https://github.com/arkadiaz/fox-userbot) \n"
-        f"┃✧ **Owner    :** [Arka](https://t.me/laz1yy) \n"
-        f"┃✧ **support  :** [groups](https://t.me/arkabotsupport) \n"
-        f"╰✠╼━━━━━━━━━━━━━━━━✠╯"
-    )
+        f"╭✠╼━━━━━━━━❖━━━━━━✠ \n"
+        f"┃ 🦊 ℱℴ𝓍 - 𝒰𝓈ℯ𝓇𝒷ℴ𝓉 🦊 \n"
+        f"╰✠╼━━━━━━━━❖━━━━━━━✠ \n"
+        f"╭═───────╼⌘╾──────═ \n"
+        f"├᪣ 🤴  `Name     :` {DEFAULTUSER} \n"
+        f"├᪣ 👀  `Username :` @{user.username} \n"
+        f"├┈───────────────── \n"
+        f"├᪣ ⚙️  `Telethon :` Ver {version.__version__} \n"
+        f"├᪣ 🐍  `Python   :` Ver {python_version()} \n"
+        f"├᪣ ⚡  `Branch   :` {UPSTREAM_REPO_BRANCH} \n"
+        f"├᪣ 👾  `Bot Ver  :` {BOT_VER} \n"
+        f"├᪣ 📂  `Modules  :` {len(modules)} Modules \n"
+        f"╰═──────╼═⌘═╾──────═ \n"
+        f"[𝗣𝗲𝗺𝗶𝗹𝗶𝗸](https://t.me/{user.username}) | [𝗥𝗲𝗽𝗼](https://github.com/arkadiaz/Fox-Userbot) | [𝗜𝗻𝘀𝘁𝗮𝗴𝗿𝗮𝗺](https://instagram.com/bm_bd_)")
     if ALIVE_LOGO:
         try:
             logo = ALIVE_LOGO
@@ -339,9 +344,9 @@ async def redis(alive):
         await alive.delete()
 
 
-@fox_cmd(pattern="aliveu")
+@register(outgoing=True, pattern="^.aliveu")
 async def amireallyaliveuser(username):
-    """For .aliveu command, change the username in the .alive command."""
+    """ For .aliveu command, change the username in the .alive command. """
     message = username.text
     output = ".aliveu [new username] tidak boleh kosong"
     if not (message == ".aliveu" and message[7:8] != " "):
@@ -352,38 +357,36 @@ async def amireallyaliveuser(username):
     await username.edit("`" f"{output}" "`")
 
 
-@fox_cmd(pattern="resetalive$")
+@register(outgoing=True, pattern=r"^\.resetalive$")
 async def amireallyalivereset(ureset):
     global DEFAULTUSER  # global statement
     DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
     await ureset.edit("`" "Successfully reset user for alive!" "`")
 
 
+CMD_HELP.update({
+    "system":
+    "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.sysd`"
+    "\n↳ : Shows system information using neofetch."
+    "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.db`"
+    "\n↳ : Shows database related info."
+    "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.spc`"
+    "\n↳ : Show system specification."
+})
+CMD_HELP.update({
+    "alive":
+    "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.alive` or `.foxon` or `.foxalive`"
+    "\n↳ : To see whether your bot is working or not."
+    "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.aliveu` <text>"
+    "\n↳ : Changes the 'user' in alive to the text you want."
+    "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.restalive`"
+    "\n↳ : Resets the user to default."
+})
 CMD_HELP.update(
     {
-        "system": f"𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}sysd`"
-        "\n↳ : Shows system information using neofetch."
-        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}db`"
-        "\n↳ : Shows database related info."
-        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}spc`"
-        "\n↳ : Show system specification."
-    }
-)
-CMD_HELP.update(
-    {
-        "alive": f"𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}alive` or `{cmd}on` or `fox`"
-        "\n↳ : To see whether your bot is working or not."
-        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}aliveu` <text>"
-        "\n↳ : Changes the 'user' in alive to the text you want."
-        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}restalive`"
-        "\n↳ : Resets the user to default."
-    }
-)
-CMD_HELP.update(
-    {
-        "botversion": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.botver`"
+        "botversion":
+        "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.botver`"
         "\n↳ : Shows the userbot version."
         "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.pip` <module(s)>"
         "\n↳ : Does a search of pip modules(s)."
-    }
-)
+    })

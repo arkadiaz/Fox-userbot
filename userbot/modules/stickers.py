@@ -19,19 +19,18 @@ from telethon.tl.types import (
     MessageMediaPhoto,
 )
 
-from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP
 from userbot import S_PACK_NAME as custompack
 from userbot import bot
-from userbot.utils import fox_cmd
+from userbot.events import register
 
 KANGING_STR = [
-    "Sedang Mengambil Sticker Ini Ke Pack Anda",
-    "Sedang Mengambil Sticker Ini Ke Pack Anda",
+    "Sticker nya terlalu bagus",
+    "Untuk aku yang mudah candu, minta yaa😝",
 ]
 
 
-@fox_cmd(pattern="(?:tikel|kang)\s?(.)?")
+@register(outgoing=True, pattern=r"^\.(?:tikel|kang)\s?(.)?")
 async def kang(args):
     user = await bot.get_me()
     if not user.username:
@@ -177,7 +176,7 @@ async def kang(args):
                         return await args.edit(
                             "`Sticker telah dibuat ke pack baru !"
                             "\nIni Pack Yang Baru Saja Anda Buat !"
-                            f"\nTekan [⚡Klik Disini⚡](t.me/addstickers/{packname}) Untuk Melihat Sticker Anda",
+                            f"\nTekan [🦊Klik Disini🦊](t.me/addstickers/{packname}) Untuk Melihat Sticker Anda",
                             parse_mode="md",
                         )
                 if is_anim:
@@ -244,7 +243,7 @@ async def kang(args):
                 await bot.send_read_acknowledge(conv.chat_id)
 
         await args.edit(
-            f"**Sticker Berhasil Ditambahkan**\n      **>>> [Tekan Disini](t.me/addstickers/{packname}) <<<**\n**Untuk Melihat Sticker Anda**",
+            f"**Sticker Berhasil Ditambahkan**\n      **>>> [☃️Tekan Disini☃️](t.me/addstickers/{packname}) <<<**\n**Untuk Melihat Sticker Anda**",
             parse_mode="md",
         )
 
@@ -273,7 +272,7 @@ async def resize_photo(photo):
     return image
 
 
-@fox_cmd(pattern="stkrinfo$")
+@register(outgoing=True, pattern=r"^\.stkrinfo$")
 async def get_pack_info(event):
     if not event.is_reply:
         return await event.edit("`Mohon Balas Ke Sticker`")
@@ -316,7 +315,7 @@ async def get_pack_info(event):
     await event.edit(OUTPUT)
 
 
-@fox_cmd(pattern="get$")
+@register(outgoing=True, pattern=r"^\.get$")
 async def sticker_to_png(sticker):
     if not sticker.is_reply:
         await sticker.edit("`NULL information to fetch...`")
@@ -348,15 +347,13 @@ async def sticker_to_png(sticker):
 
 CMD_HELP.update(
     {
-        "stickers": f"𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}kang | {cmd}tikel [emoji('s)]?`"
-        f"\n↳ : Balas {cmd}tikel Ke Sticker Atau Gambar Untuk Menambahkan Ke Pack Mu "
+        "stickers": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.kang | .tikel [emoji('s)]?`"
+        "\n↳ : Balas .tikel Ke Sticker Atau Gambar Untuk Menambahkan Ke Pack Mu "
         "\nBisa Memilih Emoji Sesuai Pilihanmu."
-        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}kang | {cmd}tikel  (emoji['s]]?` [nomer]?"
+        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.kang | .tikel  (emoji['s]]?` [nomer]?"
         "\n↳ : Ambil Sticker/Gambar Ke Pack Baru Mu "
         "Dan Bisa Pilih Emoji Sticker Mu."
-        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}stkrinfo`"
+        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.stkrinfo`"
         "\n↳ : Dapatkan Informasi Pack Sticker."
-        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}get`"
-        "\n↳ : Balas Ke Stcker Untuk Mendapatkan File 'PNG' Sticker."
-    }
-)
+        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.get`"
+        "\n↳ : Balas Ke Stcker Untuk Mendapatkan File 'PNG' Sticker."})

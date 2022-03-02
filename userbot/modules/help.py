@@ -6,12 +6,9 @@
 """ Userbot help command """
 
 import asyncio
+from userbot import ALIVE_NAME, CMD_HELP
+from userbot.events import register
 from platform import uname
-
-from userbot import ALIVE_NAME
-from userbot import CMD_HANDLER as cmd
-from userbot import CMD_HELP
-from userbot.utils import fox_cmd
 
 modules = CMD_HELP
 
@@ -20,9 +17,9 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 # ============================================
 
 
-@fox_cmd(pattern="help(?: |$)(.*)")
+@register(outgoing=True, pattern="^.help(?: |$)(.*)")
 async def help(event):
-    """For .help command,"""
+    """ For .help command,"""
     args = event.pattern_match.group(1).lower()
     if args:
         if args in CMD_HELP:
@@ -35,12 +32,10 @@ async def help(event):
         string = ""
         for i in CMD_HELP:
             string += "`" + str(i)
-            string += "`\t ❉  "
-        await event.edit(
-            "**🦊𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁​🦊**\n\n"
-            f"**◉ Bᴏᴛ ᴏꜰ {DEFAULTUSER}**\n**◉ Mᴏᴅᴜʟᴇꜱ : {len(modules)}**\n\n"
-            "**• Mᴀɪɴ Mᴇɴᴜ :**\n"
-            f"◉ {string}◉\n\n✐ **ɴᴏᴛᴇꜱ :**  `{cmd}help animasi`\n✐  support : @arkabotsupport"
-        )
+            string += "`\t ❖  "
+        await event.edit("**☃️Sᴋʏʟᴀ-Usᴇʀʙᴏᴛ☃️**\n\n"
+                         f"**• Bᴏᴛ ᴏꜰ {DEFAULTUSER}**\n**• Mᴏᴅᴜʟᴇꜱ : {len(modules)}**\n\n"
+                         "**• Mᴀɪɴ Mᴇɴᴜ :**\n"
+                         f"◆ {string}◉\n\n✐ **ɴᴏᴛᴇꜱ :**  `.help animasi`\n☞  sᴜᴘᴘᴏʀᴛ : @skylasupport")
         await asyncio.sleep(1000)
         await event.delete()

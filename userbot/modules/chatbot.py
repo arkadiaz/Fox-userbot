@@ -6,10 +6,9 @@ from googletrans import Translator
 from telethon import events
 from telethon.tl.types import User
 
-from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP, LOGS, bot
+from userbot.events import register
 from userbot.modules.sql_helper.tede_chatbot_sql import is_tede, rem_tede, set_tede
-from userbot.utils import fox_cmd
 
 translator = Translator()
 LANGUAGE = "id"
@@ -46,7 +45,7 @@ async def chat_bot_toggle(event):
         await event.edit("**Usage:** `.chatbot` <on/off>")
 
 
-@fox_cmd(pattern="chatbot(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.chatbot(?: |$)(.*)")
 async def on_apa_off(event):
     await chat_bot_toggle(event)
 
@@ -74,8 +73,8 @@ async def tede_chatbot(event):
 
 CMD_HELP.update(
     {
-        "chatbot": f"**Plugin : **`chatbot`\
-      \n\n  •  **Syntax :** `{cmd}chatbot` <on/off>\
+        "chatbot": "**Plugin : **`chatbot`\
+      \n\n  •  **Syntax :** `.chatbot` <on/off>\
       \n  •  **Function :** Untuk membalas chat dengan chatbot AI.\
       "
     }

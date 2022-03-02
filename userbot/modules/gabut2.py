@@ -1,56 +1,49 @@
-# ReCode by @yansesad
-# FROM yansen-userbot <https://github.com/Yansesad/yansen-userbot>
-# KONTOLLLLLLL
-
-from platform import uname
-
-from userbot import ALIVE_NAME, CMD_HELP
+from time import sleep
+from userbot import CMD_HELP
 from userbot.events import register
 
-# ================= CONSTANT =================
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
-# ============================================
 
-
-@register(outgoing=True, pattern=r"^\.galau(?: |$)(.*)")
+@register(outgoing=True, pattern='^.skyla(?: |$)(.*)')
 async def typewriter(typew):
     typew.pattern_match.group(1)
-    await typew.edit("**HAY KAMU GALAU YA? JANGAN GALAU LAGI YA SEMANGAT KONTOL**")
+    sleep(3)
+    await typew.edit("`Hai Perkenalkan Namaku skyla`")
+    sleep(3)
+    await typew.edit("`9999999 Tahun`")
+    sleep(1)
+    await typew.edit("`Tinggal Di ytta, Salam Kenal:)`")
+# Create by myself @localheart
 
 
-@register(outgoing=True, pattern="^\\.prenjon(?: |$)(.*)")
-async def typewritter(typew):
-    typew.pattern_match.group(1)
-    await typew.edit(
-        "**HAHAHA KASIAN UDAH PRENJON GAMON LAGI DARI PADA GAMONIN DIA MENDING JADIAN SAMA AKU DI JAMIN BAHAGIA HEHE.**"
-    )
-
-
-@register(outgoing=True, pattern="^\\.sikntl(?: |$)(.*)")
+@register(outgoing=True, pattern='^.syg(?: |$)(.*)')
 async def typewriter(typew):
     typew.pattern_match.group(1)
-    await typew.edit(
-        "**KONTOL BUAT KAMU YANG UDAH DI JAGA TAPI MALAH DIA YANG KAMU BANGGAIN, INTINYA KAMU KONTOL**"
-    )
+    sleep(3)
+    await typew.edit("`Cuma Mau Bilang`")
+    sleep(3)
+    await typew.edit("`Aku Sayang Kamu`")
+    sleep(1)
+    await typew.edit("`I LOVE YOU 💞`")
+# Create by myself @localheart
 
 
-@register(outgoing=True, pattern="^\\.badut(?: |$)(.*)")
+@register(outgoing=True, pattern='^.semangat(?: |$)(.*)')
 async def typewriter(typew):
-    typew.pattetn_match.group(1)
-    await typew.edit(
-        "**KAMU GALAU YA? YAUDA SEBENTAR AKU PAKE TOPENG BADUT AKU DULU. NAH UDAH, YUK CERITA KAMU KENAPA**"
-    )
+    typew.pattern_match.group(1)
+    sleep(3)
+    await typew.edit("`Apapun Yang Terjadi`")
+    sleep(3)
+    await typew.edit("`Tetaplah Bernapas`")
+    sleep(1)
+    await typew.edit("`Dan Selalu Bersyukur`")
+# Create by myself @localheart
 
 
-CMD_HELP.update(
-    {
-        "gabut2": "**modules** - `gabut2`\
-            \n\n cmd : `.galau`\
-            \nUsage : Lihat Sendiri\
-            \n\n cmd : `.prenjon`\
-            \nUsage : Lihat Sendiri\
-            \n\n cmd : `.badut`\
-            \nUsage : Lihat Sendiri\
-    "
-    }
-)
+CMD_HELP.update({
+    "gabut2": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.skyla`\
+    \n↳ : perkenalan skyla\
+    \n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.syg`\
+    \n↳ : Gombalan maut`\
+    \n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.semangat`\
+    \n↳ : Jan Lupa Semangat."
+})

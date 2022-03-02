@@ -1,5 +1,5 @@
 try:
-    from userbot.modules.sql_helper import BASE, SESSION
+    from userbot.modules.sql_helper import SESSION, BASE
 except ImportError:
     raise AttributeError
 from sqlalchemy import Column, String
@@ -18,7 +18,8 @@ PMPermit.__table__.create(checkfirst=True)
 
 def is_approved(chat_id):
     try:
-        return SESSION.query(PMPermit).filter(PMPermit.chat_id == str(chat_id)).one()
+        return SESSION.query(PMPermit).filter(
+            PMPermit.chat_id == str(chat_id)).one()
     except BaseException:
         return None
     finally:

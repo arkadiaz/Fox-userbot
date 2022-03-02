@@ -1,12 +1,10 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-
-from userbot import CMD_HANDLER as cmd
-from userbot import CMD_HELP, bot
-from userbot.utils import fox_cmd
+from userbot.events import register
+from userbot import bot, CMD_HELP
 
 
-@fox_cmd(pattern="getid(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.getid(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -26,8 +24,9 @@ async def _(event):
     async with bot.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=186675376)
-            )
+                events.NewMessage(
+                    incoming=True,
+                    from_users=1663258664))
             await bot.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
@@ -39,9 +38,8 @@ async def _(event):
             await event.edit(f"{response.message.message}")
 
 
-CMD_HELP.update(
-    {
-        "getid": f"𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}gid`"
-        "\n↳ : Balas Ke Pesan Pengguna Untuk Mendapatkan ID Nya."
-    }
-)
+CMD_HELP.update({
+    "getid":
+    "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.getid`"
+    "\n↳ : Balas Ke Pesan Pengguna Untuk Mendapatkan ID Nya."
+})

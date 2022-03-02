@@ -1,20 +1,17 @@
 import aiohttp
-
-from userbot import CMD_HANDLER as cmd
+from userbot.events import register
 from userbot import CMD_HELP
-from userbot.utils import fox_cmd
 
 
-@fox_cmd(pattern="git (.*)")
+@register(pattern=r".git (.*)", outgoing=True)
 async def github(event):
     URL = f"https://api.github.com/users/{event.pattern_match.group(1)}"
     await event.get_chat()
     async with aiohttp.ClientSession() as session:
         async with session.get(URL) as request:
             if request.status == 404:
-                return await event.reply(
-                    "`" + event.pattern_match.group(1) + " not found`"
-                )
+                return await event.reply("`" + event.pattern_match.group(1) +
+                                         " not found`")
 
             result = await request.json()
 
@@ -47,9 +44,7 @@ async def github(event):
                 await event.edit(REPLY)
 
 
-CMD_HELP.update(
-    {
-        "github": f">`{cmd}git <username>`"
-        "\nUsage: Like .whois but for GitHub usernames."
-    }
-)
+CMD_HELP.update({
+    "github": ".git <nama pengguna>"
+    "\nPenjelasan: Seperti .whois tetapi untuk nama pengguna GitHub."
+})

@@ -9,16 +9,16 @@ from os import environ, execle, path, remove
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
-from userbot import BOTLOG, BOTLOG_CHATID
-from userbot import CMD_HANDLER as cmd
 from userbot import (
+    BOTLOG,
+    BOTLOG_CHATID,
     CMD_HELP,
     HEROKU_API_KEY,
     HEROKU_APP_NAME,
     UPSTREAM_REPO_BRANCH,
     UPSTREAM_REPO_URL,
 )
-from userbot.utils import fox_cmd
+from userbot.events import register
 
 requirements_path = path.join(
     path.dirname(path.dirname(path.dirname(__file__))), "requirements.txt"
@@ -59,7 +59,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         if HEROKU_APP_NAME is None:
             await event.edit(
                 "`[HEROKU]: Harap Siapkan Variabel` **HEROKU_APP_NAME** `"
-                " untuk dapat deploy perubahan terbaru dari  🦊𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁 🦊.`"
+                " untuk dapat deploy perubahan terbaru dari 🦊𝔉𝔬𝔵-Usᴇʀʙᴏᴛ🦊`"
             )
             repo.__del__()
             return
@@ -69,11 +69,11 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
                 break
         if heroku_app is None:
             await event.edit(
-                f"{txt}\n`Kredensial Heroku tidak valid untuk deploy 𝐒𝐊𝐘𝐙𝐔-𝐔𝐒𝐄𝐑𝐁𝐎𝐓 dyno.`"
+                f"{txt}\n`Kredensial Heroku tidak valid untuk deploy 🦊𝔉𝔬𝔵-Usᴇʀʙᴏᴛ🦊 dyno.`"
             )
             return repo.__del__()
         await event.edit(
-            "**[HEROKU] Sedang MengUpdate**" "\nMohon Mohon Menunggu 5-7 Menit"
+            "`Heroku : Sedang MengUpdate`" "\nMohon Mohon Menunggu 5-7 Menit"
         )
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
@@ -93,20 +93,20 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         build = app.builds(order_by="created_at", sort="desc")[0]
         if build.status == "failed":
             await event.edit(
-                "`Build Gagal!\n" "Dibatalkan atau ada beberapa kesalahan...**"
+                "`Build Gagal!\n" "Dibatalkan atau ada beberapa kesalahan...`"
             )
             await asyncio.sleep(5)
             return await event.delete()
         else:
             await event.edit(
-                "**𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁 Berhasil DiUpdate,Restart Tunggu Sebentar**"
+                "`🦊𝔉𝔬𝔵 -Usᴇʀʙᴏᴛ🦊 Berhasil DiUpdate,Restart Tunggu Sebentar`"
             )
             await asyncio.sleep(15)
             await event.delete()
 
         if BOTLOG:
             await event.client.send_message(
-                BOTLOG_CHATID, "#BOT \n" "**𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁 Berhasil Di Update**"
+                BOTLOG_CHATID, "#BOT \n" "`🦊𝔉𝔬𝔵 -Usᴇʀʙᴏᴛ🦊 Berhasil Di Update`"
             )
 
     else:
@@ -124,9 +124,9 @@ async def update(event, repo, ups_rem, ac_br):
     except GitCommandError:
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
-    await event.edit("**𝐒𝐊𝐘𝐙𝐔 𝐔𝐒𝐄𝐑𝐁𝐎𝐓​** `Berhasil Di Update!`")
+    await event.edit("**🦊𝔉𝔬𝔵-Usᴇʀʙᴏᴛ🦊** `Berhasil Di Update!`")
     await asyncio.sleep(1)
-    await event.edit("**𝐒𝐊𝐘𝐙𝐔 𝐔𝐒𝐄𝐑𝐁𝐎𝐓​** `Di Restart....`")
+    await event.edit("**🦊𝔉𝔬𝔵-Usᴇʀʙᴏᴛ🦊** `Di Restart....`")
     await asyncio.sleep(1)
     await event.edit("`Mohon Menunggu Beberapa Detik.`")
     await asyncio.sleep(10)
@@ -134,7 +134,7 @@ async def update(event, repo, ups_rem, ac_br):
 
     if BOTLOG:
         await event.client.send_message(
-            BOTLOG_CHATID, "#BOT \n" "**🦊𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁​🦊 Telah Di Perbarui.**"
+            BOTLOG_CHATID, "#BOT \n" "**🦊𝔉𝔬𝔵-Usᴇʀʙᴏᴛ🦊 Telah Di Perbarui.**"
         )
         await asyncio.sleep(100)
         await event.delete()
@@ -145,7 +145,7 @@ async def update(event, repo, ups_rem, ac_br):
     return
 
 
-@fox_cmd(pattern="update(?: |$)(now|deploy)?")
+@register(outgoing=True, pattern=r"^.update(?: |$)(now|deploy)?")
 async def upstream(event):
     "For .update command, check if the bot is up to date, update if specified"
     await event.edit("**Mengecek Pembaruan, Silakan Menunggu....**")
@@ -197,15 +197,13 @@ async def upstream(event):
     changelog = await gen_chlog(repo, f"HEAD..upstream/{ac_br}")
 
     if changelog == "" and force_update is False:
-        await event.edit(f"\n** 🦊𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁 Sudah Versi Terbaru**\n")
+        await event.edit(f"\n**🦊𝔉𝔬𝔵 - Usᴇʀʙᴏᴛ🦊 Sudah Versi Terbaru**\n")
         await asyncio.sleep(15)
         await event.delete()
         return repo.__del__()
 
     if conf is None and force_update is False:
-        changelog_str = (
-            f"**Pembaruan Untuk 𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁 :\n\n⚒️ Pembaruan Data :**\n`{changelog}`"
-        )
+        changelog_str = f"**Pembaruan Untuk 🦊𝔉𝔬𝔵-Usᴇʀʙᴏᴛ🦊 :\n\n⚒️ Pembaruan Data :**\n`{changelog}`"
         if len(changelog_str) > 4096:
             await event.edit("`Changelog Terlalu Besar, Lihat File Untuk Melihatnya.`")
             file = open("output.txt", "w+")
@@ -220,7 +218,7 @@ async def upstream(event):
         else:
             await event.edit(changelog_str)
         return await event.respond(
-            f"**Perintah Untuk Update, Sebagai Berikut.**\n 𝘾𝙤𝙢𝙢𝙖𝙣𝙙:`{cmd}update now`\n 𝘾𝙤𝙢𝙢𝙖𝙣𝙙:`{cmd}update deploy`\n\nUntuk Meng Update Fitur Terbaru Dari **𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁​**"
+            "**Perintah Untuk Update, Sebagai Berikut.**\n 𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`.update now`\n 𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`.update deploy`\n\nUntuk Meng Update Fitur Terbaru Dari **🦊𝔉𝔬𝔵-Usᴇʀʙᴏᴛ🦊**"
         )
 
     if force_update:
@@ -228,12 +226,14 @@ async def upstream(event):
             "`Sinkronisasi Paksa Ke Kode Userbot Stabil Terbaru, Harap Tunggu .....`"
         )
     else:
-        await event.edit("` Proses Update 𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁​, Loading....1%`")
-        await event.edit("` Proses Update 𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁​ Loading....20%`")
-        await event.edit("` Proses Update 𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁​, Loading....35%`")
-        await event.edit("` Proses Update 𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁​, Loading....77%`")
-        await event.edit("` Proses Update 𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁​, Updating...90%`")
-        await event.edit("` Proses Update 𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁​, Mohon Tunggu Sebentar....100%`")
+        await event.edit("` Proses Update 🦊𝔉𝔬𝔵-Usᴇʀʙᴏᴛ🦊, Loading....1%`")
+        await event.edit("` Proses Update 🦊𝔉𝔬𝔵-Usᴇʀʙᴏᴛ🦊, Loading....20%`")
+        await event.edit("` Proses Update 🦊𝔉𝔬𝔵-Usᴇʀʙᴏᴛ🦊, Loading....35%`")
+        await event.edit("` Proses Update 🦊𝔉𝔬𝔵-Usᴇʀʙᴏᴛ🦊, Loading....77%`")
+        await event.edit("` Proses Update 🦊𝔉𝔬𝔵-Usᴇʀʙᴏᴛ🦊, Updating...90%`")
+        await event.edit(
+            "` Proses Update 🦊𝔉𝔬𝔵-Usᴇʀʙᴏᴛ🦊, Mohon Tunggu Sebentar....100%`"
+        )
 
     if conf == "now":
         await update(event, repo, ups_rem, ac_br)
@@ -248,11 +248,11 @@ async def upstream(event):
 
 CMD_HELP.update(
     {
-        "update": f"𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}update`"
-        "\n• : Untuk Melihat Pembaruan Terbaru fox-Userbot."
-        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}update now`"
-        "\n• : Memperbarui fox-Userbot."
-        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}update deploy`"
-        "\n• : Memperbarui fox-Userbot Dengan Cara Men-Deploy Ulang."
+        "update": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.update`"
+        "\n• : Untuk Melihat Pembaruan Terbaru Fox-Userbot."
+        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.update now`"
+        "\n• : Memperbarui Fox-Userbot."
+        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.update deploy`"
+        "\n• : Memperbarui Fox-Userbot Dengan Cara Men-Deploy Ulang."
     }
 )

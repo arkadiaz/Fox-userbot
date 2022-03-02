@@ -1,11 +1,10 @@
 from PIL import Image, ImageDraw, ImageFont
 
-from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP
-from userbot.utils import fox_cmd
+from userbot.events import register
 
 
-@fox_cmd(pattern="gid$")
+@register(outgoing=True, pattern=r"^\.gid$")
 async def image_maker(event):
     replied_user = await event.get_reply_message()
     await event.client.download_profile_photo(
@@ -40,7 +39,7 @@ async def image_maker(event):
 
 CMD_HELP.update(
     {
-        "gid": f"✨**CMD**✨ : `{cmd}gid`\
+        "gid": "✨**CMD**✨ : `.gid`\
         \n↳ : Reply to a user to generate ID Card."
     }
 )

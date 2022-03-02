@@ -3,15 +3,15 @@ import os
 import re
 import textwrap
 import time
+from userbot.utils import progress
 
 from glitch_this import ImageGlitcher
 from PIL import Image, ImageDraw, ImageFont
 from telethon import functions, types
 from telethon.tl.types import DocumentAttributeFilename
 
-from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
-from userbot.utils import fox_cmd, progress
+from userbot.events import register
 
 Glitched = TEMP_DOWNLOAD_DIRECTORY + "glitch.gif"
 
@@ -32,7 +32,7 @@ EMOJI_PATTERN = re.compile(
 )
 
 
-@fox_cmd(pattern="glitch(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.glitch(?: |$)(.*)")
 async def glitch(event):
     if not event.reply_to_msg_id:
         await event.edit("`Aku Mau Glitch Sebuah Hantu!`")
@@ -112,7 +112,9 @@ async def draw_meme_text(image_path, text):
     img = Image.open(image_path)
     os.remove(image_path)
     i_width, i_height = img.size
-    m_font = ImageFont.truetype("GeezFont/GeezFont.otf", int((70 / 640) * i_width))
+    m_font = ImageFont.truetype(
+        "GeezFont/GeezFont.otf", int((70 / 640) * i_width)
+    )
     if ";" in text:
         upper_text, lower_text = text.split(";")
     else:
@@ -245,7 +247,7 @@ async def check_media(reply_message):
 
 CMD_HELP.update(
     {
-        "glitch": f">`{cmd}glitch <1-8>`"
+        "glitch": ">`.glitch <1-8>`"
         "\nUsage: Balas Ke Sticker/Gambar.\nGlitch Level 1-8 Jika Tidak Membuat Level Maka Otomatis Default Level 2"
     }
 )

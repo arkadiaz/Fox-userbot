@@ -19,7 +19,7 @@ async def _(event):
     try:
         query = event.pattern_match.group(1)
         await event.edit("`Mohon Menunggu, Saya Sedang Mencari Wallpaper.....`")
-        async with bot.conversation("@SaitamaRobot") as conv:
+        async with bot.conversation("@tdapibot") as conv:
             try:
                 query1 = await conv.send_message(f"/wall {query}")
                 asyncio.sleep(3)
@@ -29,9 +29,7 @@ async def _(event):
             except YouBlockedUserError:
                 return await event.reply("`Maaf Tidak Bisa`")
             if r1.text.startswith("No"):
-                return await event.edit(
-                    f"`Saya Tidak Menemukan Wallpaper Yang Anda Cari`"
-                )
+                return await event.edit(f"`Saya Tidak Menemukan Wallpaper Yang Anda Cari`")
             else:
                 img = await event.client.download_media(r1)
                 img2 = await event.client.download_media(r2)
@@ -59,4 +57,5 @@ async def _(event):
         return await event.edit("`Saya Tidak Menemukan Wallpaper Yang Anda Cari`")
 
 
-CMD_HELP.update({"wallpaper": ">`.wall <query>`" "\nUsage: Mencari Wallpaper Bagus."})
+CMD_HELP.update({"wallpaper": ">`.wall <query>`"
+                 "\nUsage: Mencari Wallpaper Bagus."})

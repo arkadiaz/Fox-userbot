@@ -1,7 +1,6 @@
 import threading
 
 from sqlalchemy import Column, String
-
 from userbot.modules.sql_helper import BASE, SESSION
 
 

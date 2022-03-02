@@ -3,42 +3,44 @@
 
 import requests
 
-from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP
-from userbot.utils import fox_cmd
+from userbot.events import register
 
 
-@fox_cmd(pattern="asupan$")
+@register(outgoing=True, pattern=r"^\.asupan$")
 async def _(event):
     try:
-        response = requests.get("https://api-tede.herokuapp.com/api/asupan/ptl").json()
+        response = requests.get(
+            "https://api-tede.herokuapp.com/api/asupan/ptl").json()
         await event.client.send_file(event.chat_id, response["url"])
         await event.delete()
     except Exception:
         await event.edit("**Tidak bisa menemukan video asupan.**")
 
 
-@fox_cmd(pattern="wibu$")
+@register(outgoing=True, pattern=r"^\.wibu$")
 async def _(event):
     try:
-        response = requests.get("https://api-tede.herokuapp.com/api/asupan/wibu").json()
+        response = requests.get(
+            "https://api-tede.herokuapp.com/api/asupan/wibu").json()
         await event.client.send_file(event.chat_id, response["url"])
         await event.delete()
     except Exception:
         await event.edit("**Tidak bisa menemukan video wibu.**")
 
 
-@fox_cmd(pattern="chika$")
+@register(outgoing=True, pattern=r"^\.chika$")
 async def _(event):
     try:
-        response = requests.get("https://api-tede.herokuapp.com/api/chika").json()
+        response = requests.get(
+            "https://api-tede.herokuapp.com/api/chika").json()
         await event.client.send_file(event.chat_id, response["url"])
         await event.delete()
     except Exception:
         await event.edit("**Tidak bisa menemukan video chikakiku.**")
 
 
-@fox_cmd(pattern="bocil$")
+@register(outgoing=True, pattern=r"^\.bocil$")
 async def _(event):
     try:
         response = requests.get(
@@ -52,14 +54,14 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "asupan": f"**Plugin : **`asupan`\
-        \n\n  •  **Syntax :** `{cmd}asupan`\
+        "asupan": "**Plugin : **`asupan`\
+        \n\n  •  **Syntax :** `.asupan`\
         \n  •  **Function : **Untuk Mengirim video asupan secara random.\
-        \n\n  •  **Syntax :** `{cmd}wibu`\
+        \n\n  •  **Syntax :** `.wibu`\
         \n  •  **Function : **Untuk Mengirim video wibu secara random.\
-        \n\n  •  **Syntax :** `{cmd}chika`\
+        \n\n  •  **Syntax :** `.chika`\
         \n  •  **Function : **Untuk Mengirim video chikakiku secara random.\
-        \n\n  •  **Syntax :** `{cmd}bocil`\
+        \n\n  •  **Syntax :** `.bocil`\
         \n  •  **Function : **Untuk Mengirim video bocil secara random.\
     "
     }

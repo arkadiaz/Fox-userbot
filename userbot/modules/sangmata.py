@@ -1,13 +1,10 @@
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+from userbot import bot, CMD_HELP
+from userbot.events import register
 from asyncio.exceptions import TimeoutError
 
-from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from userbot import CMD_HANDLER as cmd
-from userbot import CMD_HELP, bot
-from userbot.utils import fox_cmd
-
-
-@fox_cmd(pattern="sg(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.sg(?: |$)(.*)")
 async def lastname(steal):
     if steal.fwd_from:
         return
@@ -29,7 +26,9 @@ async def lastname(steal):
                 r = await conv.get_response()
                 response = await conv.get_response()
             except YouBlockedUserError:
-                await steal.reply("```Mohon Unblock @sangmatainfo_bot Dan Coba Lagi```")
+                await steal.reply(
+                    "```Mohon Unblock @sangmatainfo_bot Dan Coba Lagi```"
+                )
                 return
             if r.text.startswith("Name"):
                 respond = await conv.get_response()
@@ -41,9 +40,7 @@ async def lastname(steal):
             if response.text.startswith("No records") or r.text.startswith(
                 "No records"
             ):
-                await steal.edit(
-                    "```Saya Tidak Menemukan Informasi Pengguna Ini, Pengguna Ini Belum Pernah Mengganti Nama Sebelumnya```"
-                )
+                await steal.edit("```Saya Tidak Menemukan Informasi Pengguna Ini, Pengguna Ini Belum Pernah Mengganti Nama Sebelumnya```")
                 await steal.client.delete_messages(
                     conv.chat_id, [msg.id, r.id, response.id]
                 )
@@ -58,9 +55,8 @@ async def lastname(steal):
         return await steal.edit("`Saya Sedang Sakit Mohon Maaf`")
 
 
-CMD_HELP.update(
-    {
-        "sangmata": f"`{cmd}sg`\
+CMD_HELP.update({
+    "sangmata":
+        "`.sg`\
           \nUsage: Mendapatkan Riwayat Nama Pengguna."
-    }
-)
+})

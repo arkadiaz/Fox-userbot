@@ -1,9 +1,3 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
-# you may not use this file except in compliance with the License.
-#
-
 from asyncio import sleep
 
 from requests import get
@@ -80,10 +74,12 @@ async def ANTI_SPAMBOTS(welcm):
                     check_user = await welcm.client.get_entity(user_id)
 
                     # DEBUGGING. LEAVING IT HERE FOR SOME TIME ###
-                    print(f"User Joined: {check_user.first_name} [ID: {check_user.id}]")
+                    print(
+                        f"User Joined: {check_user.first_name} [ID: {check_user.id}]")
                     print(f"Chat: {welcm.chat.title}")
                     print(f"Time: {join_time}")
-                    print(f"Message Sent: {message.text}\n\n[Time: {message_date}]")
+                    print(
+                        f"Message Sent: {message.text}\n\n[Time: {message_date}]")
                     ##############################################
 
                     try:

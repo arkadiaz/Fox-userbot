@@ -1,11 +1,10 @@
-# port by skyz /@skyzy
-# FROM skyzu-userbot <https://github.com/skyzu/skyzu-userbot>
+# port by KOALA 🐨 /@manusiarakitann
 
+from userbot.events import register
 from userbot import CMD_HELP
-from userbot.utils import fox_cmd
 
 
-@fox_cmd(pattern="gsend ?(.*)")
+@register(outgoing=True, pattern="^.gsend ?(.*)")
 async def remoteaccess(event):
 
     p = event.pattern_match.group(1)
@@ -33,10 +32,8 @@ async def remoteaccess(event):
     except BaseException:
         await event.edit("** Gagal Mengirim Pesan, Emang Lu Join Grup Nya Goblok ? **")
 
-
 CMD_HELP.update(
     {
-        f"grouplink": "{cmd}gsend\
+        "grouplink": ".gsend\
     \nMengirim Pesan Jarak Jauh Ke Grup Lain .gsend <link grup> <pesan>."
-    }
-)
+    })

@@ -28,7 +28,7 @@ async def fban(event):
 
     if event.sender_id == fban_id:
         return await event.edit(
-            "**Error: This action has been prevented by KensurBot self preservation protocols.**"
+            "**Error: This action has been prevented by KyyBot self preservation protocols.**"
         )
 
     if len((fed_list := get_flist())) == 0:
@@ -223,6 +223,4 @@ CMD_HELP.update(
         "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.listf`"
         "\n↳ : Lists all connected federations by specified name."
         "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.clearf`"
-        "\n↳ : Disconnects from all connected federations. Use it carefully."
-    }
-)
+        "\n↳ : Disconnects from all connected federations. Use it carefully."})
