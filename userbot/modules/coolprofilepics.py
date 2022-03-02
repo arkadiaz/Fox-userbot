@@ -1,5 +1,5 @@
 # credits to the respective owner xD
-# imported by @heyworld
+# imported by @arkadiaz
 import asyncio
 import os
 import random
