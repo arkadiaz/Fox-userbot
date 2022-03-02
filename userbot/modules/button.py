@@ -7,15 +7,13 @@ import re
 
 from telethon import Button
 
-from userbot import BOT_USERNAME
+from userbot import BOT_USERNAME, CMD_HELP
 from userbot.events import register
-from userbot import CMD_HELP
 from userbot.utils import edit_delete, reply_id
 
 # regex obtained from:
 # https://github.com/PaulSonOfLars/tgbot/blob/master/tg_bot/modules/helper_funcs/string_handling.py#L23
-BTN_URL_REGEX = re.compile(
-    r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
+BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
 
 
 @register(outgoing=True, pattern="^\\.button")

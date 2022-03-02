@@ -1,9 +1,10 @@
 from time import sleep
+
 from userbot import CMD_HELP
 from userbot.events import register
 
 
-@register(outgoing=True, pattern='^.ngentot(?: |$)(.*)')
+@register(outgoing=True, pattern="^.ngentot(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
@@ -26,10 +27,12 @@ async def typewriter(typew):
     await typew.edit("**SAMA ORANG LAIN**")
     sleep(1)
     await typew.edit("**HAHAHAHA**")
+
+
 # Create by myself @localheart
 
 
-@register(outgoing=True, pattern='^.goblok(?: |$)(.*)')
+@register(outgoing=True, pattern="^.goblok(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
@@ -52,10 +55,12 @@ async def typewriter(typew):
     await typew.edit("**EHHH SANGE NYA MAU DAPAT YANG CANTIK**")
     sleep(1)
     await typew.edit("**HAHAHAHA**")
+
+
 # Create by myself @localheart
 
 
-@register(outgoing=True, pattern='^.ngatain(?: |$)(.*)')
+@register(outgoing=True, pattern="^.ngatain(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
@@ -78,10 +83,12 @@ async def typewriter(typew):
     await typew.edit("**EHHH SANGE NYA MAU DAPAT YANG CANTIK**")
     sleep(1)
     await typew.edit("**HAHAHAHA**")
+
+
 # Create by myself @localheart
 
 
-@register(outgoing=True, pattern='^.yatim(?: |$)(.*)')
+@register(outgoing=True, pattern="^.yatim(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
@@ -104,6 +111,8 @@ async def typewriter(typew):
     await typew.edit("`MAAF YA, CANDAA BEBANNNN xixixi 🙈`")
     sleep(1)
     await typew.edit("`Tapi Bo'ong Hiyahiyahiya`")
+
+
 # Create by myself @localheart
 
 
@@ -136,8 +145,9 @@ async def typewriter(typew):
     await typew.edit("**KASIAN CACAD GAPUNYA KONTOLL**")
 
 
-CMD_HELP.update({
-    "toxic2": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.ngentot`\
+CMD_HELP.update(
+    {
+        "toxic2": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.ngentot`\
     \n↳ : Cobain aja\
     \n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.goblok`\
     \n↳ : Cobain aja\
@@ -147,4 +157,5 @@ CMD_HELP.update({
     \n↳ : Cobain aja\
     \n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.yatim`\
     \n↳ : Cobain aja."
-})
+    }
+)

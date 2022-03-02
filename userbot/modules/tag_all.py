@@ -120,13 +120,14 @@ async def _(event):
         FlagContainer.is_active = False
 
 
-CMD_HELP.update({
-    "tag_all":
-    "`.all`\
+CMD_HELP.update(
+    {
+        "tag_all": "`.all`\
 \nUsage: Untuk Mengetag semua anggota yang ada di group.\
 \n\n`.mention`\
 \nUsage: Untuk Menmention semua anggota yang ada di group tanpa menyebut namanya.\
 \n\n`.emojitag`\
 \nUsage: Untuk Mengetag semua anggota di grup dengan random emoji berbeda.\
 \n\n **NOTE :** Untuk Memberhentikan Tag ketik `.restart`."
-})
+    }
+)

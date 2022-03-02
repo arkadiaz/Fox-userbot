@@ -4,6 +4,7 @@
 # t.me/SharingUserbot & t.me/Lunatic0de
 
 from asyncio.exceptions import TimeoutError
+
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from userbot import CMD_HELP, bot
@@ -53,9 +54,7 @@ async def _(event):
             )
             await event.delete()
     except TimeoutError:
-        return await event.edit(
-            "**ERROR: Bot tidak merespon, coba lagi nanti**"
-        )
+        return await event.edit("**ERROR: Bot tidak merespon, coba lagi nanti**")
 
 
 CMD_HELP.update(

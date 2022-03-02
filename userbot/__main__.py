@@ -7,14 +7,21 @@
 
 import sys
 from importlib import import_module
-from telethon.tl.functions.channels import InviteToChannelRequest as Addbot
 
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
-from userbot import BOTLOG_CHATID, BOT_USERNAME, BOT_TOKEN, BOT_VER, LOGS, ALIVE_NAME, bot
+from telethon.tl.functions.channels import InviteToChannelRequest as Addbot
 
+from userbot import (
+    ALIVE_NAME,
+    BOT_TOKEN,
+    BOT_USERNAME,
+    BOT_VER,
+    BOTLOG_CHATID,
+    LOGS,
+    bot,
+)
 from userbot.modules import ALL_MODULES
 from userbot.utils import autobot, startupmessage
-
 
 try:
     bot.start()
@@ -27,9 +34,9 @@ for module_name in ALL_MODULES:
 
 # bot.loop.run_until_complete(checking())
 LOGS.info(
-    f"Jika {ALIVE_NAME} Membutuhkan Bantuan, Silahkan Tanyakan di Grup https://t.me/arkabotsupport")
-LOGS.info(
-    f"🦊Fox-Userbot🦊 ⚙️ V{BOT_VER} [TELAH DIAKTIFKAN!]")
+    f"Jika {ALIVE_NAME} Membutuhkan Bantuan, Silahkan Tanyakan di Grup https://t.me/arkabotsupport"
+)
+LOGS.info(f"🦊Fox-Userbot🦊 ⚙️ V{BOT_VER} [TELAH DIAKTIFKAN!]")
 
 
 async def check_alive():
@@ -42,6 +49,7 @@ async def check_alive():
         await bot(Addbot(int(BOTLOG_CHATID), [BOT_USERNAME]))
     except BaseException:
         pass
+
 
 bot.loop.run_until_complete(check_alive())
 if not BOT_TOKEN:
