@@ -59,7 +59,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         if HEROKU_APP_NAME is None:
             await event.edit(
                 "`[HEROKU]: Harap Siapkan Variabel` **HEROKU_APP_NAME** `"
-                " untuk dapat deploy perubahan terbaru dari ⚡𝐒𝐊𝐘𝐙𝐔-𝐔𝐒𝐄𝐑𝐁𝐎𝐓​⚡.`"
+                " untuk dapat deploy perubahan terbaru dari  🦊𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁 🦊.`"
             )
             repo.__del__()
             return
@@ -99,14 +99,14 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             return await event.delete()
         else:
             await event.edit(
-                "**𝐒𝐊𝐘𝐙𝐔 𝐔𝐒𝐄𝐑𝐁𝐎𝐓​ Berhasil DiUpdate,Restart Tunggu Sebentar**"
+                "**𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁 Berhasil DiUpdate,Restart Tunggu Sebentar**"
             )
             await asyncio.sleep(15)
             await event.delete()
 
         if BOTLOG:
             await event.client.send_message(
-                BOTLOG_CHATID, "#BOT \n" "**𝐒𝐊𝐘𝐙𝐔-𝐔𝐒𝐄𝐑𝐁𝐎𝐓​ Berhasil Di Update**"
+                BOTLOG_CHATID, "#BOT \n" "**𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁 Berhasil Di Update**"
             )
 
     else:
@@ -197,13 +197,13 @@ async def upstream(event):
     changelog = await gen_chlog(repo, f"HEAD..upstream/{ac_br}")
 
     if changelog == "" and force_update is False:
-        await event.edit(f"\n**⚡𝐒𝐊𝐘𝐙𝐔-𝐔𝐒𝐄𝐑𝐁𝐎𝐓​ Sudah Versi Terbaru**\n")
+        await event.edit(f"\n** 🦊𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁 Sudah Versi Terbaru**\n")
         await asyncio.sleep(15)
         await event.delete()
         return repo.__del__()
 
     if conf is None and force_update is False:
-        changelog_str = f"**Pembaruan Untuk 𝐒𝐊𝐘𝐙𝐔-𝐔𝐒𝐄𝐑𝐁𝐎𝐓​ :\n\n⚒️ Pembaruan Data :**\n`{changelog}`"
+        changelog_str = f"**Pembaruan Untuk 𝗙𝗼𝘅-𝗨𝘀𝗲𝗿𝗯𝗼𝘁 :\n\n⚒️ Pembaruan Data :**\n`{changelog}`"
         if len(changelog_str) > 4096:
             await event.edit("`Changelog Terlalu Besar, Lihat File Untuk Melihatnya.`")
             file = open("output.txt", "w+")
