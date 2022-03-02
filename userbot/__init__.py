@@ -114,7 +114,7 @@ PMPERMIT_TEXT = os.environ.get("PMPERMIT_TEXT", None)
 # Custom Pmpermit pic
 PMPERMIT_PIC = (
     os.environ.get("PMPERMIT_PIC")
-    or "https://telegra.ph/file/fd08937c4ae6cb1303731.jpg"
+    or "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
 )
 
 # Bleep Blop, this is a bot ;)
@@ -249,11 +249,11 @@ S_PACK_NAME = os.environ.get("S_PACK_NAME", None)
 
 # Default .alive Logo
 ALIVE_LOGO = (
-    os.environ.get("ALIVE_LOGO") or "https://telegra.ph/file/fd08937c4ae6cb1303731.jpg"
+    os.environ.get("ALIVE_LOGO") or "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
 )
 # Default .helpme Logo
 INLINE_PIC = (
-    os.environ.get("INLINE_PIC") or "https://telegra.ph/file/fd08937c4ae6cb1303731.jpg"
+    os.environ.get("INLINE_PIC") or "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
 )
 
 # Default emoji help
@@ -510,7 +510,7 @@ with bot:
                     buttons=[
                         [
                             Button.url(
-                                "ʀᴇᴘᴏ​", "https://github.com/aekadiaz/fox-userbot"
+                                "ʀᴇᴘᴏ​", "https://github.com/arkadiaz/fox-userbot"
                             )
                         ],
                     ],
