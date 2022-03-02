@@ -1,5 +1,4 @@
 from time import sleep
-
 from userbot import CMD_HELP
 from userbot.events import register
 
@@ -59,9 +58,7 @@ async def typewriter(typew):
 @register(outgoing=True, pattern=r"^\.met(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
-    await typew.edit(
-        "**NAMANYA JUGA JAMET TELE CAPER SANA SINI BUAT CARI NAMA BHAHAHA**"
-    )
+    await typew.edit("**NAMANYA JUGA JAMET TELE CAPER SANA SINI BUAT CARI NAMA BHAHAHA**")
 
 
 @register(outgoing=True, pattern=r"^\.war(?: |$)(.*)")

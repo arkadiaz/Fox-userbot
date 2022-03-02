@@ -1,16 +1,18 @@
 """  Some Modules Imported by @Nitesh_231 :) & Again @heyworld roks *_* """
-import asyncio
 import os
 import re
-
+import asyncio
+import os
+from PIL import Image, ImageDraw, ImageFont
+from wget import download
 import requests
 from html_telegraph_poster.upload_images import upload_image
-from PIL import Image, ImageDraw, ImageFont
-from telegraph import exceptions, upload_file
+from telegraph import exceptions
+from telegraph import upload_file
 from validators.url import url
-from wget import download
 
-from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
+from userbot import bot, CMD_HELP
+from userbot import TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 
 EMOJI_PATTERN = re.compile(
@@ -26,8 +28,7 @@ EMOJI_PATTERN = re.compile(
     "\U0001FA00-\U0001FA6F"  # Chess Symbols
     "\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
     "\U00002702-\U000027B0"  # Dingbats
-    "]+"
-)
+    "]+")
 
 
 def convert_toimage(image):
@@ -45,7 +46,8 @@ def deEmojify(inputString: str) -> str:
 
 
 async def threats(text):
-    r = requests.get(f"https://nekobot.xyz/api/imagegen?type=threats&url={text}").json()
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=threats&url={text}").json()
     sandy = r.get("message")
     caturl = url(sandy)
     if not caturl:
@@ -60,7 +62,8 @@ async def threats(text):
 
 
 async def trash(text):
-    r = requests.get(f"https://nekobot.xyz/api/imagegen?type=trash&url={text}").json()
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=trash&url={text}").json()
     sandy = r.get("message")
     caturl = url(sandy)
     if not caturl:
@@ -108,8 +111,8 @@ async def phss(uplded, input, name):
 
 async def trumptweet(text):
     r = requests.get(
-        f"https://nekobot.xyz/api/imagegen?type=trumptweet&text={text}"
-    ).json()
+        f"https://nekobot.xyz/api/imagegen?type=trumptweet&text={text}").json(
+    )
     geng = r.get("message")
     kapak = url(geng)
     if not kapak:
@@ -138,8 +141,7 @@ async def changemymind(text):
 
 async def kannagen(text):
     r = requests.get(
-        f"https://nekobot.xyz/api/imagegen?type=kannagen&text={text}"
-    ).json()
+        f"https://nekobot.xyz/api/imagegen?type=kannagen&text={text}").json()
     geng = r.get("message")
     kapak = url(geng)
     if not kapak:
@@ -290,15 +292,18 @@ async def tweet(event):
             if not reply_to_id.media:
                 text = reply_to_id.message
             else:
-                await event.edit("`What should i tweet? Give your username and tweet!`")
+                await event.edit(
+                    "`What should i tweet? Give your username and tweet!`")
                 return
         else:
-            await event.edit("What should i tweet? Give your username and tweet!`")
+            await event.edit(
+                "What should i tweet? Give your username and tweet!`")
             return
     if "." in text:
         username, text = text.split(".")
     else:
-        await event.edit("`What should i tweet? Give your username and tweet!`")
+        await event.edit("`What should i tweet? Give your username and tweet!`"
+                         )
     await event.edit(f"`Requesting {username} to tweet...`")
     text = deEmojify(text)
     img = await tweets(text, username)
@@ -320,15 +325,15 @@ async def nekobot(event):
     else:
         await event.edit("reply to a supported media file")
         return
-    download_location = await bot.download_media(replied, TEMP_DOWNLOAD_DIRECTORY)
+    download_location = await bot.download_media(replied,
+                                                 TEMP_DOWNLOAD_DIRECTORY)
     if download_location.endswith((".webp")):
         download_location = convert_toimage(download_location)
     size = os.stat(download_location).st_size
     if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
         if size > 5242880:
             await event.edit(
-                "the replied file size is not supported it must me below 5 mb"
-            )
+                "the replied file size is not supported it must me below 5 mb")
             os.remove(download_location)
             return
         await event.edit("generating image..")
@@ -362,15 +367,15 @@ async def nekobot(event):
     else:
         await event.edit("reply to a supported media file")
         return
-    download_location = await bot.download_media(replied, TEMP_DOWNLOAD_DIRECTORY)
+    download_location = await bot.download_media(replied,
+                                                 TEMP_DOWNLOAD_DIRECTORY)
     if download_location.endswith((".webp")):
         download_location = convert_toimage(download_location)
     size = os.stat(download_location).st_size
     if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
         if size > 5242880:
             await event.edit(
-                "the replied file size is not supported it must me below 5 mb"
-            )
+                "the replied file size is not supported it must me below 5 mb")
             os.remove(download_location)
             return
         await event.edit("generating image..")
@@ -413,13 +418,15 @@ async def nekobot(e):
     else:
         await e.edit("reply to a supported media file")
         return
-    download_location = await bot.download_media(replied, TEMP_DOWNLOAD_DIRECTORY)
+    download_location = await bot.download_media(replied,
+                                                 TEMP_DOWNLOAD_DIRECTORY)
     if download_location.endswith((".webp")):
         download_location = convert_toimage(download_location)
     size = os.stat(download_location).st_size
     if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
         if size > 5242880:
-            await e.edit("the replied file size is not supported it must me below 5 mb")
+            await e.edit(
+                "the replied file size is not supported it must me below 5 mb")
             os.remove(download_location)
             return
         await e.edit("generating image..")
@@ -439,13 +446,12 @@ async def nekobot(e):
     await e.delete()
     await bot.send_file(e.chat_id, file, reply_to=replied)
 
-
 # Ported by @AshSTR
 
 
 @register(outgoing=True, pattern="^.fgs ((.*) ; (.*))")
 async def FakeGoogleSearch(event):
-    """Get a user-customised google search meme!"""
+    """ Get a user-customised google search meme! """
     input_str = event.pattern_match.group(1)
     if input_str is None:
         await event.edit("No input found!", del_in=5)
@@ -456,16 +462,18 @@ async def FakeGoogleSearch(event):
         await event.edit("Invalid Input! Check help for more info!", del_in=5)
         return
 
-    await event.edit("Connecting to `https://www.google.com/` ...")
+    await event.edit('Connecting to `https://www.google.com/` ...')
     await asyncio.sleep(2)
-    img = "https://i.imgur.com/wNFr5X2.jpg"
+    img = 'https://i.imgur.com/wNFr5X2.jpg'
     r = download(img)
     photo = Image.open(r)
     drawing = ImageDraw.Draw(photo)
     blue = (0, 0, 255)
     black = (0, 0, 0)
-    font1 = ImageFont.truetype("userbot/utils/styles/ProductSans-BoldItalic.ttf", 20)
-    font2 = ImageFont.truetype("userbot/utils/styles/ProductSans-Light.ttf", 23)
+    font1 = ImageFont.truetype(
+        "userbot/utils/styles/ProductSans-BoldItalic.ttf", 20)
+    font2 = ImageFont.truetype(
+        "userbot/utils/styles/ProductSans-Light.ttf", 23)
     drawing.text((450, 258), result, fill=blue, font=font1)
     drawing.text((270, 37), search, fill=black, font=font2)
     photo.save("downloads/test.jpg")
@@ -473,9 +481,10 @@ async def FakeGoogleSearch(event):
     await event.delete()
     reply_id = event.pattern_match.group(3) if reply else None
     await event.client.send_file(
-        event.chat_id, "downloads/test.jpg", reply_to_message_id=reply_id
-    )
-    os.remove("downloads/test.jpg")
+        event.chat_id,
+        'downloads/test.jpg',
+        reply_to_message_id=reply_id)
+    os.remove('downloads/test.jpg')
 
 
 @register(outgoing=True, pattern=r"^\.ph(?: |$)(.*)")
@@ -525,15 +534,13 @@ async def phcomment(event):
     await event.delete()
     await purge()
 
-
-CMD_HELP.update(
-    {
-        "memes1": "`.fgs`\
+CMD_HELP.update({
+    "memes1":
+    "`.fgs`\
 \nUsage: Dapatkan meme dari google yang di custom pengguna!\
 \n`.fgs [Teks Atas] ; [Teks Bawah]`\
 \n\n<`.modi` or `.trump` or `.cmm` or `.kanna`> <text>\
 \nUsage: Just for Fun.\
 \n\n<`.ph` or `.threat` or `.trash` or `.trap` >\
 \nUsage: Balas Ke Sticker Atau Gambar Dan Liat Apa Yang Terjadi."
-    }
-)
+})

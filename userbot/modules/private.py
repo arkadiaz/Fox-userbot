@@ -2,10 +2,10 @@ import io
 import re
 import time
 from datetime import datetime
+from telethon.sync import custom, events
 
 import heroku3
 from telethon import Button, custom, events
-from telethon.sync import custom, events
 from telethon.utils import get_display_name
 
 from userbot import (
@@ -16,8 +16,8 @@ from userbot import (
     HEROKU_APP_NAME,
     SUDO_HANDLER,
     StartTime,
-    bot,
     tgbot,
+    bot,
 )
 from userbot.modules.sql_helper.bot_blacklists import check_is_black_list
 from userbot.modules.sql_helper.bot_starters import (
@@ -71,7 +71,11 @@ async def check_bot_started_users(user, event):
                 \n**ID: **`{user.id}`\
                 \n**Action: **Telah Me-Restart saya"
     try:
-        add_starter_to_db(user.id, get_display_name(user), start_date, user.username)
+        add_starter_to_db(
+            user.id,
+            get_display_name(user),
+            start_date,
+            user.username)
     except Exception as e:
         LOGS.error(str(e))
     if BOTLOG_CHATID:
@@ -460,7 +464,8 @@ async def alvlogo(event):
         )
 
 
-@asst_cmd(pattern=f"^/start({botusername})?([\\s]+)?$", func=lambda e: e.is_private)
+@asst_cmd(pattern=f"^/start({botusername})?([\\s]+)?$",
+          func=lambda e: e.is_private)
 async def bot_start(event):
     chat = await event.get_chat()
     user = await event.client.get_me()
@@ -500,11 +505,13 @@ async def bot_start(event):
                         \n**Anda dapat Menghubungi [{OWNER}](tg://user?id={OWNER_ID}) dari sini.**\
                         \n**Jangan Melakukan Spam Atau anda akan di blokir**\
                         \n\n**Powered by** [UserBot](https://github.com/SkylaIND/Skyla-Userbot)"
-            buttons = [(Button.inline("ɪɴꜰᴏ", data="infor"),)]
+            buttons = [
+                (
+                    Button.inline("ɪɴꜰᴏ", data="infor"),
+                )
+            ]
     else:
-        start_msg = (
-            f"**Menu ini Hanya Terlihat Oleh [{OWNER}](tg://user?id={OWNER_ID})** ..!"
-        )
+        start_msg = f"**Menu ini Hanya Terlihat Oleh [{OWNER}](tg://user?id={OWNER_ID})** ..!"
         buttons = [
             (Button.inline("sᴇᴛᴛɪɴɢs ᴠᴀʀ", data="apiset"),),
             (
@@ -536,14 +543,14 @@ async def bot_start(event):
         await check_bot_started_users(chat, event)
 
 
-@callback(data=re.compile(b"uptimebot"))
+@ callback(data=re.compile(b"uptimebot"))
 async def _(event):
     uptime = await get_readable_time((time.time() - StartTime))
     pin = f"⏱ ᴜᴘᴛɪᴍᴇ = {uptime}"
     await event.answer(pin, cache_time=0, alert=True)
 
 
-@callback(data=re.compile(b"pingbot"))
+@ callback(data=re.compile(b"pingbot"))
 async def _(event):
     start = datetime.now()
     end = datetime.now()
@@ -552,7 +559,7 @@ async def _(event):
     await event.answer(pin, cache_time=0, alert=True)
 
 
-@callback(data=re.compile(b"infor"))
+@ callback(data=re.compile(b"infor"))
 async def infor(event):
     await tgbot.send_message(
         event.chat_id,

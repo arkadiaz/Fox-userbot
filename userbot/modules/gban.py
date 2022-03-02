@@ -24,7 +24,9 @@ async def get_full_user(event):
             return
         if event.message.entities is not None:
             probable_user_mention_entity = event.message.entities[0]
-            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+            if isinstance(
+                    probable_user_mention_entity,
+                    MessageEntityMentionName):
                 user_id = probable_user_mention_entity.user_id
                 user_obj = await event.client.get_entity(user_id)
                 return user_obj
@@ -151,8 +153,7 @@ async def gben(userbot):
         f"││➢ **Pengguna:** [{user.first_name}](tg://user?id={user.id}) \n"
         f"││➢ **Aksi:** `Global Banned` \n"
         f"╰┈─────────────━\n\n"
-        f"➽ __by ☃️Sᴋʏʟᴀ-Usᴇʀʙᴏᴛ☃️__"
-    )
+        f"➽ __by ☃️Sᴋʏʟᴀ-Usᴇʀʙᴏᴛ☃️__")
 
 
 @register(outgoing=True, pattern="^.ungban(?: |$)(.*)")
@@ -230,8 +231,7 @@ async def gunben(userbot):
         f"││➢ **Pengguna:** [{user.first_name}](tg://user?id={user.id}) \n"
         f"││➢ **Aksi:** `Membatalkan Global Banned` \n"
         f"╰┈─────────────━\n\n"
-        f"➽ __by ☃️Sᴋʏʟᴀ-Usᴇʀʙᴏᴛ☃️__"
-    )
+        f"➽ __by ☃️Sᴋʏʟᴀ-Usᴇʀʙᴏᴛ☃️__")
 
 
 CMD_HELP.update(

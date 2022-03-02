@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Numeric, UnicodeText
-
-from userbot.modules.sql_helper import BASE, SESSION
+from userbot.modules.sql_helper import SESSION, BASE
 
 
 class LydiaAI(BASE):
@@ -10,7 +9,13 @@ class LydiaAI(BASE):
     session_id = Column(UnicodeText)
     session_expires = Column(Numeric)
 
-    def __init__(self, user_id, chat_id, session_id, session_expires):
+    def __init__(
+        self,
+        user_id,
+        chat_id,
+        session_id,
+        session_expires
+    ):
         self.user_id = user_id
         self.chat_id = chat_id
         self.session_id = session_id
@@ -38,18 +43,31 @@ def get_all_s():
         SESSION.close()
 
 
-def add_s(user_id, chat_id, session_id, session_expires):
+def add_s(
+    user_id,
+    chat_id,
+    session_id,
+    session_expires
+):
     adder = SESSION.query(LydiaAI).get((user_id, chat_id))
     if adder:
         adder.session_id = session_id
         adder.session_expires = session_expires
     else:
-        adder = LydiaAI(user_id, chat_id, session_id, session_expires)
+        adder = LydiaAI(
+            user_id,
+            chat_id,
+            session_id,
+            session_expires
+        )
     SESSION.add(adder)
     SESSION.commit()
 
 
-def remove_s(user_id, chat_id):
+def remove_s(
+    user_id,
+    chat_id
+):
     note = SESSION.query(LydiaAI).get((user_id, chat_id))
     if note:
         SESSION.delete(note)

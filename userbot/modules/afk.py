@@ -1,3 +1,4 @@
+
 """ Userbot module which contains afk-related commands """
 
 import time
@@ -67,9 +68,7 @@ async def set_afk(afk_e):
             f"🦊𝔉𝔬𝔵 - Usᴇʀʙᴏᴛ🦊\n╭✠╼━━━━━━❖━━━━━━━✠╮ \n┣ {ALIVE_NAME} sᴇᴅᴀɴɢ ᴀꜰᴋ\n┣ ᴀʟᴀꜱᴀɴ : {AFKREASON}\n╰✠╼━━━━━━❖━━━━━━━✠╯"
         )
     else:
-        await afk_e.edit(
-            "🦊 𝐴 𝐹 𝐾\n╭✠╼━━━━━━❖━━━━━━━✠╮ \n┣ ᴊᴀɴɢᴀɴ ᴅɪᴄᴀʀɪ ✨\n╰✠╼━━━━━━❖━━━━━━━✠╯"
-        )
+        await afk_e.edit("🦊 𝐴 𝐹 𝐾\n╭✠╼━━━━━━❖━━━━━━━✠╮ \n┣ ᴊᴀɴɢᴀɴ ᴅɪᴄᴀʀɪ ✨\n╰✠╼━━━━━━❖━━━━━━━✠╯")
     if user.last_name:
         await afk_e.client(
             UpdateProfileRequest(first_name=user.first_name, last_name=user.last_name)

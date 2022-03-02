@@ -1,9 +1,7 @@
-import io
-
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-
-from userbot import CMD_HELP, bot
+import io
+from userbot import bot, CMD_HELP
 from userbot.events import register
 
 
@@ -23,17 +21,16 @@ async def _(event):
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=164977173)
-            )
+                events.NewMessage(
+                    incoming=True,
+                    from_users=164977173))
             msg = await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
             await event.reply("unblock me (@buildstickerbot) and try again")
             return
         if response.text.startswith("Hi!"):
-            await event.edit(
-                "Can you kindly disable your forward privacy settings for good?"
-            )
+            await event.edit("Can you kindly disable your forward privacy settings for good?")
         else:
             await event.delete()
             await bot.send_read_acknowledge(conv.chat_id)
@@ -57,31 +54,30 @@ async def _(event):
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=611085086)
-            )
+                events.NewMessage(
+                    incoming=True,
+                    from_users=611085086))
             msg = await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
             await event.reply("Buka Blokir @stickers_to_image_bot Lalu Coba Lagi")
             return
         if response.text.startswith("I understand only stickers"):
-            await event.edit(
-                "`Maaf,Saya Tidak Bisa Mengubah Ini Menjadi Gambar, Periksa Kembali Apakah Itu Sticker Animasi?`"
-            )
+            await event.edit("`Maaf,Saya Tidak Bisa Mengubah Ini Menjadi Gambar, Periksa Kembali Apakah Itu Sticker Animasi?`")
         else:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=611085086)
-            )
+                events.NewMessage(
+                    incoming=True,
+                    from_users=611085086))
             response = await response
             if response.text.startswith("..."):
                 response = conv.wait_event(
-                    events.NewMessage(incoming=True, from_users=611085086)
-                )
+                    events.NewMessage(
+                        incoming=True,
+                        from_users=611085086))
                 response = await response
                 await event.delete()
-                await event.client.send_message(
-                    event.chat_id, response.message, reply_to=reply_message.id
-                )
+                await event.client.send_message(event.chat_id, response.message, reply_to=reply_message.id)
                 await event.client.delete_message(event.chat_id, [msg.id, response.id])
             else:
                 await event.edit("`Coba Lagi`")
@@ -118,6 +114,4 @@ CMD_HELP.update(
         "\n\n>`.get`"
         "\nUsage: Balas ke sticker untuk mendapatkan file 'PNG' sticker."
         "\n\n>`.stoi`"
-        "\nUsage: Balas Ke sticker untuk mendapatkan file 'PNG' sticker."
-    }
-)
+        "\nUsage: Balas Ke sticker untuk mendapatkan file 'PNG' sticker."})
