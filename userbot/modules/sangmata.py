@@ -2,11 +2,12 @@ from asyncio.exceptions import TimeoutError
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
+from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP, bot
-from userbot.events import register
+from userbot.utils import fox_cmd
 
 
-@register(outgoing=True, pattern=r"^\.sg(?: |$)(.*)")
+@fox_cmd(pattern="sg(?: |$)(.*)")
 async def lastname(steal):
     if steal.fwd_from:
         return
@@ -20,7 +21,7 @@ async def lastname(steal):
     if message.sender.bot:
         await steal.edit("```Balas Ke Pesan Pengguna Yang Sebenarnya.```")
         return
-    await steal.edit("```Lu siapa si ngentot, gua intip sabi laa..```")
+    await steal.edit("```Mengambil Informasi Pengguna Tersebut, Mohon Menunggu..```")
     try:
         async with bot.conversation(chat) as conv:
             try:
@@ -59,7 +60,7 @@ async def lastname(steal):
 
 CMD_HELP.update(
     {
-        "sangmata": "`.sg`\
+        "sangmata": f"`{cmd}sg`\
           \nUsage: Mendapatkan Riwayat Nama Pengguna."
     }
 )

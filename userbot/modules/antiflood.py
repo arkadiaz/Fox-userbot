@@ -5,6 +5,7 @@ from telethon.tl.types import ChatBannedRights
 
 import userbot.modules.sql_helper.antiflood_sql as sql
 from userbot.events import register
+from userbot.utils import fox_cmd
 from userbot.utils.tools import is_admin
 
 CHAT_FLOOD = sql.__load_flood_settings()
@@ -38,7 +39,6 @@ async def _(event):
             entity=event.chat_id,
             message="""**Automatic AntiFlooder**
 @admin [User](tg://user?id={}) is flooding this chat.
-
 `{}`""".format(
                 event.message.from_id, str(e)
             ),
@@ -58,7 +58,7 @@ because he reached the defined flood limit.""".format(
         )
 
 
-@register(outgoing=True, pattern="^.setflood(?: |$)(.*)")
+@fox_cmd(pattern="setflood(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return

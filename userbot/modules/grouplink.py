@@ -1,11 +1,11 @@
-# port by KOALA 🐨 /@manusiarakitann
-# FROM skyzu-userbot <https://github.com/Skyzu/skyzu+userbot>
+# port by skyz /@skyzy
+# FROM skyzu-userbot <https://github.com/skyzu/skyzu-userbot>
 
 from userbot import CMD_HELP
-from userbot.events import register
+from userbot.utils import fox_cmd
 
 
-@register(outgoing=True, pattern="^.gsend ?(.*)")
+@fox_cmd(pattern="gsend ?(.*)")
 async def remoteaccess(event):
 
     p = event.pattern_match.group(1)
@@ -36,7 +36,7 @@ async def remoteaccess(event):
 
 CMD_HELP.update(
     {
-        "grouplink": ".gsend\
+        f"grouplink": "{cmd}gsend\
     \nMengirim Pesan Jarak Jauh Ke Grup Lain .gsend <link grup> <pesan>."
     }
 )

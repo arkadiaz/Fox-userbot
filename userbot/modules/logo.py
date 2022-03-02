@@ -2,11 +2,13 @@ import asyncio
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from userbot import ALIVE_NAME, CMD_HELP
-from userbot.events import register
+from userbot import ALIVE_NAME
+from userbot import CMD_HANDLER as cmd
+from userbot import CMD_HELP
+from userbot.utils import fox_cmd
 
 
-@register(outgoing=True, pattern=r"^\.logo(?: |$)(.*)")
+@fox_cmd(pattern="logo(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -16,7 +18,7 @@ async def _(event):
         await event.edit("`Give a name too!`")
     else:
         await event.edit("`Processing`")
-    chat = "arkadianzebot"
+    chat = "@Nastymusiicboy"
     async with event.client.conversation(chat) as conv:
         try:
             msg = await conv.send_message(f"/logo {text}")
@@ -26,7 +28,7 @@ async def _(event):
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await event.edit(
-                "**Error: Mohon Buka Blokir** @levintapibot **Dan Coba Lagi!**"
+                "**Error: Mohon Buka Blokir** @Nastymusiicbot **Dan Coba Lagi!**"
             )
             return
         await asyncio.sleep(0.5)
@@ -41,8 +43,8 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "logo": "**Plugin : **`logo`\
-        \n\n  •  **Syntax :** `.logo` <text>\
+        "logo": f"**Plugin : **`logo`\
+        \n\n  •  **Syntax :** `{cmd}logo` <text>\
         \n  •  **Function : **Membuat logo dari Teks yang diberikan\
     "
     }

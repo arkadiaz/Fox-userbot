@@ -1,22 +1,32 @@
-# Thanks Full To Team Ultroid
-# Ported By @skyzu
+# Thanks TeamUltroid
+# Ported By @fox
 
+from telethon.tl import types
 from telethon.tl.functions.channels import GetFullChannelRequest as getchat
 from telethon.tl.functions.phone import CreateGroupCallRequest as startvc
 from telethon.tl.functions.phone import DiscardGroupCallRequest as stopvc
 from telethon.tl.functions.phone import GetGroupCallRequest as getvc
 from telethon.tl.functions.phone import InviteToGroupCallRequest as invitetovc
+from telethon.utils import get_display_name
 
+from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP
-from userbot.events import register
+from userbot.utils import fox_cmd
 
-NO_ADMIN = "`Maaf Kamu Bukan Admin!"
+NO_ADMIN = "`Maaf Kamu Bukan Admin 👮`"
 
 
-async def get_call(event):
-    geez = await event.client(getchat(event.chat_id))
-    vcky = await event.client(getvc(geez.full_chat.call))
-    return vcky.call
+def vcmention(user):
+    full_name = get_display_name(user)
+    if not isinstance(user, types.User):
+        return full_name
+    return f"[{full_name}](tg://user?id={user.id})"
+
+
+async def get_call(sky):
+    sky = await sky.client(getchat(sky.chat_id))
+    await sky.client(getvc(sky.full_chat.call, limit=1))
+    return hehe.call
 
 
 def user_list(l, n):
@@ -24,61 +34,63 @@ def user_list(l, n):
         yield l[i : i + n]
 
 
-@register(outgoing=True, pattern=r"^\.startvc$", groups_only=True)
-async def start_voice(td):
-    chat = await td.get_chat()
+@fox_cmd(pattern="startvc$")
+async def start_voice(c):
+    chat = await c.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
 
     if not admin and not creator:
-        return await td.edit(NO_ADMIN)
+        await c.edit(f"**Maaf {ALIVE_NAME} Bukan Admin 👮**")
+        return
     try:
-        await td.client(startvc(td.chat_id))
-        await td.edit("`Voice Chat Started...`")
+        await c.client(startvc(c.chat_id))
+        await c.edit("`Memulai Obrolan Suara`")
     except Exception as ex:
-        await td.edit(f"`{str(ex)}`")
+        await c.edit(f"**ERROR:** `{ex}`")
 
 
-@register(outgoing=True, pattern=r"^\.stopvc$", groups_only=True)
-async def stop_voice(td):
-    chat = await td.get_chat()
+@fox_cmd(pattern="stopvc$")
+async def stop_voice(c):
+    chat = await c.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
 
     if not admin and not creator:
-        return await td.edit(NO_ADMIN)
+        await c.edit(f"**Maaf {ALIVE_NAME} Bukan Admin 👮**")
+        return
     try:
-        await td.client(stopvc(await get_call(td)))
-        await td.edit("`Voice Chat Stopped...`")
+        await c.client(stopvc(await get_call(c)))
+        await c.edit("`Mematikan Obrolan Suara`")
     except Exception as ex:
-        await td.edit(f"`{str(ex)}`")
+        await c.edit(f"**ERROR:** `{ex}`")
 
 
-@register(outgoing=True, pattern=r"^\.vcinvite", groups_only=True)
-async def vc_invite(td):
-    await td.edit("`Sedang Mengivinte Member...`")
+@fox_cmd(pattern="vcinvite")
+async def _(sky):
+    await sky.edit("`Sedang Menginvite Member...`")
     users = []
     z = 0
-    async for x in td.client.iter_participants(td.chat_id):
+    async for x in sky.client.iter_participants(sky.chat_id):
         if not x.bot:
             users.append(x.id)
     hmm = list(user_list(users, 6))
     for p in hmm:
         try:
-            await td.client(invitetovc(call=await get_call(td), users=p))
+            await sky.client(invitetovc(call=await get_call(sky), users=p))
             z += 6
         except BaseException:
             pass
-    await td.edit(f"`Invited {z} users`")
+    await sky.edit(f"`Menginvite {z} Member`")
 
 
 CMD_HELP.update(
     {
-        "vcg": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.startvc`\
-         \n↳ : Start Group Call in a group.\
-         \n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.stopvc`\
-         \n↳ : `Stop Group Call in a group.`\
-         \n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.vcinvite`\
-         \n↳ : Invite all members of group in Group Call. (You must be joined)."
+        "vcg": f"𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}startvc`\
+         \n↳ : Memulai Obrolan Suara dalam Group.\
+         \n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}stopvc`\
+         \n↳ : `Menghentikan Obrolan Suara Pada Group.`\
+         \n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}vcinvite`\
+         \n↳ : Invite semua member yang berada di group."
     }
 )

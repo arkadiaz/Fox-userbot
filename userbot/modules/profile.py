@@ -27,8 +27,9 @@ from telethon.tl.types import (
 )
 from telethon.utils import get_input_location
 
+from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
-from userbot.events import register
+from userbot.utils import fox_cmd
 
 # ====================== CONSTANT ===============================
 INVALID_MEDIA = "```Maaf Media Tidak Valid.```"
@@ -44,7 +45,7 @@ USERNAME_TAKEN = "```Mohon Maaf, Username Itu Sudah Ada Yang Menggunakannya.```"
 # ===============================================================
 
 
-@register(outgoing=True, pattern="^.reserved$")
+@fox_cmd(pattern="reserved$")
 async def mine(event):
     """For .reserved command, get a list of your reserved usernames."""
     result = await bot(GetAdminedPublicChannelsRequest())
@@ -54,7 +55,7 @@ async def mine(event):
     await event.edit(output_str)
 
 
-@register(outgoing=True, pattern="^.cname")
+@fox_cmd(pattern="cname")
 async def update_name(name):
     """For .name command, change your name in Telegram."""
     newname = name.text[6:]
@@ -70,7 +71,7 @@ async def update_name(name):
     await name.edit(NAME_OK)
 
 
-@register(outgoing=True, pattern="^.setpfp$")
+@fox_cmd(pattern="setpfp$")
 async def set_profilepic(propic):
     """For .profilepic command, change your profile picture in Telegram."""
     replymsg = await propic.get_reply_message()
@@ -98,7 +99,7 @@ async def set_profilepic(propic):
             await propic.edit(INVALID_MEDIA)
 
 
-@register(outgoing=True, pattern="^.setbio (.*)")
+@fox_cmd(pattern="setbio (.*)")
 async def set_biograph(setbio):
     """For .setbio command, set a new bio for your profile in Telegram."""
     newbio = setbio.pattern_match.group(1)
@@ -106,7 +107,7 @@ async def set_biograph(setbio):
     await setbio.edit(BIO_SUCCESS)
 
 
-@register(outgoing=True, pattern="^.username (.*)")
+@fox_cmd(pattern="username (.*)")
 async def update_username(username):
     """For .username command, set a new username in Telegram."""
     newusername = username.pattern_match.group(1)
@@ -117,7 +118,7 @@ async def update_username(username):
         await username.edit(USERNAME_TAKEN)
 
 
-@register(outgoing=True, pattern="^.count$")
+@fox_cmd(pattern="count$")
 async def count(event):
     """For .count command, get profile stats."""
     u = 0
@@ -154,7 +155,7 @@ async def count(event):
     await event.edit(result)
 
 
-@register(outgoing=True, pattern=r"^.delpfp")
+@fox_cmd(pattern="delpfp")
 async def remove_profilepic(delpfp):
     """For .delpfp command, delete your current profile picture in Telegram."""
     group = delpfp.text[8:]
@@ -181,7 +182,7 @@ async def remove_profilepic(delpfp):
     await delpfp.edit(f"`Berhasil Menghapus {len(input_photos)} Foto Profil.`")
 
 
-@register(pattern=".data(?: |$)(.*)", outgoing=True)
+@fox_cmd(pattern="data(?: |$)(.*)")
 async def who(event):
 
     await event.edit("`Mengambil Informasi Data`")
@@ -319,21 +320,23 @@ async def fetch_info(replied_user, event):
 
 CMD_HELP.update(
     {
-        "profil": "`.username` <username baru>\
-\nUsage: Ganti Username Telegram.\
-\n\n`.name` <nama depan> Atau `.name` <Nama Depan> <Nama Belakang>\
-\nUsage: Ganti Nama Telegram Anda\
-\n\n`.setpfp`\
-\nUsage: Balas Ke Gambar Ketik .setpfp Untuk Mengganti Foto Profil Telegram.\
-\n\n`.setbio` <bio baru>\
-\nUsage: Untuk Mengganti Bio Telegram.\
-\n\n`.delpfp` Atau `.delpfp` <berapa profil>/<all>\
-\nUsage: Menghapus Foto Profil Telegram.\
-\n\n`.reserved`\
-\nUsage: Menunjukkan nama pengguna yang dipesan oleh Anda.\
-\n\n`.count`\
-\nUsage: Menghitung Grup, Chat, Bot etc...\
-\n\n`.data` <username> Atau Balas Ke Pesan Ketik `.data`\
-\nUsage: Mendapatkan Informasi Pengguna."
+        "profil": f"**Plugin : **`profil`\
+        \n\n  •  **Syntax :** `{cmd}username` <username baru>\
+        \n  •  **Function : **Menganti Username Telegram.\
+        \n\n  •  **Syntax :** `{cmd}name` <nama depan> atau `.name` <Nama Depan> <Nama Belakang>\
+        \n  •  **Function : **Menganti Nama Telegram Anda.\
+        \n\n  •  **Syntax :** `{cmd}setbio` <bio baru>\
+        \n  •  **Function : **Untuk Mengganti Bio Telegram.\
+        \n\n  •  **Syntax :** `{cmd}setpfp`\
+        \n  •  **Function : **Balas Ke Gambar Ketik .setpfp Untuk Mengganti Foto Profil Telegram.\
+        \n\n  •  **Syntax :** `{cmd}delpfp` atau `.delpfp` <berapa profil>/<all>\
+        \n  •  **Function : **Menghapus Foto Profil Telegram.\
+        \n\n  •  **Syntax :** `{cmd}reserved`\
+        \n  •  **Function : **Menunjukkan nama pengguna yang dipesan oleh Anda.\
+        \n\n  •  **Syntax :** `{cmd}count`\
+        \n  •  **Function : **Menghitung Grup, Chat, Bot dll.\
+        \n\n  •  **Syntax :** `{cmd}info` <username> Atau Balas Ke Pesan Ketik `.data`\
+        \n  •  **Function : **Mendapatkan Informasi Pengguna.\
+    "
     }
 )

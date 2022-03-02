@@ -6,7 +6,7 @@ Available Commands:
 import asyncio
 
 from userbot import ALIVE_NAME, G_BAN_LOGGER_GROUP, bot
-from userbot.events import register
+from userbot.utils import fox_cmd
 
 # imported from uniborg by @heyworld
 
@@ -15,7 +15,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 # ============================================
 
 
-@register(outgoing=True, pattern="^.gbanb(?: |$)(.*)")
+@fox_cmd(pattern="gbanb(?: |$)(.*)")
 async def _(event):
     if G_BAN_LOGGER_GROUP is None:
         await event.edit("Set G_BAN_LOGGER_GROUP in vars otherwise module won't work.")
@@ -41,7 +41,7 @@ async def _(event):
     await event.delete()
 
 
-@register(outgoing=True, pattern="^.ungbanb(?: |$)(.*)")
+@fox_cmd(pattern="ungbanb(?: |$)(.*)")
 async def _(event):
     if G_BAN_LOGGER_GROUP is None:
         await event.edit("Set G_BAN_LOGGER_GROUP in vars otherwise module won't work.")

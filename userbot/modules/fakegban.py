@@ -1,21 +1,23 @@
 # This is a troll indeed ffs *facepalm*
-# Ported from xtra-telegram by @heyworld
+# Ported from xtra-telegram
 import asyncio
 
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import ChannelParticipantsAdmins
 
-from userbot import ALIVE_NAME, CMD_HELP, bot
+from userbot import ALIVE_NAME
+from userbot import CMD_HANDLER as cmd
+from userbot import CMD_HELP, bot
 
 # from userbot.utils import admin_cmd
-from userbot.events import register
+from userbot.utils import fox_cmd
 
 # ================= CONSTANT =================
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 # ============================================
 
 
-@register(outgoing=True, pattern="^.fgban(?: |$)(.*)")
+@fox_cmd(pattern="fgban(?: |$)(.*)")
 async def gbun(event):
     if event.fwd_from:
         return
@@ -67,7 +69,7 @@ async def gbun(event):
 
 CMD_HELP.update(
     {
-        "fakegban": "`.fgban`\
+        "fakegban": f"`{cmd}fgban`\
     \nUsage: Type .fgban or Reply .fgban reason and see it yourself. "
     }
 )

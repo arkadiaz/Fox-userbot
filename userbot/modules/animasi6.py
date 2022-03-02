@@ -1,10 +1,11 @@
-# Edit By @pikyus1
+# Edit By @fox
 
+from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP
-from userbot.events import register
+from userbot.utils import fox_cmd
 
 
-@register(outgoing=True, pattern="^.thanks(?: |$)(.*)")
+@fox_cmd(pattern="thanks(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -19,7 +20,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern="^.malam(?: |$)(.*)")
+@fox_cmd(pattern="malam(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -34,7 +35,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern="^.rumah(?: |$)(.*)")
+@fox_cmd(pattern="rumah(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -50,7 +51,7 @@ async def typewriter(typew):
 
 CMD_HELP.update(
     {
-        "animasi6": "`.rumah` ; `.malam` ; `.thanks`\
+        "animasi6": f"`{cmd}rumah` ; `{cmd}malam` ; `{cmd}thanks`\
     \nUsage: liat aja."
     }
 )

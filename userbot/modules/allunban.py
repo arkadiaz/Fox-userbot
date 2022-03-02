@@ -1,12 +1,12 @@
-# Port By @VckyouuBitch From GeezProjects
-# Copyright © 2021 Geez-Projects
+# Copyright © 2021 Skyzu-Projects
 from telethon.tl.types import ChannelParticipantsKicked
 
+from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP
-from userbot.events import register
+from userbot.utils import fox_cmd
 
 
-@register(outgoing=True, pattern=r"^\.allunban(?: |$)(.*)", groups_only=True)
+@fox_cmd(pattern="allunban(?: |$)(.*)")
 async def _(event):
     await event.edit("`Sedang Mencari List Banning.`")
     p = 0
@@ -26,7 +26,7 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "allunban": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.allunban`\
+        "allunban": f"𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}allunban`\
     \n↳ : Membatalkan semua Ban Di Anggota Grup."
     }
 )

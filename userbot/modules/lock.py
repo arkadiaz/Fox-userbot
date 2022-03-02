@@ -8,10 +8,10 @@ from telethon.tl.functions.messages import EditChatDefaultBannedRightsRequest
 from telethon.tl.types import ChatBannedRights
 
 from userbot import CMD_HELP
-from userbot.events import register
+from userbot.utils import fox_cmd
 
 
-@register(outgoing=True, pattern=r"^\.lock ?(.*)")
+@fox_cmd(pattern="lock ?(.*)")
 async def locks(event):
     input_str = event.pattern_match.group(1).lower()
     peer_id = event.chat_id
@@ -100,7 +100,7 @@ async def locks(event):
         return
 
 
-@register(outgoing=True, pattern=r"^.unlock ?(.*)")
+@fox_cmd(pattern="unlock ?(.*)")
 async def rem_locks(event):
     input_str = event.pattern_match.group(1).lower()
     peer_id = event.chat_id
@@ -195,7 +195,7 @@ async def rem_locks(event):
 
 CMD_HELP.update(
     {
-        "locks": "`.lock <all atau Jenis>` atau `.unlock <all atau Jenis>`\
+        f"locks": "`{cmd}lock <all atau Jenis>` atau `.unlock <all atau Jenis>`\
 \nUsage: Memungkinkan anda kunci atau membuka kunci, beberapa jenis pesan dalam obrolan.\
 \n[Anda Harus Jadi Admin Grup Untuk Menggunakan Perintah!]\
 \n\nJenis pesan yang bisa dikunci atau dibuka adalah: \

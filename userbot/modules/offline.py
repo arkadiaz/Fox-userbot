@@ -10,7 +10,8 @@ from datetime import datetime
 from telethon import events
 from telethon.tl import functions, types
 
-from userbot.events import register
+from userbot import CMD_HANDLER as cmd
+from userbot.utils import fox_cmd
 
 from userbot import (  # noqa pylint: disable=unused-import isort:skip
     AFKREASON,
@@ -140,9 +141,7 @@ async def on_afk(event):
             pass
 
 
-@register(
-    outgoing=True, pattern="^.off(?: |$)(.*)", disable_errors=True
-)  # pylint:disable=E0602
+@fox_cmd(pattern="off(?: |$)(.*)")  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -256,7 +255,7 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "off": ".off (reason) atau balas media untuk itu "
+        "off": f"{cmd}off (reason) atau balas media untuk itu "
         "\nPenggunaan afk bisa dengan media keren ketika seseorang menandai atau membalas salah satu pesan atau chat pribadi Anda."
     }
 )

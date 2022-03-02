@@ -1,7 +1,10 @@
 from platform import uname
 
-from userbot import ALIVE_NAME, CMD_HELP
+from userbot import ALIVE_NAME
+from userbot import CMD_HANDLER as cmd
+from userbot import CMD_HELP
 from userbot.events import register
+from userbot.utils import fox_cmd
 
 # ================= CONSTANT =================
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
@@ -14,7 +17,7 @@ async def typewriter(typew):
     await typew.edit("𝐀𝐬𝐬𝐚𝐥𝐚𝐦𝐮'𝐚𝐥𝐚𝐢𝐤𝐮𝐦...")
 
 
-@register(outgoing=True, pattern="^.atg(?: |$)(.*)")
+@fox_cmd(pattern="atg(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("𝐀𝐒𝐓𝐀𝐆𝐇𝐅𝐈𝐑𝐔𝐋𝐋𝐀𝐇....SAYANG!!!!")
@@ -26,7 +29,7 @@ async def typewriter(typew):
     await typew.edit("𝐖𝐚'𝐚𝐥𝐚𝐢𝐤𝐮𝐦𝐬𝐚𝐥𝐚𝐦...")
 
 
-@register(outgoing=True, pattern="^.dor(?: |$)(.*)")
+@fox_cmd(pattern="dor(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -153,7 +156,7 @@ CMD_HELP.update(
 
 CMD_HELP.update(
     {
-        "salam2": "V\
+        "salam2": f"V\
 \nUsage: Merendah.\
 \n\nJ\
 \nUsage: Nyari Sleep Call.\
@@ -165,9 +168,9 @@ CMD_HELP.update(
 \nUsage: teruntuk petarung.\
 \n\nH\
 \nUsage: Kecantikan.\
-\n\n.atg\
+\n\n{cmd}atg\
 \nUsage: Istighfar.\
-\n\n.dor\
+\n\n{cmd}dor\
 \nUsage: gatau.\
 \n\nO\
 \nUsage: Ngatain org norak.\

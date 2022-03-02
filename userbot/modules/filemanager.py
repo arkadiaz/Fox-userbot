@@ -4,13 +4,12 @@ import os.path
 import time
 from os.path import exists, isdir
 
-from userbot.events import register
-from userbot.utils import humanbytes
+from userbot.utils import humanbytes, fox_cmd
 
 MAX_MESSAGE_SIZE_LIMIT = 4095
 
 
-@register(outgoing=True, pattern=r"^\.ls ?(.*)")
+@fox_cmd(pattern="ls ?(.*)")
 async def lst(event):
     if event.fwd_from:
         return

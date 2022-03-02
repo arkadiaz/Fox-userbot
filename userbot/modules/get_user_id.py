@@ -1,11 +1,12 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
+from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP, bot
-from userbot.events import register
+from userbot.utils import fox_cmd
 
 
-@register(outgoing=True, pattern=r"^\.getid(?: |$)(.*)")
+@fox_cmd(pattern="getid(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -40,7 +41,7 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "getid": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.gid`"
+        "getid": f"𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}gid`"
         "\n↳ : Balas Ke Pesan Pengguna Untuk Mendapatkan ID Nya."
     }
 )

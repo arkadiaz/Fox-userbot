@@ -3,8 +3,9 @@ from time import sleep
 
 from telethon import events
 
+from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP, bot
-from userbot.events import register
+from userbot.utils import fox_cmd
 
 
 @bot.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
@@ -66,7 +67,7 @@ async def _(event):
             await event.edit(animation_chars[i % 32])
 
 
-@register(outgoing=True, pattern="^.helikopter(?: |$)(.*)")
+@fox_cmd(pattern="helikopter(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -89,7 +90,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern="^.tembak(?: |$)(.*)")
+@fox_cmd(pattern="tembak(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -97,7 +98,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern="^.bundir(?: |$)(.*)")
+@fox_cmd(pattern="bundir(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -118,7 +119,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern="^.awkwok(?: |$)(.*)")
+@fox_cmd(pattern="awkwok(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -130,7 +131,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern="^.ular(?: |$)(.*)")
+@fox_cmd(pattern="ular(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -222,7 +223,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern="^.y(?: |$)(.*)")
+@fox_cmd(pattern="y(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -242,7 +243,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern="^.tank(?: |$)(.*)")
+@fox_cmd(pattern="tank(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -253,7 +254,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern="^.babi(?: |$)(.*)")
+@fox_cmd(pattern="babi(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -268,7 +269,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern="^.ajg(?: |$)(.*)")
+@fox_cmd(pattern="ajg(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -281,7 +282,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern="^.bernyanyi(?: |$)(.*)")
+@fox_cmd(pattern="bernyanyi(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("**Ganteng Doang Gak Bernyanyi (ง˙o˙)ว**")
@@ -319,15 +320,15 @@ async def typewriter(typew):
 
 CMD_HELP.update(
     {
-        "animasi5": "`.bulan` ; `.hati` ; `.bernyanyi`\
+        "animasi5": f"`{cmd}bulan` ; `{cmd}hati` ; `{cmd}bernyanyi`\
     \nUsage: liat aja.\
-    \n\n`.helikopter` ; `.tank` ; `.tembak`\n`.bundir`\
+    \n\n`{cmd}helikopter` ; `{cmd}tank` ; `{cmd}tembak`\n`{cmd}bundir`\
     \nUsage: liat sendiri\
-    \n\n`.y`\
+    \n\n`{cmd}y`\
     \nUsage: jempol\
-    \n\n`.awkwok`\
+    \n\n`{cmd}awkwok`\
     \nUsage: ketawa lari.\
-    \n\n`.ular` ; `.babi` ; `.ajg`\
+    \n\n`{cmd}ular` ; `{cmd}babi` ; `{cmd}ajg`\
     \nUsage: liat sendiri."
     }
 )

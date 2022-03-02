@@ -10,11 +10,9 @@ from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.functions.messages import ReportSpamRequest
 from telethon.tl.types import User
 
+from userbot import ALIVE_LOGO, ALIVE_NAME, BOTLOG, BOTLOG_CHATID
+from userbot import CMD_HANDLER as cmd
 from userbot import (
-    ALIVE_LOGO,
-    ALIVE_NAME,
-    BOTLOG,
-    BOTLOG_CHATID,
     CMD_HELP,
     COUNT_PM,
     LASTMSG,
@@ -25,6 +23,7 @@ from userbot import (
     PMPERMIT_TEXT,
 )
 from userbot.events import register
+from userbot.utils import fox_cmd
 
 if PMPERMIT_PIC is None:
     CUSTOM_PIC = ALIVE_LOGO
@@ -44,11 +43,15 @@ CUSTOM_TEXT = (
     else f"__Halo kawan, saya bot yang menjaga room chat Fox-Userbot {DEFAULTUSER} di mohon jangan melakukan spam , kalau anda melakukan itu OTOMATIS saya akan memblockir anda!__ \n"
 )
 DEF_UNAPPROVED_MSG = (
-    f"🦊 𝔽𝕆𝕏 𝔸𝕃𝔼ℝ𝕋 🦊 \n\n"
-    f"𝐃𝐢𝐦𝐨𝐡𝐨𝐧 𝐭𝐢𝐝𝐚𝐤 𝐬𝐩𝐚𝐦\n"
-    f"𝐏𝐞𝐬𝐚𝐧 𝐚𝐧𝐝𝐚 𝐚𝐤𝐚𝐧 𝐝𝐢𝐛𝐚𝐥𝐚𝐬\n"
-    f"𝐓𝐞𝐫𝐢𝐦𝐚 𝐤𝐚𝐬𝐢𝐡 𝐜𝐚𝐧𝐭𝐢𝐤/𝐠𝐚𝐧𝐭𝐞𝐧𝐠\n"
-    f"**🦊Fox-Userbot**\n"
+    "╔═════════════════════╗\n"
+    "    🦊 FOX ALERT 🦊 \n"
+    "╚═════════════════════╝\n"
+    "**TOLONG JANGAN MELAKUKAN SPAM CHAT KEPADA MAJIKAN SAYA** \n"
+    f"**YA KONTOL KARENA SAYA AKAN OTOMATIS MEMBLOKIR KAMU, TUNGGU SAMPAI {DEFAULTUSER} MENERIMA PESAN KAMU** \n"
+    "╔═════════════════════╗\n"
+    "│○›Support : @arkabotsupport      \n"
+    f"│○›ᗷy : Fox Userbot​           \n"
+    "╚═════════════════════╝"
 )
 # =================================================================
 
@@ -189,7 +192,7 @@ async def auto_accept(event):
                     )
 
 
-@register(outgoing=True, pattern=r"^\.notifoff$")
+@fox_cmd(pattern="notifoff$")
 async def notifoff(noff_event):
     """For .notifoff command, stop getting notifications from unapproved PMs."""
     try:
@@ -202,7 +205,7 @@ async def notifoff(noff_event):
     )
 
 
-@register(outgoing=True, pattern=r"^\.notifon$")
+@fox_cmd(pattern="notifon$")
 async def notifon(non_event):
     """For .notifoff command, get notifications from unapproved PMs."""
     try:
@@ -215,7 +218,7 @@ async def notifon(non_event):
     )
 
 
-@register(outgoing=True, pattern=r"^\.(?:setuju|ok)\s?(.)?")
+@fox_cmd(pattern="(?:setuju|ok)\s?(.)?")
 async def approvepm(apprvpm):
     """For .ok command, give someone the permissions to PM you."""
     try:
@@ -251,10 +254,10 @@ async def approvepm(apprvpm):
     try:
         approve(uid)
     except IntegrityError:
-        return await apprvpm.edit("**Pesan Sudah Diterima✔️**")
+        return await apprvpm.edit("`Oke Pesan Anda Sudah Diterima ツ`")
 
     await apprvpm.edit(
-        f"`Hai` [{name0}](tg://user?id={uid}) **Pesan Sudah Diterima✔️**"
+        f"`Hai` [{name0}](tg://user?id={uid}) `Pesan Anda Sudah Diterima ya entot`"
     )
     await apprvpm.delete(getmsg)
     await message.delete()
@@ -265,7 +268,7 @@ async def approvepm(apprvpm):
         )
 
 
-@register(outgoing=True, pattern=r"^\.(?:tolak|nopm)\s?(.)?")
+@fox_cmd(pattern="(?:tolak|nopm)\s?(.)?")
 async def disapprovepm(disapprvpm):
     try:
         from userbot.modules.sql_helper.pm_permit_sql import dissprove
@@ -294,7 +297,7 @@ async def disapprovepm(disapprvpm):
         )
 
 
-@register(outgoing=True, pattern=r"^\.block$")
+@fox_cmd(pattern="block$")
 async def blockpm(block):
     """For .block command, block people from PMing you!"""
     if block.reply_to_msg_id:
@@ -326,7 +329,7 @@ async def blockpm(block):
         )
 
 
-@register(outgoing=True, pattern=r"^\.unblock$")
+@fox_cmd(pattern="unblock$")
 async def unblockpm(unblock):
     """For .unblock command, let people PMing you again!"""
     if unblock.reply_to_msg_id:
@@ -343,7 +346,7 @@ async def unblockpm(unblock):
         )
 
 
-@register(outgoing=True, pattern=r"^.(set|get|reset) pm_msg(?: |$)(\w*)")
+@fox_cmd(pattern="(set|get|reset) pm_msg(?: |$)(\w*)")
 async def add_pmsg(cust_msg):
     """Set your own Unapproved message"""
     if not PM_AUTO_BAN:
@@ -426,23 +429,23 @@ async def permitpm(event):
 
 CMD_HELP.update(
     {
-        "pmpermit": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`.setuju | .ok`"
+        "pmpermit": f"𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`{cmd}setuju | {cmd}ok`"
         "\n↳ : Menerima pesan seseorang dengan cara balas pesannya atau tag dan juga untuk dilakukan di pm."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`.tolak | .nopm`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`{cmd}tolak | {cmd}nopm`"
         "\n↳ : Menolak pesan seseorang dengan cara balas pesannya atau tag dan juga untuk dilakukan di pm."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`.block`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`{cmd}block`"
         "\n↳ : Memblokir Orang Di PM."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`.unblock`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`{cmd}unblock`"
         "\n↳ : Membuka Blokir."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`.notifoff`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`{cmd}notifoff`"
         "\n↳ : Mematikan notifikasi pesan yang belum diterima."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`.notifon`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`{cmd}notifon`"
         "\n↳ : Menghidupkan notifikasi pesan yang belum diterima."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`.set pm_msg` <balas ke pesan>"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`{cmd}set pm_msg` <balas ke pesan>"
         "\n↳ : Menyetel Pesan Pribadimu untuk orang yang pesannya belum diterima"
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`.get pm_msg`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`{cmd}get pm_msg`"
         "\n↳ : Mendapatkan Custom pesan PM mu"
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`.reset pm_msg`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: >`{cmd}reset pm_msg`"
         "\n↳ : Menghapus pesan PM ke default"
         "\n\nPesan Pribadi yang belum diterima saat ini tidak dapat disetel"
         "\nke teks format kaya bold, underline, link, dll."

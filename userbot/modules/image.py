@@ -1,5 +1,5 @@
 # Ported By VCKYOU @VckyouuBitch
-# Credits © Skyzu-Userbot
+# Credits © fox-Userbot
 # Ya gitu deh:')
 
 

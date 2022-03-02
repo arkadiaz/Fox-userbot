@@ -1,4 +1,4 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
+# Copyright (C) 2000000 The Raphielscape Company LLC.
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 
@@ -29,15 +29,18 @@ from telethon.tl.types import (
     PeerChat,
 )
 
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, DEVS
+from userbot import BOTLOG, BOTLOG_CHATID
+from userbot import CMD_HANDLER as cmd
+from userbot import CMD_HELP
 from userbot.events import register
+from userbot.utils import fox_cmd
 
 # =================== CONSTANT ===================
-PP_TOO_SMOL = "`Gambar Terlalu Kecil`"
-PP_ERROR = "`Gagal Memproses Gambar`"
-NO_ADMIN = "`Maaf Anda Bukan Admin:)`"
-NO_PERM = "`Maaf Anda Tidak Mempunyai Izin!`"
-NO_SQL = "`Berjalan Pada Mode Non-SQL`"
+PP_TOO_SMOL = "**Gambar Terlalu Kecil**"
+PP_ERROR = "**Gagal Memproses Gambar**"
+NO_ADMIN = "**Maaf Anda Bukan Admin:)**"
+NO_PERM = "**Maaf Anda Tidak Mempunyai Izin!**"
+NO_SQL = "**Berjalan Pada Mode Non-SQL**"
 
 CHAT_PP_CHANGED = "`Berhasil Mengubah Profil Grup`"
 CHAT_PP_ERROR = (
@@ -76,7 +79,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 # ================================================
 
 
-@register(outgoing=True, pattern=r"^\.setgpic$")
+@fox_cmd(pattern="setgpic$")
 async def set_group_photo(gpic):
     if not gpic.is_group:
         await gpic.edit("`Mohon Lakukan Perintah Ini Di Grup.`")
@@ -112,8 +115,7 @@ async def set_group_photo(gpic):
             await gpic.edit(PP_ERROR)
 
 
-@register(outgoing=True, pattern=r"^\.promote(?: |$)(.*)")
-@register(incoming=True, from_users=DEVS, pattern=r"^\.cpromote(?: |$)(.*)")
+@fox_cmd(pattern="promote(?: |$)(.*)")
 async def promote(promt):
     # Get targeted chat
     chat = await promt.get_chat()
@@ -163,8 +165,7 @@ async def promote(promt):
         )
 
 
-@register(outgoing=True, pattern=r"^\.demote(?: |$)(.*)")
-@register(incoming=True, from_users=DEVS, pattern=r"^\.cdemote(?: |$)(.*)")
+@fox_cmd(pattern="demote(?: |$)(.*)")
 async def demote(dmod):
     # Admin right check
     chat = await dmod.get_chat()
@@ -213,7 +214,7 @@ async def demote(dmod):
         )
 
 
-@register(outgoing=True, pattern=r"^\.ban(?: |$)(.*)")
+@fox_cmd(pattern="ban(?: |$)(.*)")
 async def ban(bon):
     # Here laying the sanity check
     chat = await bon.get_chat()
@@ -242,7 +243,7 @@ async def ban(bon):
             await reply.delete()
     except BadRequestError:
         return await bon.edit(
-            "`Saya tidak memiliki hak pesan nuking! Tapi tetap saja dia di banned!`"
+            "**Saya tidak memiliki hak pesan nuking! Tapi tetap saja dia di banned!**"
         )
     # Delete message and then tell that the command
     # is done gracefully
@@ -266,7 +267,7 @@ async def ban(bon):
         )
 
 
-@register(outgoing=True, pattern=r"^\.unban(?: |$)(.*)")
+@fox_cmd(pattern="unban(?: |$)(.*)")
 async def nothanos(unbon):
     # Here laying the sanity check
     chat = await unbon.get_chat()
@@ -278,7 +279,7 @@ async def nothanos(unbon):
         return await unbon.edit(NO_ADMIN)
 
     # If everything goes well...
-    await unbon.edit("`Sedang Melakukan Unban...`")
+    await unbon.edit("**Sedang Melakukan Unban...**")
 
     user = await get_user_from_event(unbon)
     user = user[0]
@@ -287,7 +288,7 @@ async def nothanos(unbon):
 
     try:
         await unbon.client(EditBannedRequest(unbon.chat_id, user.id, UNBAN_RIGHTS))
-        await unbon.edit("```Si Jamat Berhasil Di Unban```")
+        await unbon.edit("**Si Jamat Berhasil Di Unban**")
         await sleep(3)
         await unbon.delete()
 
@@ -299,10 +300,10 @@ async def nothanos(unbon):
                 f"GRUP: {unbon.chat.title}(`{unbon.chat_id}`)",
             )
     except UserIdInvalidError:
-        await unbon.edit("`Sepertinya Terjadi Kesalahan!`")
+        await unbon.edit("**Sepertinya Terjadi Kesalahan!**")
 
 
-@register(outgoing=True, pattern=r"^\.mute(?: |$)(.*)")
+@fox_cmd(pattern="mute(?: |$)(.*)")
 async def spider(spdr):
     # Check if the function running under SQL mode
     try:
@@ -342,7 +343,7 @@ async def spider(spdr):
             if reason:
                 await spdr.edit(f"**Telah Dibisukan!**\n**Alasan:** `{reason}`")
             else:
-                await spdr.edit("`Si Jamet Telah Dibisukan!`")
+                await spdr.edit("**Si Jamet Telah Dibisukan!**")
 
             # Announce to logging group
             if BOTLOG:
@@ -353,10 +354,10 @@ async def spider(spdr):
                     f"GRUP: {spdr.chat.title}(`{spdr.chat_id}`)",
                 )
         except UserIdInvalidError:
-            return await spdr.edit("`Terjadi Kesalahan!`")
+            return await spdr.edit("**Terjadi Kesalahan!**")
 
 
-@register(outgoing=True, pattern=r"^\.unmute(?: |$)(.*)")
+@fox_cmd(pattern="unmute(?: |$)(.*)")
 async def unmoot(unmot):
     # Admin or creator check
     chat = await unmot.get_chat()
@@ -374,7 +375,7 @@ async def unmoot(unmot):
         return await unmot.edit(NO_SQL)
 
     # If admin or creator, inform the user and start unmuting
-    await unmot.edit("```Melakukan Unmute...```")
+    await unmot.edit("**Melakukan Unmute...**")
     user = await get_user_from_event(unmot)
     user = user[0]
     if not user:
@@ -392,7 +393,7 @@ async def unmoot(unmot):
             await sleep(3)
             await unmot.delete()
         except UserIdInvalidError:
-            return await unmot.edit("`Terjadi Kesalahan!`")
+            return await unmot.edit("**Terjadi Kesalahan!**")
 
         if BOTLOG:
             await unmot.client.send_message(
@@ -434,7 +435,7 @@ async def muter(moot):
             await moot.delete()
 
 
-@register(outgoing=True, pattern=r"^\.ungmute(?: |$)(.*)")
+@fox_cmd(pattern="ungmute(?: |$)(.*)")
 async def ungmoot(un_gmute):
     # Admin or creator check
     chat = await un_gmute.get_chat()
@@ -460,10 +461,10 @@ async def ungmoot(un_gmute):
     await un_gmute.edit("```Membuka Global Mute Pengguna...```")
 
     if ungmute(user.id) is False:
-        await un_gmute.edit("`Kesalahan! Pengguna Sedang Tidak Di Gmute.`")
+        await un_gmute.edit("**Kesalahan! Pengguna Sedang Tidak Di Gmute.**")
     else:
         # Inform about success
-        await un_gmute.edit("```Berhasil! Pengguna Sudah Tidak Lagi Dibisukan```")
+        await un_gmute.edit("**Berhasil! Pengguna Sudah Tidak Lagi Dibisukan**")
         await sleep(3)
         await un_gmute.delete()
 
@@ -476,7 +477,7 @@ async def ungmoot(un_gmute):
             )
 
 
-@register(outgoing=True, pattern=r"^\.gmute(?: |$)(.*)")
+@fox_cmd(pattern="gmute(?: |$)(.*)")
 async def gspider(gspdr):
     # Admin or creator check
     chat = await gspdr.get_chat()
@@ -500,12 +501,12 @@ async def gspider(gspdr):
     # If pass, inform and start gmuting
     await gspdr.edit("`Berhasil Membisukan Pengguna!`")
     if gmute(user.id) is False:
-        await gspdr.edit("`Kesalahan! Pengguna Sudah Dibisukan.`")
+        await gspdr.edit("**Kesalahan! Pengguna Sudah Dibisukan.**")
     else:
         if reason:
             await gspdr.edit(f"**Dibisukan Secara Global!**\n**Alasan:** `{reason}`")
         else:
-            await gspdr.edit("`Berhasil Membisukan Pengguna Secara Global!`")
+            await gspdr.edit("**Berhasil Membisukan Pengguna Secara Global!**")
 
         if BOTLOG:
             await gspdr.client.send_message(
@@ -516,7 +517,7 @@ async def gspider(gspdr):
             )
 
 
-@register(outgoing=True, pattern=r"^\.zombies(?: |$)(.*)", groups_only=False)
+@fox_cmd(pattern="zombies(?: |$)(.*)")
 async def rm_deletedacc(show):
 
     con = show.pattern_match.group(1).lower()
@@ -546,9 +547,7 @@ async def rm_deletedacc(show):
     if not admin and not creator:
         return await show.edit("`Mohon Maaf, Bukan Admin Disini!`")
 
-    await show.edit(
-        "**Menghapus Akun Terhapus...\nMohon Menunggu Sedang Dalam Proses**"
-    )
+    await show.edit("`Menghapus Akun Terhapus...\nMohon Menunggu Sedang Dalam Proses`")
     del_u = 0
     del_a = 0
 
@@ -567,12 +566,12 @@ async def rm_deletedacc(show):
             del_u += 1
 
     if del_u > 0:
-        del_status = f"**Membersihkan** `{del_u}` **Akun Terhapus**"
+        del_status = f"`Membersihkan` **{del_u}** `Akun Terhapus`"
 
     if del_a > 0:
         del_status = (
             f"Membersihkan **{del_u}** Akun Terhapus "
-            f"\n`{del_a}` **Admin Akun Terhapus Tidak Bisa Dihapus.**"
+            f"\n**{del_a}** `Admin Akun Terhapus Tidak Bisa Dihapus.`"
         )
     await show.edit(del_status)
     await sleep(2)
@@ -582,12 +581,12 @@ async def rm_deletedacc(show):
         await show.client.send_message(
             BOTLOG_CHATID,
             "#MEMBERSIHKAN\n"
-            f"**Membersihkan** `{del_u}` **Akun Terhapus!**"
+            f"Membersihkan **{del_u}** Akun Terhapus!"
             f"\nGRUP: {show.chat.title}(`{show.chat_id}`)",
         )
 
 
-@register(outgoing=True, pattern=r"^\.admins$")
+@fox_cmd(pattern="admins$")
 async def get_admin(show):
     info = await show.client.get_entity(show.chat_id)
     title = info.title if info.title else "Grup Ini"
@@ -606,7 +605,7 @@ async def get_admin(show):
     await show.edit(mentions, parse_mode="html")
 
 
-@register(outgoing=True, pattern=r"^\.pin(?: |$)(.*)")
+@fox_cmd(pattern="pin(?: |$)(.*)")
 async def pin(msg):
     # Admin or creator check
     chat = await msg.get_chat()
@@ -620,7 +619,7 @@ async def pin(msg):
     to_pin = msg.reply_to_msg_id
 
     if not to_pin:
-        return await msg.edit("**Mohon Balas Ke Pesan Untuk Melakukan Pin.**")
+        return await msg.edit("`Mohon Balas Ke Pesan Untuk Melakukan Pin.`")
 
     options = msg.pattern_match.group(1)
 
@@ -650,7 +649,7 @@ async def pin(msg):
         )
 
 
-@register(outgoing=True, pattern=r"^\.kick(?: |$)(.*)")
+@fox_cmd(pattern="kick(?: |$)(.*)")
 async def kick(usr):
     # Admin or creator check
     chat = await usr.get_chat()
@@ -693,7 +692,7 @@ async def kick(usr):
         )
 
 
-@register(outgoing=True, pattern=r"^\.users ?(.*)")
+@fox_cmd(pattern="users ?(.*)")
 async def get_users(show):
     info = await show.client.get_entity(show.chat_id)
     title = info.title if info.title else "Grup Ini"
@@ -783,7 +782,7 @@ async def get_user_from_id(user, event):
     return user_obj
 
 
-@register(outgoing=True, pattern=r"^\.usersdel ?(.*)")
+@fox_cmd(pattern="usersdel ?(.*)")
 async def get_usersdel(show):
     info = await show.client.get_entity(show.chat_id)
     title = info.title if info.title else "Grup Ini"
@@ -873,7 +872,7 @@ async def get_userdel_from_id(user, event):
     return user_obj
 
 
-@register(outgoing=True, pattern=r"^\.bots$", groups_only=True)
+@fox_cmd(pattern="bots ?(.*)")
 async def get_bots(show):
     info = await show.client.get_entity(show.chat_id)
     title = info.title if info.title else "Grup Ini"
@@ -915,34 +914,34 @@ async def get_bots(show):
 
 CMD_HELP.update(
     {
-        "admin": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.promote` <username/balas ke pesan> <nama title (optional)>"
+        "admin": f"𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}promote` <username/balas ke pesan> <nama title (optional)>"
         "\n↳ : Mempromosikan member sebagai admin."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.demote` <username/balas ke pesan>"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}demote` <username/balas ke pesan>"
         "\n↳ : Menurunkan admin sebagai member."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.ban` <username/balas ke pesan> <alasan (optional)>"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}ban` <username/balas ke pesan> <alasan (optional)>"
         "\n↳ : Memblokir Seseorang."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.unban <username/reply>`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}unban <username/reply>`"
         "\n↳ : Menghapus Blokir."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.mute` <username/balas ke pesan> <alasan (optional)>"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}mute` <username/balas ke pesan> <alasan (optional)>"
         "\n↳ : Membisukan Seseorang Di Grup, Bisa Ke Admin Juga."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.unmute` <username/balas ke pesan>"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}unmute` <username/balas ke pesan>"
         "\n↳ : Membuka bisu orang yang dibisukan."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.gmute` <username/balas ke pesan> <alasan (optional)>"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}gmute` <username/balas ke pesan> <alasan (optional)>"
         "\n↳ : Membisukan ke semua grup yang kamu punya sebagai admin."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.ungmute` <username/reply>"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}ungmute` <username/reply>"
         "\n↳ : Reply someone's message with `.ungmute` to remove them from the gmuted list."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.zombies`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}zombies`"
         "\n↳ : Untuk mencari akun terhapus dalam grup."
-        "Gunakan `.zombies clean` untuk menghapus Akun Terhapus dari grup."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.all`"
+        f"Gunakan `{cmd}zombies clean` untuk menghapus Akun Terhapus dari grup."
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}all`"
         "\n↳ : Tag semua member dalam grup."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.admins`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}admins`"
         "\n↳ : Melihat daftar admin di grup."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.bots`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}bots`"
         "\n↳ : Melihat daftar bot dalam grup."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.users` Atau >`.users` <nama member>"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}users` Atau >`{cmd}users` <nama member>"
         "\n↳ : Mendapatkan daftar pengguna daam grup."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.setgpic` <balas ke gambar>"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}setgpic` <balas ke gambar>"
         "\n↳ : Mengganti foto profil grup."
     }
 )

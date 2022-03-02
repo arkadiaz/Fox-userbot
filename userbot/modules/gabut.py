@@ -1,15 +1,17 @@
 from platform import uname
 from time import sleep
 
-from userbot import ALIVE_NAME, CMD_HELP, WEATHER_DEFCITY
-from userbot.events import register
+from userbot import ALIVE_NAME
+from userbot import CMD_HANDLER as cmd
+from userbot import CMD_HELP, WEATHER_DEFCITY
+from userbot.utils import fox_cmd
 
 # ================= CONSTANT =================
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 # ============================================
 
 
-@register(outgoing=True, pattern="^.g(?: |$)(.*)")
+@fox_cmd(pattern="g(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(f"**JAKA SEMBUNG BAWA GOLOK**")
@@ -20,7 +22,7 @@ async def typewriter(typew):
 # Pantun
 
 
-@register(outgoing=True, pattern="^.p(?: |$)(.*)")
+@fox_cmd(pattern="p(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("`Salam Dulu Biar Sopan...`")
@@ -31,7 +33,7 @@ async def typewriter(typew):
 # Salam
 
 
-@register(outgoing=True, pattern="^.l(?: |$)(.*)")
+@fox_cmd(pattern="l(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("`Kalo Orang Salam Itu Dijawab...`")
@@ -42,22 +44,38 @@ async def typewriter(typew):
 # Menjawab Salam
 
 
-@register(outgoing=True, pattern="^.kenalin(?: |$)(.*)")
+@fox_cmd(pattern="kenalin(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
-    await typew.edit("`Kenalin Saya Yansen`")
+    await typew.edit("☑️ `putra wibu`")
     sleep(2)
-    await typew.edit("`Asal Dari Bekasi`")
+    await typew.edit("✅ `putra wibu`")
+    sleep(1)
+    await typew.edit("☑️ `duta stres`")
     sleep(2)
-    await typew.edit("`Umur 17 Tahun`")
+    await typew.edit("✅ `duta stres`")
+    sleep(1)
+    await typew.edit("☑️ `fajar Gajelas`")
     sleep(2)
-    await typew.edit("`Sekian Terima Kasih`")
+    await typew.edit("✅ `fajar Gajelas`")
+    sleep(1)
+    await typew.edit("☑️ `ken Wibu Sangean`")
+    sleep(2)
+    await typew.edit("✅ `ken Wibu Sangean`")
+    sleep(1)
+    await typew.edit("☑️ `xxinu Autis`")
+    sleep(2)
+    await typew.edit("✅ `xxinu Autis`")
+    sleep(1)
+    await typew.edit(
+        "`⚡ Cuma fox Yang Paling Waras, Baik Hati, Dan Tidak Sombong :v`"
+    )
 
 
 # King Userbot Support
 
 
-@register(outgoing=True, pattern="^.istigfar(?: |$)(.*)")
+@fox_cmd(pattern="istigfar(?: |$)(.*)")
 async def perkenalan(event):
     event.pattern_match.group(1)
     await event.edit(f"`Heh Kamu Gaboleh Begitu...`")
@@ -68,7 +86,7 @@ async def perkenalan(event):
 # Istigfar
 
 
-@register(outgoing=True, pattern=r"^\.virtual(?: |$)(.*)")
+@fox_cmd(pattern="virtual(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("**OOOO**")
@@ -90,7 +108,7 @@ async def typewriter(typew):
     await typew.edit("**KASIAN MANA MASIH MUDA**")
 
 
-@register(outgoing=True, pattern="^.perkenalkan(?: |$)(.*)")
+@fox_cmd(pattern="perkenalkan(?: |$)(.*)")
 async def perkenalan(event):
     event.pattern_match.group(1)
     await event.edit(f"`Hai Guys , Perkenalkan Nama Gw {DEFAULTUSER}`")
@@ -105,46 +123,50 @@ async def perkenalan(event):
 # Perkenalan
 
 
-@register(outgoing=True, pattern="^.yansen(?: |$)(.*)")
+@fox_cmd(pattern="fox(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
     await typew.edit("**Ehh Lu Mau Tau Gak?**")
     sleep(1)
-    await typew.edit("**Si Yansen Mukanya Ganteng Banget**")
+    await typew.edit("**Sih Arka mukanya mirip babi😂**")
     sleep(1)
-    await typew.edit("**Manis **")
+    await typew.edit("**Ehh Gak Bercanda Deh😁**")
     sleep(1)
-    await typew.edit("**Baik Hati Dan Tidak Sombong**")
+    await typew.edit("**Emang Bener Sih Arka Mukanya Kaya Babi🙈**")
     sleep(1)
-    await typew.edit("**Rajin Menabung Dan Beribadah**")
+    await typew.edit("**Ehh Engga Deh,Arka Kan Ganteng Kaya Artis Korea😄**")
     sleep(1)
-    await typew.edit("**Keren Pokonya**")
+    await typew.edit("**Tapi Boong😂**")
     sleep(1)
     await typew.edit("**HAHAHAHAHAHAHA**")
     sleep(1)
-    await typew.edit("**Udah Dulu Ya Salam Dari Binjay**")
+    await typew.edit("**Udah Ahh Takut Arka Nangis Minta Balon😂**")
+    sleep(1)
+    await typew.edit("**Maaf Ya Arka Ganteng Bercanda😁**")
+    sleep(1)
+    await typew.edit("**Tapi Bo'ong Hiyahiyahiya**")
 
 
-# Create by myself @skyzuex
+# Create by myself @foxex
 
 
 CMD_HELP.update(
     {
-        "gabut": "**Modules** - `Gabut`\
-        \n\n Cmd : `.l`\
+        "gabut": f"**Modules** - `Gabut`\
+        \n\n Cmd : `{cmd}l`\
         \nUsage : Untuk Menjawab Salam\
-        \n\n Cmd : `.perkenalkan`\
+        \n\n Cmd : `{cmd}perkenalkan`\
         \nUsage : Memperkenalkan Diri\
-        \n\n Cmd : `.virtual`\
+        \n\n Cmd : `{cmd}virtual`\
         \nUsage : ngeledek orang yang virtual\
-        \n\n Cmd : `.g`\
+        \n\n Cmd : `{cmd}g`\
         \nUsage : Member Goblok\
-        \n\n Cmd : `.kenalin`\
+        \n\n Cmd : `{cmd}kenalin`\
         \nUsage : Awokwok\
-        \n\n Cmd : `.yansen`\
-        \nUsage : liat aja sendiri\
-        \n\n Cmd : `.p`\
+        \n\n Cmd : `{cmd}fox`\
+        \nUsage : buat ngeledek fox\
+        \n\n Cmd : `{cmd}p`\
         \nUsage : Untuk Memberi Salam\
     "
     }

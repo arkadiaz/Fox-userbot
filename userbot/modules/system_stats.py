@@ -20,16 +20,10 @@ from shutil import which
 import psutil
 from telethon import __version__, version
 
-from userbot import (
-    ALIVE_LOGO,
-    ALIVE_NAME,
-    BOT_VER,
-    CMD_HELP,
-    UPSTREAM_REPO_BRANCH,
-    StartTime,
-    bot,
-)
-from userbot.events import register
+from userbot import ALIVE_LOGO, ALIVE_NAME, BOT_VER
+from userbot import CMD_HANDLER as cmd
+from userbot import CMD_HELP, UPSTREAM_REPO_BRANCH, StartTime, bot
+from userbot.utils import fox_cmd
 
 # ================= CONSTANT =================
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
@@ -65,7 +59,7 @@ async def get_readable_time(seconds: int) -> str:
     return up_time
 
 
-@register(outgoing=True, pattern=r"^\.spc")
+@fox_cmd(pattern="spc")
 async def psu(event):
     uname = platform.uname()
     softw = "**Informasi Sistem**\n"
@@ -121,7 +115,7 @@ def get_size(bytes, suffix="B"):
         bytes /= factor
 
 
-@register(outgoing=True, pattern=r"^\.sysd$")
+@fox_cmd(pattern="sysd$")
 async def sysdetails(sysd):
     if not sysd.text[0].isalpha() and sysd.text[0] not in ("/", "#", "@", "!"):
         try:
@@ -140,7 +134,7 @@ async def sysdetails(sysd):
             await sysd.edit("`Install neofetch first !!`")
 
 
-@register(outgoing=True, pattern=r"^\.botver$")
+@fox_cmd(pattern="botver$")
 async def bot_ver(event):
     if event.text[0].isalpha() or event.text[0] in ("/", "#", "@", "!"):
         return
@@ -168,8 +162,8 @@ async def bot_ver(event):
         revout = str(stdout.decode().strip()) + str(stderr.decode().strip())
 
         await event.edit(
-            "**⚜-**🦊Fox ᴜsᴇʀʙᴏᴛ🦊 Versi:** \n "
-            f"heads/Fox-ᴜsᴇʀʙᴏᴛ-0-x634i7u1"
+            "**⚜-**🦊Fox-Userbot🦊 Versi:** \n "
+            f"heads/Fox-Userbot-0-x634i7u1"
             "\n**⚜-**Revisi:**\n "
             f"{revout}"
         )
@@ -179,7 +173,7 @@ async def bot_ver(event):
         )
 
 
-@register(outgoing=True, pattern=r"^\.pip(?: |$)(.*)")
+@fox_cmd(pattern="pip(?: |$)(.*)")
 async def pipcheck(pip):
     if pip.text[0].isalpha() or pip.text[0] in ("/", "#", "@", "!"):
         return
@@ -227,22 +221,22 @@ async def pipcheck(pip):
         await pip.edit("Gunakan `.help pip` Untuk Melihat Contoh")
 
 
-@register(outgoing=True, pattern=r"^\.(?:pinalive)\s?(.)?")
+@fox_cmd(pattern="(?:foxalive)\s?(.)?")
 async def amireallyalive(alive):
     user = await bot.get_me()
     await get_readable_time((time.time() - StartTime))
     output = (
-        f" **🦊Fox ᴜsᴇʀʙᴏᴛ🦊** \n\n"
+        f"丂Ҝㄚ乙ㄩ 卂ㄥ丨ᐯ乇\n\n"
         f"\n__**{FOX_TEKS_KUSTOM}**__\n\n\n"
-        f"╔✠════════════════✠\n"
-        f"╟ `Name       :` {DEFAULTUSER} \n"
-        f"╟ `Username   :` @{user.username} \n"
-        f"╟ `Telethon   :` {version.__version__} \n"
-        f"╟ `Python     :` {python_version()} \n"
-        f"╟ `Bot Ver    :` {BOT_VER} \n"
-        f"╟ `Modules    :` {len(modules)} \n"
-        f"╚✠════════════════✠\n"
-        f"[ɢʀᴏᴜᴘꜱ](https://t.me/arkabotsupport) | [ᴄʜᴀɴɴᴇʟ](t.me/arkabotupdate) | [ᴏᴡɴᴇʀ](https://t.me/laz1yy) | [ɢɪᴛʜᴜʙ](https://github.com/arkadiaz/fox-userbot)"
+        f"╭✠╼━━━━━━━━━━━━━━━✠╮\n"
+        f"➥ **Name** : `{DEFAULTUSER}` \n"
+        f"➥ **Username** : @{user.username} \n"
+        f"➥ **Telethon** : `{version.__version__}` \n"
+        f"➥ **Python**   : `{python_version()}` \n"
+        f"➥ **Bot Ver**  : `{BOT_VER}` \n"
+        f"➥ **Modules**  : `{len(modules)}` \n"
+        f"╰✠╼━━━━━━━━━━━━━━━✠╯\n"
+        f"[ɢʀᴏᴜᴘꜱ](https://t.me/arkabotsupport) | [ʙᴏᴛᴏꜰ](https://t.me/{user.username}) | [ɢɪᴛʜᴜʙ](https://github.com/arkabot/fox-userbot)"
     )
     if ALIVE_LOGO:
         try:
@@ -264,18 +258,18 @@ async def amireallyalive(alive):
         await alive.delete()
 
 
-@register(outgoing=True, pattern=r"^\.(?:pinon)\s?(.)?")
+@fox_cmd(pattern="(?:foxon)\s?(.)?")
 async def amireallyalive(alive):
     await bot.get_me()
     await get_readable_time((time.time() - StartTime))
     output = (
         f"●▬▬▬▬▬▬ஜ۩۞۩ஜ▬▬▬▬▬▬● \n"
-        f"✾ 🤴 • `ᴏᴡɴᴇʀ    :`[Arka](t.me/laz1yy) \n"
-        f"✾ 🖥️ • `ꜱʏꜱᴛᴇᴍ   :`Ubuntu 20.10 \n"
-        f"✾ ⚙️ • `ᴛᴇʟᴇᴛʜᴏɴ :`v.{version.__version__} \n"
-        f"✾ 🐍 • `ᴘʏᴛʜᴏɴ   :`v.{python_version()} \n"
-        f"✾ 👾 • `ʙᴏᴛ      :`v.{BOT_VER} \n"
-        f"✾ 📂 • `ᴍᴏᴅᴜʟᴇ   :`{len(modules)} \n"
+        f"✾ 🤴 • `ᴏᴡɴᴇʀ :`[Arka](t.me/laz1yy)             ㅤ \n"
+        f"✾ 🖥️ • `ꜱʏꜱᴛᴇᴍ. :`Ubuntu 20.10            \n"
+        f"✾ ⚙️ • `ᴛᴇʟᴇᴛʜᴏɴ :`v.{version.__version__}                ㅤㅤ  \n"
+        f"✾ 🐍 • `ᴘʏᴛʜᴏɴ. :`v.{python_version()} ㅤㅤ\n"
+        f"✾ 👾 • `ʙᴏᴛ :`v.{BOT_VER}                ㅤㅤㅤ \n"
+        f"✾ 📂 • `ᴍᴏᴅᴜʟᴇ :`{len(modules)} ㅤㅤㅤㅤㅤㅤㅤ   \n"
         f"●▬▬▬▬▬▬ஜ۩۞۩ஜ▬▬▬▬▬▬●"
     )
     if ALIVE_LOGO:
@@ -298,7 +292,7 @@ async def amireallyalive(alive):
         await alive.delete()
 
 
-@register(outgoing=True, pattern=r"^\.(?:alive|on)\s?(.)?")
+@fox_cmd(pattern="(?:alive|on)\s?(.)?")
 async def redis(alive):
     user = await bot.get_me()
     await get_readable_time((time.time() - StartTime))
@@ -309,21 +303,21 @@ async def redis(alive):
     await alive.edit("__Sedang Memuat...__")
     await alive.edit("__Sedang Memuat..__")
     await alive.edit("__Sedang Memuat...__")
-    await alive.edit("✨")
+    await alive.edit("🦊")
     await asyncio.sleep(2)
     output = (
-        f"┏━━━━🦊Fox-ᴜsᴇʀʙᴏᴛ🦊━━━━━ \n"
-        f"┣  `Name     :` {DEFAULTUSER} \n"
-        f"┣  `Username :` @{user.username} \n"
-        f"┣  `Telethon :` Ver {version.__version__} \n"
-        f"┣  `Python   :` Ver {python_version()} \n"
-        f"┣  `Branch   :` {UPSTREAM_REPO_BRANCH} \n"
-        f"┣  `Bot Ver  :` {BOT_VER} \n"
-        f"┣  `Modules  :` {len(modules)} Modules \n"
-        f"┣  `GitHub   :` [Repo](https://github.com/arkadiaz/fox-userbot) \n"
-        f"┣  `Support  :` [Groups](https://t.me/arkabotsupport) \n"
-        f"┣  `Owner    :` [Arka](https://t.me/laz1yy) \n"
-        f"┗━━━━━━━━━━━━━━━━━━━"
+        f"╭✠╼━━━━━━━━━━━━━━━━✠╮\n"
+        f"┃✧ **Name     :** {DEFAULTUSER} \n"
+        f"┃✧ **Username :** @{user.username} \n"
+        f"┃✧ **Telethon :** Ver {version.__version__} \n"
+        f"┃✧ **Python   :** Ver {python_version()} \n"
+        f"┃✧ **Branch   :** {UPSTREAM_REPO_BRANCH} \n"
+        f"┃✧ **Bot Ver  :** {BOT_VER} \n"
+        f"┃✧ **Modules  :** {len(modules)} Modules \n"
+        f"┃✧ **GitHub   :** [UserBot](https://github.com/arkadiaz/fox-userbot) \n"
+        f"┃✧ **Owner    :** [Arka](https://t.me/laz1yy) \n"
+        f"┃✧ **support  :** [groups](https://t.me/arkabotsupport) \n"
+        f"╰✠╼━━━━━━━━━━━━━━━━✠╯"
     )
     if ALIVE_LOGO:
         try:
@@ -345,7 +339,7 @@ async def redis(alive):
         await alive.delete()
 
 
-@register(outgoing=True, pattern="^.aliveu")
+@fox_cmd(pattern="aliveu")
 async def amireallyaliveuser(username):
     """For .aliveu command, change the username in the .alive command."""
     message = username.text
@@ -358,7 +352,7 @@ async def amireallyaliveuser(username):
     await username.edit("`" f"{output}" "`")
 
 
-@register(outgoing=True, pattern=r"^\.resetalive$")
+@fox_cmd(pattern="resetalive$")
 async def amireallyalivereset(ureset):
     global DEFAULTUSER  # global statement
     DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
@@ -367,21 +361,21 @@ async def amireallyalivereset(ureset):
 
 CMD_HELP.update(
     {
-        "system": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.sysd`"
+        "system": f"𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}sysd`"
         "\n↳ : Shows system information using neofetch."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.db`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}db`"
         "\n↳ : Shows database related info."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.spc`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}spc`"
         "\n↳ : Show system specification."
     }
 )
 CMD_HELP.update(
     {
-        "alive": "𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.alive` or `.on` or `rose`"
+        "alive": f"𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}alive` or `{cmd}on` or `fox`"
         "\n↳ : To see whether your bot is working or not."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.aliveu` <text>"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}aliveu` <text>"
         "\n↳ : Changes the 'user' in alive to the text you want."
-        "\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `.restalive`"
+        f"\n\n𝘾𝙤𝙢𝙢𝙖𝙣𝙙: `{cmd}restalive`"
         "\n↳ : Resets the user to default."
     }
 )

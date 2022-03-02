@@ -1,10 +1,11 @@
 from time import sleep
 
+from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP
-from userbot.events import register
+from userbot.utils import fox_cmd
 
 
-@register(outgoing=True, pattern=r"^\.sayang(?: |$)(.*)")
+@fox_cmd(pattern="sayang(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(3)
@@ -18,7 +19,7 @@ async def typewriter(typew):
 # Create by myself @localheart
 
 
-@register(outgoing=True, pattern=r"^\.semangat(?: |$)(.*)")
+@fox_cmd(pattern="semangat(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(3)
@@ -32,7 +33,7 @@ async def typewriter(typew):
 # Create by myself @localheart
 
 
-@register(outgoing=True, pattern=r"^\.jamet(?: |$)(.*)")
+@fox_cmd(pattern="jamet(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("**WOII**")
@@ -58,7 +59,7 @@ async def typewriter(typew):
     await typew.edit("**LEMBEK NGENTOT🔥**")
 
 
-@register(outgoing=True, pattern=r"^\.pp(?: |$)(.*)")
+@fox_cmd(pattern="pp(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -66,25 +67,25 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern=r"^\.dp(?: |$)(.*)")
+@fox_cmd(pattern="dp(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("**MUKA LU HINA, GAUSAH SOK KERAS YA NGENTOT!!**")
 
 
-@register(outgoing=True, pattern=r"^\.so(?: |$)(.*)")
+@fox_cmd(pattern="so(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("**GAUSAH SOKAB SAMA GUA NGENTOT, LU BABU GA LEVEL!!**")
 
 
-@register(outgoing=True, pattern=r"^\.met(?: |$)(.*)")
+@fox_cmd(pattern="met(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("**NAMANYA JUGA JAMET CAPER SANA SINI BUAT CARI NAMA BHAHAHA**")
 
 
-@register(outgoing=True, pattern=r"^\.war(?: |$)(.*)")
+@fox_cmd(pattern="war(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -92,7 +93,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern=r"^\.wartai(?: |$)(.*)")
+@fox_cmd(pattern="wartai(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -100,7 +101,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern=r"^\.kismin(?: |$)(.*)")
+@fox_cmd(pattern="kismin(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -108,19 +109,19 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern=r"^\.ded(?: |$)(.*)")
+@fox_cmd(pattern="ded(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("**MATI AJA LU GOBLOK, GAGUNA LU HIDUP DI BUMI**")
 
 
-@register(outgoing=True, pattern=r"^\.sokab(?: |$)(.*)")
+@fox_cmd(pattern="sokab(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("**SOKAB BET SI LU NGENTOT!!**")
 
 
-@register(outgoing=True, pattern=r"^\.gembel(?: |$)(.*)")
+@fox_cmd(pattern="gembel(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -128,13 +129,13 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern=r"^\.cuih(?: |$)(.*)")
+@fox_cmd(pattern="cuih(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("**CIH GE KEREN LO BEGITU GOBLOK!!**")
 
 
-@register(outgoing=True, pattern=r"^\.dih(?: |$)(.*)")
+@fox_cmd(pattern="dih(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit(
@@ -142,7 +143,7 @@ async def typewriter(typew):
     )
 
 
-@register(outgoing=True, pattern=r"^\.gcs(?: |$)(.*)")
+@fox_cmd(pattern="gcs(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("**GC SAMPAH KAYA GINI, BUBARIN AJA GOBLOK!!**")
@@ -150,36 +151,36 @@ async def typewriter(typew):
 
 CMD_HELP.update(
     {
-        "war": "**Plugin : **`war`\
-        \n\n  •  **Syntax :** `.jamet`\
+        "war": f"**Plugin : **`war`\
+        \n\n  •  **Syntax :** `{cmd}jamet`\
         \n  •  **Function : **Menghina Jamet telegram\
-        \n\n  •  **Syntax :** `.pp`\
+        \n\n  •  **Syntax :** `{cmd}pp`\
         \n  •  **Function : **Menghina Jamet telegram yang ga pake foto profil\
-        \n\n  •  **Syntax :** `.dp`\
+        \n\n  •  **Syntax :** `{cmd}dp`\
         \n  •  **Function : **Menghina Jamet muka hina!\
-        \n\n  •  **Syntax :** `.so`\
+        \n\n  •  **Syntax :** `{cmd}so`\
         \n  •  **Function : **Ngeledek orang sokab\
-        \n\n  •  **Syntax :** `.met`\
+        \n\n  •  **Syntax :** `{cmd}met`\
         \n  •  **Function : **Ngeledek si jamet caper\
-        \n\n  •  **Syntax :** `.war`\
+        \n\n  •  **Syntax :** `{cmd}war`\
         \n  •  **Function : **Ngeledek orang so keras ngajak war\
-        \n\n  •  **Syntax :** `.wartai`\
+        \n\n  •  **Syntax :** `{cmd}wartai`\
         \n  •  **Function : **Ngeledek orang so ketrigger ngajak cod minta sharelok\
-        \n\n  •  **Syntax :** `.kismin`\
+        \n\n  •  **Syntax :** `{cmd}kismin`\
         \n  •  **Function : **Ngeledek orang kismin so jagoan di tele\
-        \n\n  •  **Syntax :** `.ded`\
+        \n\n  •  **Syntax :** `{cmd}ded`\
         \n  •  **Function : **Nyuruh orang mati aja goblok wkwk\
-        \n\n  •  **Syntax :** `.sokab`\
+        \n\n  •  **Syntax :** `{cmd}sokab`\
         \n  •  **Function : **Ngeledek orang so kenal so dekat padahal kga kenal goblok\
-        \n\n  •  **Syntax :** `.gembel`\
+        \n\n  •  **Syntax :** `{cmd}gembel`\
         \n  •  **Function : **Ngeledek bapaknya si jamet\
-        \n\n  •  **Syntax :** `.cuih`\
+        \n\n  •  **Syntax :** `{cmd}cuih`\
         \n  •  **Function : **ngatain orang sok keren\
-        \n\n  •  **Syntax :** `.dih`\
+        \n\n  •  **Syntax :** `{cmd}dih`\
         \n  •  **Function : **Ngeledek anak haram\
-        \n\n  •  **Syntax :** `.gcs`\
+        \n\n  •  **Syntax :** `{cmd}gcs`\
         \n  •  **Function : **Ngeledek gc sampah\
-        \n\n**Klo mau Req, kosa kata dari lu Hubungi @skyzu**\
+        \n\n**Klo mau Req, kosa kata dari lu Hubungi @fox**\
     "
     }
 )

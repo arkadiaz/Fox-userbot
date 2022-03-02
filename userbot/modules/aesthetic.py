@@ -1,7 +1,7 @@
 from telethon import events
 
 from userbot import CMD_HELP
-from userbot.events import register
+from userbot.utils import fox_cmd
 
 PRINTABLE_ASCII = range(0x21, 0x7F)
 
@@ -16,7 +16,7 @@ def aesthetify(string):
         yield chr(c)
 
 
-@register(outgoing=True, pattern=r"^\.ae(?: |$)(.*)")
+@fox_cmd(pattern="ae(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return

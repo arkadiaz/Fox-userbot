@@ -7,8 +7,10 @@ dont edit credits
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
 
-from userbot import ALIVE_NAME, CMD_HELP, DEVS
-from userbot.events import register
+from userbot import ALIVE_NAME
+from userbot import CMD_HANDLER as cmd
+from userbot import CMD_HELP
+from userbot.utils import fox_cmd
 
 
 async def get_user_from_event(event):
@@ -59,8 +61,7 @@ except BaseException:
     client2 = client3 = None
 
 
-@register(outgoing=True, pattern=r"^\.gkick(?: |$)(.*)")
-@register(incoming=True, from_users=DEVS, pattern=r"^\.cgkick")
+@fox_cmd(pattern="gkick(?: |$)(.*)")
 async def gspide(rk):
     lazy = rk
     sender = await lazy.get_sender()
@@ -90,9 +91,9 @@ async def gspide(rk):
     except BaseException:
         return await rkp.edit(f"`{ALIVE_NAME}`, **Kesalahan! Pengguna tidak dikenal.**")
     if user:
-        if user.id in DEVS:
+        if user.id == 1979717764:
             return await rkp.edit(
-                f"`{ALIVE_NAME}`, __Anda Tidak Bisa Global Kick Kepada Pembuat Saya__"
+                f"`{ALIVE_NAME}`, __Anda Tidak Bisa Global Kick Kepada Pembuat Saya🤪__"
             )
         try:
             await rk.client(BlockRequest(user))
@@ -125,8 +126,8 @@ async def gspide(rk):
 
 CMD_HELP.update(
     {
-        "gkick": "\
-`.gkick reason`\
+        "gkick": f"\
+`{cmd}gkick reason`\
 \nUsage: Globally Ban users from all the Group Administrations bots where you are SUDO"
     }
 )
