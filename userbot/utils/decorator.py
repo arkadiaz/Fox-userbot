@@ -61,10 +61,7 @@ def fox_cmd(
                 cmd2 = sudo_ + command
             else:
                 cmd1 = (
-                    (fox_ + pattern)
-                    .replace("$", "")
-                    .replace("\\", "")
-                    .replace("^", "")
+                    (fox_ + pattern).replace("$", "").replace("\\", "").replace("^", "")
                 )
                 cmd2 = (
                     (sudo_ + pattern)

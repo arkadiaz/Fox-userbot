@@ -67,9 +67,7 @@ async def typewriter(typew):
     sleep(2)
     await typew.edit("✅ `xxinu Autis`")
     sleep(1)
-    await typew.edit(
-        "`⚡ Cuma fox Yang Paling Waras, Baik Hati, Dan Tidak Sombong :v`"
-    )
+    await typew.edit("`⚡ Cuma fox Yang Paling Waras, Baik Hati, Dan Tidak Sombong :v`")
 
 
 # King Userbot Support

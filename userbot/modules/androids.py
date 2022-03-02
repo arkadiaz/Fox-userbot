@@ -18,10 +18,10 @@ from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.utils import (
     chrome,
+    fox_cmd,
     human_to_bytes,
     humanbytes,
     md5,
-    fox_cmd,
     time_formatter,
 )
 
