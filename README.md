@@ -36,5 +36,6 @@
 *   [Risman](https://github.com/mrismanaziz/Man-Userbot)   Man - Userbot
 *   [Skyzu](https://github.com/Skyzu/skyzu-userbot)   skyzu-userbot
 *   [Lepin](https://github.com/Yansensad/yansen-userbot) Yansen-Userbot
+*   [Skyla](https://github.com/SkylaIND/Skyla-userbot) Skyla-Userbot
 *   DAN TERIMAKASIH KEPADA USERBOT LAINNYA
 
