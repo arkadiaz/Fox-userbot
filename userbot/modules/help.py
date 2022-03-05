@@ -35,7 +35,7 @@ async def help(event):
             string += "`" + str(i)
             string += "`\t ❖  "
         await event.edit(
-            "**☃️Sᴋʏʟᴀ-Usᴇʀʙᴏᴛ☃️**\n\n"
+            "**☃️Fox-Usᴇʀʙᴏᴛ☃️**\n\n"
             f"**• Bᴏᴛ ᴏꜰ {DEFAULTUSER}**\n**• Mᴏᴅᴜʟᴇꜱ : {len(modules)}**\n\n"
             "**• Mᴀɪɴ Mᴇɴᴜ :**\n"
             f"◆ {string}◉\n\n✐ **ɴᴏᴛᴇꜱ :**  `.help animasi`\n☞  sᴜᴘᴘᴏʀᴛ : @skylasupport"
