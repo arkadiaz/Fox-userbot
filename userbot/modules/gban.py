@@ -151,7 +151,7 @@ async def gben(userbot):
         f"││➢ **Pengguna:** [{user.first_name}](tg://user?id={user.id}) \n"
         f"││➢ **Aksi:** `Global Banned` \n"
         f"╰┈─────────────━\n\n"
-        f"➽ __by ☃️Sᴋʏʟᴀ-Usᴇʀʙᴏᴛ☃️__"
+        f"➽ __by 🦊Fox-Usᴇʀʙᴏᴛ🦊__"
     )
 
 
@@ -230,7 +230,7 @@ async def gunben(userbot):
         f"││➢ **Pengguna:** [{user.first_name}](tg://user?id={user.id}) \n"
         f"││➢ **Aksi:** `Membatalkan Global Banned` \n"
         f"╰┈─────────────━\n\n"
-        f"➽ __by ☃️Sᴋʏʟᴀ-Usᴇʀʙᴏᴛ☃️__"
+        f"➽ __by 🦊Fox-Usᴇʀʙᴏᴛ🦊__"
     )
 
 
